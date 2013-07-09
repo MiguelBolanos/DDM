@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2" />
+    <title>Mobil V1.0</title>
+    <meta charset="utf-8">
+       <link rel="stylesheet" href="js/jQueryMobile/jquery.mobile.theme-1.3.1.min.css" />
+	   <link rel="stylesheet" href="js/jQueryMobile/jquery.mobile.structure-1.3.1.min.css" />
+	   <link rel="stylesheet" href="css/estilo.css" />
+	   <style>
+		 .ui-page { background: #fff;}
+	   </style>
+	   <script src="js/jquery.js"></script>
+       <script src="js/jQueryMobile/jquery.mobile-1.3.1.min.js"></script>
+       <!--<script src="cordova-2.3.0"></script>-->
+    </head>
+    <body>
+		<!--Login-->
+		<div data-role="page" id="login">
+			<div data-role="content">
+				<div class="logo">&nbsp;</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div2 izquierda">&nbsp;</div>
+				<div class="div1 izquierda"><input type="text" name="tbUsuario" value="" placeholder=" Usuario" data-role="none" class="campo9" id="tbUsuario"></input></div>
+				<div class="div2 izquierda">&nbsp;</div>
+				<div class="limpiar"></div>
+				<div class="div2 izquierda">&nbsp;</div>
+				<div class="div1 izquierda"><input type="password" name="tbConstrasena" value="" placeholder=" Contrase&ntilde;a" data-role="none" class="campo10" id="tbContrasena"></input></div>
+				<div class="div2 izquierda">&nbsp;</div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto-centro">
+					<a class="bEntrar" href="#" id="bEntrar"></a>
+				</div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto_centro"><a href="#" class="olvide_pass">Olvide contraseña</a></div>
+			</div>
+		</div>
+        <!-- Menu -->
+        <div data-role="page" id="pMenu">
+		    <div class="barra_Header">
+				<div>
+					<a class="bAyuda" href="#"></a>
+					<a class="bConfiguracion" href="#" id="bConfiguracion"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<div class="menu">
+					<div class="ui-grid-b">
+						<div class="ui-block-a">
+							<div class="boton_grid"><a class="bClientes" href="#" id="bClientes"></a></div>
+						</div>
+						<div class="ui-block-b">
+							<div class="boton_grid"><a class="bFacturas" href="#pListaFacturas"></a></div>
+						</div>
+						<div class="ui-block-c">
+							<div class="boton_grid"><a class="bCotizacion" href="#"></a></div>
+						</div>
+					</div>
+				</div>
+				<div class="menu">
+					<div class="ui-grid-b">
+						<div class="ui-block-a"><div class="boton_grid"><a class="bGastos" href="#"></a></div></div>
+						<div class="ui-block-b"></div>
+						<div class="ui-block-c"></div>
+					</div>
+				</div>
+			</div>
+	    </div>
+		<!--Lista Clientes-->
+		<div data-role="page" id="pListaClientes">
+		    <div class="header_clientes">
+				<div>
+					<a class="bInicio" href="#" id="bInicioListaClientes"></a>
+					<a class="bAgregar" href="#" id="bAgregarCliente"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Busca un cliente..." data-inset="true" data-icon="false" id="lvClientes">
+				</ul>
+				<div id="CargandoListaCliente">&nbsp;</div>
+			</div>
+		</div>
+	    <!--Lista Facturas-->
+		<div data-role="page" id="pListaFacturas">
+		    <div class="barra_Header_Listado">
+				<div>
+					<a class="bInicio" href="#pMenu"></a>
+					<a class="bAgregar" href="#"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Busca una factura..." data-inset="true" data-icon="false">
+					<li>
+						<a href="#">
+						<div class="listado1">Documentos Digitales...</div>
+						<div class="listado2">DDM090629R13</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+						<div class="listado1">Ana Garcia...</div>
+						<div class="listado2">GAFA800703VA1</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+						<div class="listado1">Gaxiola y Asociados...</div>
+						<div class="listado2">DDM090629R13</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--Lista Cotizaciones-->
+		<!--Lista Gastos-->
+		<!--Configuracion-->
+		<div data-role="page" id="pConfiguracion">
+		    <div class="barra_Header_Listado">
+				<div>
+					<a class="bCancelar" href="#pMenu"></a>
+					<a class="bGuardar" href="#" id="bGuardarConfiguracion"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<div class="texto_principal">Datos fiscales</div>
+				<div class="div1 izquierda"><input type="text" name="tbRazonSocial" value="" placeholder=" Razon Social" data-role="none" class="campo6" id="tbRazonSocial"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbRFC" value="" placeholder=" RFC" data-role="none" class="campo7" id="tbRFC"></input></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div1"><input type="text" name="cbSucursal" value="" placeholder=" Sucursal" data-role="none" class="campo1"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div1 izquierda"><input type="text" name="tbCalle" value="" placeholder=" Calle" data-role="none" class="campo2" id="tbCalle"></input></div>
+				<div class="div2 izquierda"><input type="text" name="tbNumExt" value="" placeholder=" Numero ext." data-role="none" class="campo8" id="tbNumExt"></input></div>
+				<div class="div2 izquierda"><input type="text" name="tbNumInt" value="" placeholder=" Numero int." data-role="none" class="campo3" id="tbNumInt"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbColonia" value="" placeholder=" Colonia" data-role="none" class="campo8" id="tbColonia"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbCiudad" value="" placeholder=" Ciudad" data-role="none" class="campo8" id="tbCiudad"></input></div>
+				<div class="div3 izquierda"><input type="text" name="tbReferencias" value="" placeholder=" Referencias" data-role="none" class="campo8" id="tbReferencias"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbMunicipio" value="" placeholder=" Municipio" data-role="none" class="campo8"id="tbMunicipio"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbEstado" value="" placeholder=" Estado" data-role="none" class="campo8" id="tbEstado"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbPais" value="" placeholder=" Pais" data-role="none" class="campo5" id="tbPais"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbCodigoPostal" value="" placeholder=" Codigo postal" data-role="none" class="campo4" id="tbCodigoPostal"></input></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div1 izquierda"><input type="text" name="tbRegimenFiscal" value="" placeholder=" Regimen fiscal" data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbLugarExpedicion" value="" placeholder=" Lugar de expedicion" data-role="none" class="campo7"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div1 izquierda"><input type="text" name="tbFolio" value="" placeholder=" Folio" data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbSerie" value="" placeholder=" Serie" data-role="none" class="campo7"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto_izquierda"><a class="bSucursal" href="#"></a></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto_principal">Impuestos</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div1 izquierda"><input type="text" name="tbNombreImpuesto" value="" placeholder=" Nombre impuesto" data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbTasa" value="" placeholder=" Tasa" data-role="none" class="campo7"></input></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div1 izquierda">&nbsp;</div>
+				<div class="div1 izquierda"><input type="text" name="cbTipoImpuesto" value="" placeholder=" Tipo de impuesto" data-role="none" class="campo1"></input></div>
+		     </div>
+		</div>
+		<!--Perfil Clientes-->
+		<div data-role="page" id="pPerfilClientes">
+			<div class="barra_Header_Listado">
+				<div>
+					<a class="bInicio" href="#pMenu"></a>
+					<a class="bEditar" href="#" id="bEditarCliente"></a>
+				</div>
+			</div>
+			<div data-role="content">
+			<div class="div3 texto_principal">Saldo</div>
+			<div class="div_total">$0.00</div>
+			<div class="espacio2 limpiar"></div>
+			<div class="div3 ajusta_datos_perfil">
+				<div class="listado1">Ana Garcia Fernandez</div>
+				<div class="listado2">xxxxxxxxxxxx</div>
+			</div>
+			<div class="espacio2 limpiar"></div>
+			<div class="div_ubicacion">
+				<div class="listado2">Reio Mayo</div>
+				<div class="listado2">Mexicali</div>
+			</div>
+			<div class="espacio1 limpiar"></div>
+			<div class="div_telefono">
+				<div class="listado2">686-119-6594</div>
+			</div>
+			<div class="espacio1 limpiar"></div>
+			<div class="div_correo">
+				<div class="listado2">lapoj@hotmail.com</div>
+			</div>
+			<div class="espacio1 limpiar"></div>
+			</div>
+			<div class="piePagina">
+				<a class="bAcciones" href="#popupBasic" data-rel="popup" id="bAccionesCliente"></a>
+				<div data-role="popup" id="popupBasic" data-theme="f" data-overlay-theme="a">
+					<p>This is a completely basic popup, no options set.<p>
+				</div>
+			</div>
+		</div>	
+				
+		<!--Administrar Clientes-->
+		<div data-role="page" id="pClientes">
+				<div class="barra_Header_Listado">
+					<div>
+						<a class="bCancelar" href="#pListaClientes"></a>
+						<a class="bGuardar" href="#" id="bGuardarCliente"></a>
+					</div>
+				</div>
+				<div data-role="content">
+				<div class="texto_principal">Empresa</div>
+				<div class="div3"><input type="text" name="tbNombreCliente" value="" maxlength="255" placeholder=" Nombre o razon social" data-role="none" class="campo9" id="tbNombreCliente"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbRFCCliente" value="" maxlength="13" placeholder=" RFC" data-role="none" class="campo5 mayusculas" id="tbRFCCliente"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbNombreComercialCliente" value="" maxlength="255" placeholder=" Nombre Comercial" data-role="none" class="campo4" id="tbNombreComercialCliente"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto_principal">Direccion fiscal</div>
+				<div class="div10 izquierda"><input type="text" name="tbCalleCliente" value="" maxlength="255" placeholder=" Calle" data-role="none" class="campo2" id="tbCalleCliente"></input></div>
+				<div class="div11 izquierda"><input type="text" name="tbNoExteriorCliente" value="" maxlength="30" placeholder=" Num ext" data-role="none" class="campo3" id="tbNoExteriorCliente"></input></div>
+				<div class="div11 izquierda"><input type="text" name="tbNoInteriorCliente" value="" maxlength="30" placeholder=" Num int" data-role="none" class="campo8" id="tbNoInteriorCliente"></input></div>
+				<div class="div12 izquierda"><input type="text" name="tbColoniaCliente" value="" maxlength="255" placeholder=" Colonia" data-role="none" class="campo8" id="tbColoniaCliente"></input></div>
+				<div class="div11 izquierda"><input type="text" name="tbCPCliente" value="" maxlength="12" placeholder=" CP" data-role="none" class="campo8" id="tbCPCliente"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbCiudadCliente" value="" maxlength="255" placeholder=" Ciudad" data-role="none" class="campo8" id="tbCiudadCliente"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbEstadoCliente" value="" maxlength="255" placeholder=" Estado" data-role="none" class="campo8" id="tbEstadoCliente"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbMunicipioCliente" value="" maxlength="255" placeholder=" Municipio" data-role="none" class="campo5" id="tbMunicipioCliente"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbPaisCliente" value="" maxlength="255" placeholder=" Pais" data-role="none" class="campo4" id="tbPaisCliente"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto_izquierda"><a href="#" id="bSucursalCliente" class="bNuevo derecha">Sucursales</a></div>
+				<div id="dSucursales">
+				<ul  id="ulSucursales">
+				</ul>
+				</div>
+				<div class="espacio2 limpiar"></div>
+				<div id="dContacto" class="cabecera_seccion_down">Contacto</div>
+				<div id="dContactoContenido" class="NoVisible">
+				<ul  id="ulContactos">
+				</ul>
+				<div class="texto_izquierda"><a href="#" id="bContactoCliente" class="bNuevo derecha"> Contacto</a></div>
+				</div>
+				<div class="espacio2 limpiar"></div>
+				<div id="dOtraInformacion" class="cabecera_seccion_down">Otra informacion</div>
+				<div id="dOtraInformacionContenido" class="NoVisible">
+				<div class="div3">
+				<select class="campo1 " data-role="none" id="cbMetodoPago">
+					<option value="" selected="selected">Metodo de pago</option>
+					<option value="No identificado">No identificado</option>
+					<option value="Efectivo">Efectivo</option>
+					<option value="Cheque">Cheque</option>
+					<option value="Transferencia electronica">Transferencia electronica</option>
+					<option value="Tarjeta">Tarjeta</option>
+					<option value="Otro">Otro</option>
+				</select>
+				</div>
+				<div id="dNoCuenta" class="NoVisible">
+				<div class="espacio1 limpiar"></div>
+				<div class="div3"><input type="text" name="tbNoCuentaCliente" value="" maxlength="4" placeholder=" No cuenta" data-role="none" class="campo1" id="tbNoCuentaCliente"></input></div>
+				</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div3"><input type="text" name="tbNotaInterna" value="" maxlength="255" placeholder=" Nota interna" data-role="none" class="campo1" id="tbNotaInterna"></input></div>
+				</div>
+				</div>
+		</div>	
+		<!--Administrar Facturas-->
+		<div data-role="page" id="pFacturas">
+				<div class="barra_Header_Listado">
+					<div>
+						<a class="bCancelar" href="#pMenu"></a>
+						<a class="bGuardar" href="#"></a>
+					</div>
+				</div>
+				<div data-role="content">
+				<div class="div3"><input type="text" name="tbCliente" value="" placeholder=" Cliente" data-role="none" class="campo1"></input></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div4"><input type="date" name="tbFecha" value="" placeholder=" Fecha" data-role="none" class="campo1 izquierda"></input></div>
+				<div class="div5"><input type="text" name="tbTipoCFDI" value="" placeholder=" Tipo CFDI" data-role="none" class="campo1 derecha"></input></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div1"><input type="text" name="tbDescuento" value="" placeholder=" Desc. (%)" data-role="none" class="campo6"></input></div>
+				<div class="div1"><input type="text" name="tbMoneda" value="" placeholder=" Moneda" data-role="none" class="campo7"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto_principal">Concepto</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div6"><a class="bNuevo" href="#"></a></div>
+				<div class="div7"><input type="text" name="tbArticulo" value="" placeholder=" Articulo" data-role="none" class="campo1"></input></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div3"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo9"></input></div>
+				<div class="div8"><input type="text" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo5"></input></div>
+				<div class="div9"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8"></input></div>
+				<div class="div8"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo4"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div8"><input type="checkbox" name="Iva" value="unit-in-group" /></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div1"><input type="text" name="tbNotaOpcional" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
+				<div class="div1"><input type="text" name="tbTerminos" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
+				<div class="espacio2 limpiar"></div>	
+				<div class="texto_centro"><a class="bGenerarFactura" href="#"></a></div>
+				</div>
+			</div>
+		<!--Administrar Cotizaciones-->
+		<!--Administrar Gastos-->
+		<script src="js/jquery.scrollExtend.min.js"></script>
+		<script src="js/codigo.js"></script>
+		<script>
+		/*variables sistema*/
+		$(document).on("ready",function(){
+			$.support.cors = true;
+			$.mobile.allowCrossDomainPages = true;
+			//Login
+			$("#bEntrar").on("click",function(){autentifica();});
+			//Configuracion
+			$("#bConfiguracion").on("click",function(){populateConfiguracion();});
+			$("#bGuardarConfiguracion").on("click",function(){updateConfiguracion();});
+			//Clientes
+			$("#bClientes").on("click",function(){populateAllClientes();});
+			$("#bInicioListaClientes").on("click",function(){setInicioListaClientes();});
+			$("#bAgregarCliente").on("click",function(){limpiarPantallaCliente(true);});
+			/*Listview infinite clientes*/
+			$('#lvClientes').onScrollBeyond(function() {
+			  if(EmpresaID > 0)
+				{	
+					$("CargandoListaCliente").addClass("cargando");
+					getMoreClientes();
+					$("CargandoListaCliente").removeClass("cargando");
+				}
+			});
+			$("#bSucursalCliente").on("click",function(){addSucursal(true,"",0);});
+			$("#cbMetodoPago").on("change",function(){selectFormaPago();});
+			$("#bGuardarCliente").on("click",function(){insertCliente();});
+			$("#dOtraInformacion").on("click",function(){otraInformacion();});
+			$("#dContacto").on("click",function(){contacto();});
+			$("#bContactoCliente").on("click",function(){addContacto(false,0);});
+			});
+		</script>
+    </body>
+</html>

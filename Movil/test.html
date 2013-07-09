@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<script src="js/jquery.js"></script>
+	<script>
+	$(document).on("ready",function(){
+		/*$.ajax('http://192.168.0.103/app/Service1.asmx/HelloWorld',
+		{
+			type: 'POST',
+			contentType: 'application/json',
+			success: function(r){console.log("ok");},
+			error: function(){console.log("error");}
+		});*/
+	/////////////////////////////////////////////////////////////
+	 $.ajax({
+		 cache: false,
+		 type: 'POST',
+		 async: true,
+		 dataType: "xml",
+		 url:'http://192.168.0.103/app/Service1.asmx/Login',
+		 data: { "sUsuario" : "oscar.castillo@docdigitales.com" , "sContrasena" : "123123" },
+		 success: function (xml) {
+			var r = $(xml).text();
+			console.log("ok "+r);
+		 },
+		 error: function (xhr, ajaxOptions, thrownError) {
+			console.log("Error: " + xhr.status +" | "+xhr.responseText);
+		 }
+	 });
+	/////////////////////////////////////////////////////////////
+	});
+	</script>
+</head>
+<body>
+Test Cross-Domain
+</body>
+</html>

@@ -1,0 +1,634 @@
+/*Header*/
+.barra_Header{
+	background: url('../imagenes/barra-header.png');
+	color:#fff;
+	height:75px;
+}
+
+.barra_Header_Listado{
+	/*background: url('../imagenes/barra-header.png');*/
+	background-color:#00294B;
+	color:#fff;
+	height:95px;
+	text-align:center;
+}
+
+.header_clientes{
+	background: url('../imagenes/barra-clientes.png');
+	background-color:#00294B;
+	background-position:center;
+	background-repeat:no-repeat;
+	color:#fff;
+	height:95px;
+	text-align:center;
+}
+/*Botones Header*/
+.bAyuda {
+	background: url('../botones/b-ayuda.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 70px;
+    width: 70px;
+}
+.bAyuda:hover {
+	background: url('../botones/b-ayuda-over.png');
+	background-repeat:no-repeat;
+}
+
+.bConfiguracion {
+	background: url('../botones/b-configuracion.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	float:right;
+	height: 70px;
+    width: 70px;
+}
+.bConfiguracion:hover {
+	background: url('../botones/b-configuracion-over.png');
+	background-repeat:no-repeat;
+}
+
+.bInicio {
+	background: url('../botones/b-inicio.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	float:left;
+	height: 90px;
+    width: 90px;
+}
+.bInicio:hover {
+	background: url('../botones/b-inicio-over.png');
+	background-repeat:no-repeat;
+}
+
+.bAgregar {
+	background: url('../botones/b-mas.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	float:right;
+	height: 90px;
+    width: 90px;
+}
+.bAgregar:hover {
+	background: url('../botones/b-mas-over.png');
+	background-repeat:no-repeat;
+}
+
+.bGuardar {
+	background: url('../botones/b-guardar.png');
+	background-repeat:no-repeat;
+	/*display: inline-block;*/
+	float:right;
+	height: 90px;
+    width: 180px;
+}
+.bGuardar:hover {
+	background: url('../botones/b-guardar-over.png');
+	background-repeat:no-repeat;
+}
+
+.bEditar {
+	background: url('../botones/b-editar.png');
+	background-repeat:no-repeat;
+	/*display: inline-block;*/
+	float:right;
+	height: 90px;
+    width: 100px;
+}
+.bEditar:hover {
+	background: url('../botones/b-editar-over.png');
+	background-repeat:no-repeat;
+}
+
+
+.bCancelar {
+	background: url('../botones/b-cancelar.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	float:left;
+	height: 90px;
+    width: 180px;
+}
+.bCancelar:hover {
+	background: url('../botones/b-cancelar-over.png');
+	background-repeat:no-repeat;
+}
+/*Footer*/
+.piePagina{
+	background-color:#00294B;
+	text-align:center;
+}
+/*Footer Botones*/
+.bAcciones {
+	background: url('../botones/b-acciones.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 90px;
+    width: 180px;
+}
+.bAcciones:hover {
+	background: url('../botones/b-acciones-over.png');
+	background-repeat:no-repeat;
+}
+
+/*div menu*/
+.menu{
+	padding-top:5%;
+}
+/*Botones Menu*/
+.bClientes {
+	background: url('../botones/b-clientes.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 165px;
+	margin-left: auto;
+	margin-right: auto; 
+    width: 170px;
+}
+.bClientes:hover {
+	background: url('../botones/b-clientes-over.png');
+}
+
+.bFacturas {
+	background: url('../botones/b-facturacion.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 165px;
+	margin-left: auto;
+	 margin-right: auto; 
+    width: 170px;
+}
+.bFacturas:hover {
+	background: url('../botones/b-facturacion-over.png');
+}
+
+.bCotizacion {
+	background: url('../botones/b-cotizaciones.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 165px;
+	margin-left: auto;
+	 margin-right: auto; 
+    width: 170px;
+}
+.bCotizacion:hover {
+	background: url('../botones/b-cotizaciones-over.png');
+}
+
+.bGastos {
+	background: url('../botones/b-gastos.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 165px;
+	margin-left: auto;
+	margin-right: auto; 
+    width: 170px;
+}
+.bGastos:hover {
+	background: url('../botones/b-gastos-over.png');
+}
+/*botones*/
+.bEntrar {
+	background: url('../botones/boton-entrar.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 75px;
+	margin-left: auto;
+	margin-right: auto; 
+    width: 430px;
+}
+.bEntrar:hover {
+	background: url('../botones/boton-entrar-over.png');
+}
+
+.bSucursal {
+	background: url('../botones/b-+sucursal.png');
+	background-repeat:no-repeat;
+	display: block;
+	float:right;
+	height: 35px;
+    width: 180px;
+}
+.bNuevo {
+	background: url('../botones/b-nuevo.png');
+	background-repeat:no-repeat;
+	color:#3C6699;
+	display: block;
+	height: 45px;
+	padding:12px 0px 0px 50px;
+	text-decoration:none;
+    width: 100px;
+}
+.bNuevo:hover {
+	background: url('../botones/b-nuevo-over.png');
+	background-repeat:no-repeat;
+}
+.bQuitar{
+	background: url('../botones/b-quitar.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 45px;
+    width: 45px;
+}
+.bQuitar:hover{
+	background: url('../botones/b-quitar-over.png');
+	background-repeat:no-repeat;
+}
+.bGenerarFactura {
+	background: url('../botones/b-generar-factura.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 90px;
+	margin-left: auto;
+	margin-right: auto; 
+    width: 310px;
+}
+.bGenerarFactura:hover {
+	background: url('../botones/b-generar-factura-over.png');
+}
+/*Listados*/
+.listado1{
+  color:#336699;
+  font:Arial;
+  font-family:Arial;
+  font-size:8pt;
+ }
+
+.listado2{
+  color:#808080;
+  font:Arial;
+  font-family:Arial;
+  font-size:6.5pt;
+ }
+
+
+.boton_grid{
+ text-align:center;	
+}
+
+.boton_header_left{
+display:inline;
+
+}
+
+.boton_header_right{
+display:inline;
+float:right;
+}
+
+/*Pantalla*/
+.texto_principal
+{
+	color:#336699;
+	font:Arial;
+	font-family:Arial;
+	font-size:8pt;
+}
+
+.texto_secundario
+{
+	color:#808080;
+	font:Arial;
+	font-family:Arial;
+	font-size:7pt;
+}
+
+.campo1
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 8px; 
+	-webkit-border-radius: 8px;
+	 width:100%;
+}
+.campo2
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 8px 0px 0px 0px; 
+	-webkit-border-radius: 8px 0px 0px 0px;
+	 width:100%;
+}
+.campo3
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 0px 8px 0px 0px; 
+	-webkit-border-radius: 0px 8px 0px 0px;
+	 width:100%;
+}
+.campo4
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 0px 0px 8px 0px; 
+	-webkit-border-radius: 0px 0px 8px 0px;
+	 width:100%;
+}
+.campo5
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 0px 0px 0px 8px; 
+	-webkit-border-radius: 0px 0px 0px 8px;
+	 width:100%;
+}
+.campo6
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 8px 0px 0px 8px; 
+	-webkit-border-radius: 8px 0px 0px 8px;
+	 width:100%;
+}
+.campo7
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 0px 8px 8px 0px; 
+	-webkit-border-radius: 0px 8px 8px 0px;
+	 width:100%;
+}
+.campo8
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	 width:100%;
+}
+.campo9
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 8px 8px 0px 0px; 
+	-webkit-border-radius: 8px 8px 0px 0px;
+	 width:100%;
+}
+.campo10
+{
+	border: 1px solid #BDC2C9;
+	border-collapse:collapse;
+	height:100%;
+   -moz-border-radius: 0px 0px 8px 8px; 
+   -webkit-border-radius: 0px 0px 8px 8px;
+    width:100%;
+}
+.div1{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:50%;
+}
+.div2{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:25%;
+}
+.div3{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:100%;
+}
+.div4{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:49.5%;
+}
+.div5{
+	 display:block-inline;
+	 float:right;
+	 width:49.5%;
+}
+.div6{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:5%;
+}
+.div7{
+	 display:block-inline;
+	 float:right;
+	 width:95%;
+}
+.div8{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:33%;
+}
+.div9{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:34%;
+}
+
+.div10{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:90%;
+}
+.div11{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:10%;
+}
+.div12{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:80%;
+}
+.div13{
+	 display:block-inline;
+	 /*float:left;*/
+	 width:45%;
+}
+.div14{
+	 display:block-inline;
+	 width:99%;
+}
+.divSucursal{
+	border: 1px solid #BDC2C9;
+	border-collapse:collapse;
+	-moz-border-radius: 5px; 
+	padding:5px 0px 5px 5px;
+	-webkit-border-radius: 5px;
+}
+.divSucursal:hover{
+	background-color:#FAFAFA;
+}
+.divSucursalContenido{
+	/*border: 1px solid #BDC2C9;
+	border-collapse:collapse;
+	moz-border-radius: 0px 0px 5px 5px;
+	padding:5px 0px 5px 5px;
+	webkit-border-radius: 0px 0px 5px 5px;*/
+	padding:5px 0px 5px 0px;
+}
+.espacio1{
+	height:5px
+}
+.espacio2{
+	height:15px
+}
+.limpiar{
+	clear:both;
+}
+.texto_derecha{
+	text-align:right;	
+}
+.texto_izquierda{
+	text-align:left;
+}
+.texto_centro{
+	text-align:center;
+}
+.derecha{
+	float:right;
+}
+.izquierda{
+	float:left;
+}
+.centro{
+	float:center;
+}
+.div_centro{
+	margin: 0px auto;
+}
+.div_total{
+	background-color:#65C9EF;
+	color:#fff;
+	font:Arial;
+	font-family:Arial;
+	font-size:12pt;
+	height:155px;
+	line-height:155px;
+	text-align:center;
+}
+.div_ubicacion{
+	background: url('../botones/b-ubicacion.png');
+	background-position: left top;
+	background-repeat: no-repeat;
+	height:50px;
+	padding-left:35px;
+}
+.div_telefono{
+	background: url('../botones/b-telefono.png');
+	background-position: left top;
+	background-repeat: no-repeat;
+	height:30px;
+	line-height:30px;
+	padding-left:35px;
+}
+.div_correo{
+	background: url('../botones/b-correo.png');
+	background-position: left top;
+	background-repeat: no-repeat;
+	height:30px;
+	line-height:30px;
+	padding-left:35px;
+}
+/*login*/
+.ajusta_datos_perfil
+{
+	padding-left:35px;
+}
+.logo{
+	background: url('../imagenes/logo-login.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto; 
+    width: 525px;
+}
+
+.olvide_pass{
+	color:#0000FF;
+	font:Arial;
+	font-family:Arial;
+	font-size:7.5pt;
+	margin-left: auto;
+	margin-right: auto; 
+	text-decoration:underline;
+}
+
+/*Clientes*/
+.cargando{
+	background: url('../imagenes/ajax-loader.gif');
+	background-position:center;
+	background-repeat:no-repeat;
+}
+
+#ulSucursales 
+{ 
+	display: inline-block;
+    padding: 0;
+   width:   100%;
+}
+
+#ulSucursales li 
+{ 
+	list-style: none;
+}
+
+.NoVisible{
+	display:none;
+	visibility:hidden;
+}
+.Visible{
+	display:inline;
+	visibility:visible;
+}
+#ulContactos 
+{ 
+	display: inline-block;
+    padding: 0;
+   width:   100%;
+}
+
+#ulContactos li 
+{ 
+	list-style: none;
+}
+ 
+.cabecera_seccion_down
+{
+	background: url('../imagenes/arrow-down.png');
+	background-color:#8DD7F9;
+	background-position: right center;
+	background-repeat:no-repeat;
+	color:#406699;
+	padding:3px 0px 3px 10px;
+	text-align:left;
+}
+.cabecera_seccion_down:hover
+{
+	background-color:#C1E9FB;
+	color:#406699;
+}
+.cabecera_seccion_up
+{
+	background: url('../imagenes/arrow-up.png');
+	background-color:#8DD7F9;
+	background-position: right center;
+	background-repeat:no-repeat;
+	color:#406699;
+	padding:3px 0px 3px 10px;
+	text-align:left;
+}
+.cabecera_seccion_up:hover
+{
+	background-color:#C1E9FB;
+	color:#406699;
+}
+
+.mayusculas
+{
+	text-transform:uppercase;
+}
+
