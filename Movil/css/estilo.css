@@ -130,6 +130,51 @@
 	background: url('../botones/b-acciones-over.png');
 	background-repeat:no-repeat;
 }
+/*Botones Pantalla Cliente*/
+.bNuevaFactura {
+	background: url('../botones/b-nuevafactura.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 75px;
+    width: 550px;
+}
+.bNuevaFactura:hover {
+	background: url('../botones/b-nuevafactura-over.png');
+	background-repeat:no-repeat;
+}
+.bNuevaCotizacion {
+	background: url('../botones/b-nuevacotizacion.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 75px;
+    width: 550px;
+}
+.bNuevaCotizacion:hover {
+	background: url('../botones/b-nuevacotizacion-over.png');
+	background-repeat:no-repeat;
+}
+.bEliminarCliente {
+	background: url('../botones/b-neliminarCliente.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 75px;
+    width: 550px;
+}
+.bEliminarCliente:hover {
+	background: url('../botones/b-neliminarCliente-over.png');
+	background-repeat:no-repeat;
+}
+.bCancelarAccion {
+	background: url('../botones/b-ncancelar.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 75px;
+    width: 550px;
+}
+.bCancelarAccion:hover {
+	background: url('../botones/b-ncancelar-over.png');
+	background-repeat:no-repeat;
+}
 
 /*div menu*/
 .menu{

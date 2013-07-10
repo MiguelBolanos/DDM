@@ -169,28 +169,34 @@
 			<div class="div_total">$0.00</div>
 			<div class="espacio2 limpiar"></div>
 			<div class="div3 ajusta_datos_perfil">
-				<div class="listado1">Ana Garcia Fernandez</div>
-				<div class="listado2">xxxxxxxxxxxx</div>
+				<div class="listado1" id="pcNombre"></div>
+				<div class="listado2" id="pcRFC"></div>
 			</div>
 			<div class="espacio2 limpiar"></div>
 			<div class="div_ubicacion">
-				<div class="listado2">Reio Mayo</div>
-				<div class="listado2">Mexicali</div>
+				<div class="listado2" id="pcDireccion1"></div>
+				<div class="listado2" id="pcDireccion2"></div>
 			</div>
 			<div class="espacio1 limpiar"></div>
-			<div class="div_telefono">
-				<div class="listado2">686-119-6594</div>
+			<div class="div_telefono" id="pcTelefono">
+				<div class="listado2"></div>
 			</div>
 			<div class="espacio1 limpiar"></div>
 			<div class="div_correo">
-				<div class="listado2">lapoj@hotmail.com</div>
+				<div class="listado2" id="pcCorreo"></div>
 			</div>
 			<div class="espacio1 limpiar"></div>
 			</div>
 			<div class="piePagina">
-				<a class="bAcciones" href="#popupBasic" data-rel="popup" id="bAccionesCliente"></a>
-				<div data-role="popup" id="popupBasic" data-theme="f" data-overlay-theme="a">
-					<p>This is a completely basic popup, no options set.<p>
+				<a class="bAcciones" href="#pAccionesCliente" data-rel="popup" data-transition="pop" data-position-to="window" id="bAccionesCliente"></a>
+				<div data-role="popup" id="pAccionesCliente" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0">
+						<div class="div3"><a class="bNuevaFactura" href="#" id="bClienteNuevaFactura"></a></div>
+						<div class="espacio1 limpiar"></div>
+						<div class="div3"><a class="bNuevaCotizacion" href="#" id="bClienteNuevaCotizacion"></a></div>
+						<div class="espacio1 limpiar"></div>
+						<div class="div3"><a class="bEliminarCliente" href="#" id="bEliminarCliente"></a></div>
+						<div class="espacio2 limpiar"></div>
+						<div class="div3"><a class="bCancelarAccion" href="#" id="bCancelarAccion"></a></div>
 				</div>
 			</div>
 		</div>	
@@ -307,6 +313,12 @@
 			//Clientes
 			$("#bClientes").on("click",function(){populateAllClientes();});
 			$("#bInicioListaClientes").on("click",function(){setInicioListaClientes();});
+			$("#pAccionesCliente").on({ //bloquea la pantalla al abrir un popup
+				popupbeforeposition: function () {
+					$('.ui-popup-screen').off();
+				}
+			});
+			$("#bCancelarAccion").on("click",function(){ $('#pAccionesCliente').popup("close");});
 			$("#bAgregarCliente").on("click",function(){limpiarPantallaCliente(true);});
 			/*Listview infinite clientes*/
 			$('#lvClientes').onScrollBeyond(function() {
