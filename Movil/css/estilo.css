@@ -291,6 +291,31 @@
 .bGenerarFactura:hover {
 	background: url('../botones/b-generar-factura-over.png');
 }
+/*Botones Configuraciones*/
+.bDatosFiscales {
+	background: url('../botones/b-datosfiscales.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 75px;
+	margin-left: auto;
+	margin-right: auto; 
+    width: 430px;
+}
+.bDatosFiscales:hover {
+	background: url('../botones/b-datosfiscales-over.png');
+}
+.bImpuestos {
+	background: url('../botones/b-impuestos.png');
+	background-repeat:no-repeat;
+	display: block;
+	height: 75px;
+	margin-left: auto;
+	margin-right: auto; 
+    width: 430px;
+}
+.bImpuestos:hover {
+	background: url('../botones/b-impuestos-over.png');
+}
 /*Listados*/
 .listado1{
   color:#336699;
@@ -602,6 +627,16 @@ float:right;
 	text-decoration:underline;
 }
 
+.olvide_pass_mensaje{
+	color:#336699;
+	font:Arial;
+	font-family:Arial;
+	font-size:8.5pt;
+	font-stretch:bold;
+	font-style:italic;
+}
+
+
 /*Clientes*/
 .cargando{
 	background: url('../imagenes/ajax-loader.gif');
@@ -675,5 +710,13 @@ float:right;
 .mayusculas
 {
 	text-transform:uppercase;
+}
+
+.error{
+	color:#FF0000;
+	font:Arial;
+	font-family:Arial;
+	font-size:7.5pt;
+	font-style:italic;
 }
 

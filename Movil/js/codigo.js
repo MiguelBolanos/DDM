@@ -8,33 +8,76 @@ var contadorSucursales = 0;
 var contadorContactos = 0;
 /*Login*/
 function autentifica(){
-$.ajax({
-		cache: false,
-        type: 'POST',
-        async: false,
-		//contentType: "text/xml; charset=utf-8",
-		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/Login',
-        data: {"sUsuario":$("#tbUsuario").val(),"sContrasena":$("#tbContrasena").val()},
-        success: function (xml) {
-		var r = $(xml).text();
-		var obj = jQuery.parseJSON(r);
-			if(obj.Validacion == "true")
-			{	
-				EmpresaID = obj.EmpresaID;
-				Login = obj.Login;
-				$.mobile.changePage("#pMenu");
-			}
-			else
-			{
-				alert("Usuario o contraseña incorrecta(s)");
-			}
-	    },
-        error: function (xhr, ajaxOptions, thrownError) {
-			alert("Error: " + xhr.status +" | "+xhr.responseText);
-        }
-});
+var usuario = $("#tbUsuario").val();
+var pass = $("#tbContrasena").val();
+	if(usuario != "" && pass != "")
+	{
+		$.ajax({
+				cache: false,
+				type: 'POST',
+				async: false,
+				//contentType: "text/xml; charset=utf-8",
+				dataType: "xml",
+				url:'http://192.168.0.102/app/Service1.asmx/Login',
+				data: {"sUsuario" : usuario,"sContrasena" : pass},
+				success: function (xml) {
+				var r = $(xml).text();
+				var obj = jQuery.parseJSON(r);
+					if(obj.Validacion == "true")
+					{	
+						EmpresaID = obj.EmpresaID;
+						Login = obj.Login;
+						$("#errorLogin").removeClass("Visible");
+						$("#errorLogin").addClass("NoVisible");
+						$.mobile.changePage("#pMenu");
+					}
+					else
+					{
+						$("#errorLogin").text("*Su contrasena es incorrecta.");
+						$("#errorLogin").removeClass("NoVisible");
+						$("#errorLogin").addClass("Visible"); 
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					alert("Error: " + xhr.status +" | "+xhr.responseText);
+				}
+		});
+	}
 }
+
+function recuperarContrasena(pLogin)
+{
+	if(pLogin != "")
+	{
+		$.ajax({
+			cache: false,
+			type: 'POST',
+			async: false,
+			//contentType: "text/xml; charset=utf-8",
+			dataType: "xml",
+			url:'http://192.168.0.102/app/Service1.asmx/recuperarContrasena',
+			data: {"pLogin" : pLogin},
+			success: function (xml) {
+				var r = $(xml).text();
+				var obj = jQuery.parseJSON(r);
+				if(obj.Validacion == "false")
+				{	
+						alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert("Error: " + xhr.status +" | "+xhr.responseText);
+			}
+		});
+		$.mobile.changePage("#pRecuperarContrasena");
+	}
+	else{
+		$("#errorLogin").text("*Favor de escribir su usuario");
+		$("#errorLogin").removeClass("NoVisible");
+		$("#errorLogin").addClass("Visible"); 
+	}
+}
+
 /*Configuración*/
 function limpiarConfiguracion()
 {
@@ -54,6 +97,7 @@ function limpiarConfiguracion()
 
 function populateConfiguracion()
 {
+var html = ""	
 limpiarConfiguracion();
 $.ajax({
 		cache: false,
@@ -79,7 +123,12 @@ $.ajax({
 			$("#tbEstado").val(obj.Estado);
 			$("#tbPais").val(obj.Pais);
 			$("#tbCodigoPostal").val(obj.CodigoPostal);
-			$.mobile.changePage("#pConfiguracion");
+			$.each(obj.Sucursales, function(index,value){
+				html= '<option value="'+value.Empresa_SucursalID+'" selected="selected">'+value.Sucursal_Nombre+'</option>';
+				$("#cbSucursalEmpresa").append(html);
+			});
+			
+			$.mobile.changePage("#pDatosFiscales");
 		}
 		else
 				alert("A ocuurido un error, por favor verifique su conexion a internet.");
@@ -146,7 +195,7 @@ var html;
 			{	
 				$.mobile.changePage("#pListaClientes");
 				$.each(obj.Clientes, function(index,value){
-				html= '<li data-icon="false"><a href="#" onclick="populatePerfil('+value.ClienteID+')"><div class="listado1">'+value.Nombre +'...</div><div class="listado2">'+ value.RFC +'</div></a></li>'
+				html= '<li data-icon="false"><a href="#" onclick="populatePerfil('+value.ClienteID+')"><div class="listado1">'+value.Nombre +'...</div><div class="listado2">'+ value.RFC +'</div></a></li>';
 					$("#lvClientes").append(html);
 				});
 					$("#lvClientes").show();
@@ -163,8 +212,46 @@ var html;
 
 function populatePerfil(pClienteID)
 {
-	
-	$.mobile.changePage("#pPerfilClientes");
+	//limpiamos campos
+	$("#pcSaldo").text("$ 0.00");
+	$("#pcNombre").text("");
+	$("#pcRFC").text("");
+	$("#pcDireccion1").text("");
+	$("#pcDireccion2").text("");
+	$("#pcTelefono").text("");
+	$("#pcCorreo").text("");
+	$.ajax({
+		cache: false,
+        type: 'POST',
+        async: false,
+		//contentType: "text/xml; charset=utf-8",
+		dataType: "xml",
+        url:'http://192.168.0.102/app/Service1.asmx/getPerfilCliente',
+        data: {"pClienteID" : pClienteID},
+        success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				ClienteID = pClienteID;
+				$("#pcSaldo").text(obj.Saldo);
+				$("#pcNombre").text(obj.Nombre);
+				$("#pcRFC").text(obj.RFC);
+				$("#pcDireccion1").text(obj.Direccion1);
+				$("#pcDireccion2").text(obj.Direccion2);
+				$("#pcTelefono").text(obj.Telefono);
+				$("#pcCorreo").text(obj.Correo);
+				$.mobile.changePage("#pPerfilClientes");
+			}
+			else
+			{
+				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+			}
+	    },
+        error: function (xhr, ajaxOptions, thrownError) {
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
+        }
+	});
 }
 
 function populateCliente(pClienteID){
@@ -242,15 +329,44 @@ function populateCliente(pClienteID){
 				selectFormaPago();
 				$('#tbNoCuentaCliente').val(obj.UltimosDigitos);
 				$('#tbNotaInterna').val(obj.NotaInterna);
+				$.mobile.changePage("#pClientes");
 			}
 			else
-			alert("Usuario o contraseña incorrecta(s)");
+			alert("A ocuurido un error, por favor verifique su conexion a internet.");
 	    },
         error: function (xhr, ajaxOptions, thrownError) {
 			alert("Error: " + xhr.status +" | "+xhr.responseText);
         }
 	});
-	$.mobile.changePage("#pClientes");
+}
+
+function deleteCliente(pClienteID)
+{
+	$.ajax({
+		cache: false,
+        type: 'POST',
+        async: false,
+		//contentType: "text/xml; charset=utf-8",
+		dataType: "xml",
+        url:'http://192.168.0.102/app/Service1.asmx/deleteCliente',
+        data: {"pClienteID" : pClienteID},
+        success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				$('#lvClientes').children().remove('li');
+				populateAllClientes();
+			}
+			else
+			{
+				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+			}
+	    },
+        error: function (xhr, ajaxOptions, thrownError) {
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
+        }
+	});
 }
 
 function setInicioListaClientes()
@@ -276,7 +392,7 @@ var html;
 			if(obj.Validacion == "true")
 			{	
 				$.each(obj.Clientes, function(index,value){
-				html= '<li data-icon="false"><a href="#" onclick="populateCliente('+value.ClienteID+')><div class="listado1">'+value.Nombre +'...</div><div class="listado2">'+ value.RFC +'</div></a></li>'
+				html= '<li data-icon="false"><a href="#" onclick="populateCliente('+value.ClienteID+')><div class="listado1">'+value.Nombre +'...</div><div class="listado2">'+ value.RFC +'</div></a></li>';
 					$("#lvClientes").append(html);
 				});
 					$("#lvClientes").show();
@@ -304,6 +420,7 @@ function limpiarPantallaCliente(pEnviarPantalla){
 	$("#tbCalleCliente").val("");
 	$("#tbColoniaCliente").val("");
 	$("#tbEstadoCliente").val("");
+	$("#tbMunicipioCliente").val("");
 	$("#tbPaisCliente").val("");
 	$("#tbNoExteriorCliente").val("");
 	$("#tbNoInteriorCliente").val("");

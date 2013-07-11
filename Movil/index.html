@@ -19,6 +19,9 @@
 		<div data-role="page" id="login">
 			<div data-role="content">
 				<div class="logo">&nbsp;</div>
+				<div class="div2 izquierda">&nbsp;</div>
+				<div class="div1 izquierda"><span class="error NoVisible" id="errorLogin">*Su contrasena es incorrecta.</span></div>
+				<div class="div2 izquierda">&nbsp;</div>
 				<div class="espacio1 limpiar"></div>
 				<div class="div2 izquierda">&nbsp;</div>
 				<div class="div1 izquierda"><input type="text" name="tbUsuario" value="" placeholder=" Usuario" data-role="none" class="campo9" id="tbUsuario"></input></div>
@@ -32,15 +35,25 @@
 					<a class="bEntrar" href="#" id="bEntrar"></a>
 				</div>
 				<div class="espacio2 limpiar"></div>
-				<div class="texto_centro"><a href="#" class="olvide_pass">Olvide contraseña</a></div>
+				<div class="texto_centro"><a href="#" class="olvide_pass" id="bRecuperarContrasena">Olvide contraseña</a></div>
 			</div>
 		</div>
+		<!--Recuperar Contraseña-->
+		<div data-role="page" id="pRecuperarContrasena">
+			<div data-role="content">
+			<div class="logo">&nbsp;</div>
+			<div class="espacio2 limpiar"></div>
+			<div class="div3 texto_centro olvide_pass_mensaje">Se ha enviado un link a su</div>
+			<div class="div3 texto_centro olvide_pass_mensaje">correo electronico para generar</div>
+			<div class="div3 texto_centro olvide_pass_mensaje">una nueva contrasena</div>
+			</div>
+		</div>	
         <!-- Menu -->
         <div data-role="page" id="pMenu">
 		    <div class="barra_Header">
 				<div>
 					<a class="bAyuda" href="#"></a>
-					<a class="bConfiguracion" href="#" id="bConfiguracion"></a>
+					<a class="bConfiguracion" href="#pConfiguracion" id="bConfiguracion"></a>
 				</div>
 			</div>
 			<div data-role="content">
@@ -117,6 +130,20 @@
 		<div data-role="page" id="pConfiguracion">
 		    <div class="barra_Header_Listado">
 				<div>
+					<a class="bInicio" href="#pMenu"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<div class="espacio2 limpiar"></div>
+				<div class="div3"><a class="bDatosFiscales" href="#" id="bDatosFiscales"></a></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div3"><a class="bImpuestos" href="#" id="bImpuestos"></a></div>
+			</div>
+		</div>	
+		<!--Datos Fiscales-->
+		<div data-role="page" id="pDatosFiscales">
+		    <div class="barra_Header_Listado">
+				<div>
 					<a class="bCancelar" href="#pMenu"></a>
 					<a class="bGuardar" href="#" id="bGuardarConfiguracion"></a>
 				</div>
@@ -124,9 +151,13 @@
 			<div data-role="content">
 				<div class="texto_principal">Datos fiscales</div>
 				<div class="div1 izquierda"><input type="text" name="tbRazonSocial" value="" placeholder=" Razon Social" data-role="none" class="campo6" id="tbRazonSocial"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbRFC" value="" placeholder=" RFC" data-role="none" class="campo7" id="tbRFC"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbRFC" value="" placeholder=" RFC" data-role="none" class="campo7" id="tbRFC" readonly></input></div>
 				<div class="espacio1 limpiar"></div>
-				<div class="div1"><input type="text" name="cbSucursal" value="" placeholder=" Sucursal" data-role="none" class="campo1"></input></div>
+				<div class="div1">
+					<select class="campo1 " data-role="none" id="cbSucursalEmpresa">
+						<option value="" selected="selected">Sucursal</option>
+					</select>
+				</div>
 				<div class="espacio2 limpiar"></div>
 				<div class="div1 izquierda"><input type="text" name="tbCalle" value="" placeholder=" Calle" data-role="none" class="campo2" id="tbCalle"></input></div>
 				<div class="div2 izquierda"><input type="text" name="tbNumExt" value="" placeholder=" Numero ext." data-role="none" class="campo8" id="tbNumExt"></input></div>
@@ -144,8 +175,6 @@
 				<div class="espacio2 limpiar"></div>
 				<div class="div1 izquierda"><input type="text" name="tbFolio" value="" placeholder=" Folio" data-role="none" class="campo6"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbSerie" value="" placeholder=" Serie" data-role="none" class="campo7"></input></div>
-				<div class="espacio2 limpiar"></div>
-				<div class="texto_izquierda"><a class="bSucursal" href="#"></a></div>
 				<div class="espacio2 limpiar"></div>
 				<div class="texto_principal">Impuestos</div>
 				<div class="espacio1 limpiar"></div>
@@ -166,7 +195,7 @@
 			</div>
 			<div data-role="content">
 			<div class="div3 texto_principal">Saldo</div>
-			<div class="div_total">$0.00</div>
+			<div class="div_total" id="pcSaldo">$0.00</div>
 			<div class="espacio2 limpiar"></div>
 			<div class="div3 ajusta_datos_perfil">
 				<div class="listado1" id="pcNombre"></div>
@@ -307,8 +336,9 @@
 			$.mobile.allowCrossDomainPages = true;
 			//Login
 			$("#bEntrar").on("click",function(){autentifica();});
+			$("#bRecuperarContrasena").on("click",function(){recuperarContrasena($("#tbUsuario").val());});
 			//Configuracion
-			$("#bConfiguracion").on("click",function(){populateConfiguracion();});
+			$("#bDatosFiscales").on("click",function(){populateConfiguracion();});
 			$("#bGuardarConfiguracion").on("click",function(){updateConfiguracion();});
 			//Clientes
 			$("#bClientes").on("click",function(){populateAllClientes();});
@@ -320,6 +350,9 @@
 			});
 			$("#bCancelarAccion").on("click",function(){ $('#pAccionesCliente').popup("close");});
 			$("#bAgregarCliente").on("click",function(){limpiarPantallaCliente(true);});
+			$("#bEditarCliente").on("click",function(){populateCliente(ClienteID);});
+			$("#bEliminarCliente").on("click",function(){ if(confirm("¿Confirma la eliminacion de este cliente?")){ deleteCliente(ClienteID);}});
+			
 			/*Listview infinite clientes*/
 			$('#lvClientes').onScrollBeyond(function() {
 			  if(EmpresaID > 0)
