@@ -72,7 +72,8 @@
 				</div>
 				<div class="menu">
 					<div class="ui-grid-b">
-						<div class="ui-block-a"><div class="boton_grid"><a class="bGastos" href="#"></a></div></div>
+						<div class="ui-block-a">
+							<div class="boton_grid"><a class="bGastos" href="#pListaGastos" id="bGastos"></a></div></div>
 						<div class="ui-block-b"></div>
 						<div class="ui-block-c"></div>
 					</div>
@@ -126,6 +127,22 @@
 		</div>
 		<!--Lista Cotizaciones-->
 		<!--Lista Gastos-->
+		<div data-role="page" id="pListaGastos">
+			<div class="header_gastos">
+				<div>
+					<a class="bInicio" href="#" id="bInicioListaGastos"></a>
+					<a class="bAgregar" href="#" id="bAgregarGasto"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Busca un gasto..." data-inset="true" data-icon="false" id="lvGastos">
+				</ul>
+				<div id="CargandoListaGastos">&nbsp;</div>
+					
+				<div class="texto_azul izquierda div1" id="gTotalTexto">Total</div>
+				<div class="div_total_derecha izquierda div1" id="gTotal"></div>
+			</div>
+		</div>
 		<!--Configuracion-->
 		<div data-role="page" id="pConfiguracion">
 		    <div class="barra_Header_Listado">
@@ -359,6 +376,27 @@
 			</div>
 		<!--Administrar Cotizaciones-->
 		<!--Administrar Gastos-->
+		<div data-role="page" id="pGastos">
+			<div class="barra_Header_Listado">
+				<div>
+					<a class="bCancelar" href="#pListaGastos"></a>
+					<a class="bGuardar" href="#"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<div class="div3 texto_azul">Gasto</div>
+				<div class="div1 izquierda"><input type="text" id="tbMontoGasto" value="" placeholder=" Monto " data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="date" id="tbFechaGasto" value="" placeholder=" Fecha " data-role="none" class="campo7"></input></div>
+				<div class="espacio limpiar"></div>
+				<div class="div3"><input type="text" id="tbProveedorGasto" value="" placeholder=" Proveedor " data-role="none" class="campo9"></input></div>
+				<div class="div3"><input type="text" id="tbCategoriaGasto" value="" placeholder=" Categoria " data-role="none" class="campo8"></input></div>
+				<div class="div3"><input type="text" id="tbDescripcionGasto" value="" placeholder=" Descripcion " data-role="none" class="campo10"></input></div>
+				<div class="espacio limpiar"></div>
+				<select  class="campo1 div1 derecha" data-role="none" placeholder=" Impuestos " id="cbImpuestosGasto">
+					<!--option value="-1"  selected="selected">Impuestos</option>-->
+				</select>
+			</div>
+		</div>
 		<script src="js/jquery.scrollExtend.min.js"></script>
 		<script src="js/codigo.js"></script>
 		<script>
@@ -367,7 +405,8 @@
 			$.support.cors = true;
 			$.mobile.allowCrossDomainPages = true;
 			//Login
-			$("#bEntrar").on("click",function(){autentifica();});
+			$("#tbUsuario").focus();
+			$("#bEntrar").on("click",function(){autentifica();cargarImpuestos();});
 			$("#bRecuperarContrasena").on("click",function(){recuperarContrasena($("#tbUsuario").val());});
 			//Configuracion
 			$("#bDatosFiscales").on("click",function(){populateConfiguracion();});
@@ -391,9 +430,16 @@
 			$('#lvClientes').onScrollBeyond(function() {
 			  if(EmpresaID > 0)
 				{	
-					$("CargandoListaCliente").addClass("cargando");
-					getMoreClientes();
-					$("CargandoListaCliente").removeClass("cargando");
+					var page = $.mobile.activePage.attr("id");
+					if(page=="pListaClientes"){
+						$("#CargandoListaCliente").addClass("cargando");
+						getMoreClientes();
+						$("#CargandoListaCliente").removeClass("cargando");
+					}else if (page=="pListaGastos"){
+						$("#CargandoListaGastos").addClass("cargando");
+						getMoreGastos();
+						$("#CargandoListaGastos").removeClass("cargando");
+					}
 				}
 			});
 			$("#bSucursalCliente").on("click",function(){addSucursal(true,"",0);});
@@ -402,6 +448,16 @@
 			$("#dOtraInformacion").on("click",function(){otraInformacion();});
 			$("#dContacto").on("click",function(){contacto();});
 			$("#bContactoCliente").on("click",function(){addContacto(false,0);});
+			//Gastos
+			$("#bGastos").on("click",function(){populateAllGastos();});
+			$("#bInicioListaGastos").on("click",function(){setInicioListaGastos();});
+			$("#bAgregarGasto").on("click",function(){limpiarPantallaGastos(true);insertarImpuestos("cbImpuestosGasto");});
+/*			$('#lvGastos').onScrollBeyond(function() {
+			  if(EmpresaID > 0)
+				{	
+				alert('entro gastos');
+				}
+			});*/
 			});
 		</script>
     </body>

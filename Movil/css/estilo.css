@@ -22,6 +22,17 @@
 	height:95px;
 	text-align:center;
 }
+
+.header_gastos{
+	background: url('../imagenes/barra-gastos.png');
+	background-color:#00294B;
+	background-position:center;
+	background-repeat:no-repeat;
+	color:#fff;
+	height:95px;
+	text-align:center;
+}
+
 /*Botones Header*/
 .bAyuda {
 	background: url('../botones/b-ayuda.png');
@@ -344,6 +355,7 @@
   font:Arial;
   font-family:Arial;
   font-size:8pt;
+  display: inline;
  }
 
 .listado2{
@@ -351,6 +363,7 @@
   font:Arial;
   font-family:Arial;
   font-size:6.5pt;
+  display: inline;
  }
 
 
@@ -557,6 +570,9 @@ float:right;
 	webkit-border-radius: 0px 0px 5px 5px;*/
 	padding:5px 0px 5px 0px;
 }
+.espacio{
+	height:1px;
+}
 .espacio1{
 	height:5px
 }
@@ -574,6 +590,12 @@ float:right;
 }
 .texto_centro{
 	text-align:center;
+}
+.texto_blanco{
+	color:#FFFFFF;
+}
+.texto_azul{
+	color:#00294B;
 }
 .derecha{
 	float:right;
@@ -596,6 +618,16 @@ float:right;
 	height:155px;
 	line-height:155px;
 	text-align:center;
+}
+.div_total_derecha{
+	background-color:#65C9EF;
+	color:#fff;
+	font:Arial;
+	font-family:Arial;
+	font-size:12pt;
+	height:155px;
+	line-height:155px;
+	text-align:right;
 }
 .div_ubicacion{
 	background: url('../botones/b-ubicacion.png');

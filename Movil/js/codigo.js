@@ -1,17 +1,27 @@
 /*Variables*/
 var EmpresaID = 0;
 var ClienteID = 0;
+<<<<<<< HEAD
 var Empresa_SucursalID = 0;
 var SeriesID = 0;
+=======
+var GastosID = 0;
+>>>>>>> Lista Gastos, Impuestos al inicio.
 var Login = "";
 var Paginacion = 1;
+var ImpuestosJSON;
 /*Variables pantalla clientes*/
 var contadorSucursales = 0;
 var contadorContactos = 0;
+<<<<<<< HEAD
 var contadorImpuestos = 0;
 var JSonSucursales;
 var JSonSeries;
 var JSonTiposImpuestos;
+=======
+/*Variables Gastos*/
+var TotalGastos = 0;
+>>>>>>> Lista Gastos, Impuestos al inicio.
 /*Login*/
 function autentifica(){
 var usuario = $("#tbUsuario").val();
@@ -318,6 +328,7 @@ function populateImpuestos(){
 var html = "";	
 contadorImpuestos = 1;
 	$.ajax({
+<<<<<<< HEAD
 		cache: false,
 		type: 'post',
 		async: false,
@@ -325,6 +336,15 @@ contadorImpuestos = 1;
 		url:'http://192.168.0.103/app/Service1.asmx/getImpuestos',
 		data: {"pEmpresaID" : EmpresaID },
 		success: function (xml) {
+=======
+			cache: false,
+			type: 'post',
+			async: false,
+			dataType: 'xml',
+			url:'http://192.168.0.103/app/Service1.asmx/updateEmpresa',
+			data: {"jSon" : Json },
+			success: function (xml) {
+>>>>>>> Lista Gastos, Impuestos al inicio.
 			var r = $(xml).text();
 			var obj = jQuery.parseJSON(r);
 			if(obj.Validacion == "true")
@@ -414,7 +434,7 @@ var html;
 					$("#lvClientes").listview("refresh");
 			}
 			else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 			},
 			error: function (e) {
 			alert("Error: " + e.responseText);
@@ -1051,4 +1071,171 @@ function insertCliente()
 			}
 		});
 	}
+}
+
+///////////////////////////////////////////////////////////     GASTOS     ////////////////////////////////////////////////////////////////////////////
+function populateAllGastos()
+{
+Paginacion = 1;
+TotalGastos = 0;
+var html;
+	$.ajax({
+			cache:false,
+			type: 'post',
+			async:false,
+			dataType:'xml',
+			url:'http://192.168.0.103/app/Service1.asmx/getAllGastos',
+			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
+			success: function (json){
+			var r = $(json).text();
+			//alert(r);
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true"){
+				$.mobile.changePage("#pListaGastos");
+				
+				$.each(obj.Gastos, function(index,value){
+				html='<li data-icon="false"><a href="#" onclick="populateGasto('+value.GastosID+')"><div class="listado1 izquierda">Gastos fijos</div><div class="listado1 derecha">$ '+value.Monto+'</div><div class="espacio limpiar"></div><div class="listado2 izquierda">'+value.Descripcion+
+				'</div><div class="listado2 div_centro">'+value.Fecha+'</div></a></li>';
+				$('#lvGastos').append(html);
+				TotalGastos = TotalGastos + parseFloat(value.Monto);
+				});
+				
+				$('#gTotal').text("$ "+Math.round(parseFloat(TotalGastos)*100)/100);
+				$('#lvGastos').show();
+				$('#lvGastos').listview("refresh");
+			}
+			else
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
+			},
+			error:function(e){
+				alert("Error: "+e.responseText);
+			}
+	});
+}
+
+function setInicioListaGastos()
+{
+	$('#lvGastos').children().remove('li');
+	$.mobile.changePage("#pMenu");
+}
+
+function getMoreGastos()
+{
+Paginacion++;
+var html;
+	$.ajax({
+			cache:false,
+			type: 'post',
+			async:false,
+			dataType:'xml',
+			url:'http://192.168.0.103/app/Service1.asmx/getAllGastos',
+			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
+			success: function (xml){
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true"){
+				$.mobile.changePage("#pListaGastos");
+				
+				$.each(obj.Gastos, function(index,value){
+				html='<li data-icon="false"><a href="#" onclick="populateGasto('+value.GastosID+')"><div class="listado1 izquierda">Gastos fijos</div><div class="listado1 derecha">$ '+value.Monto+'</div><div class="espacio limpiar"></div><div class="listado2 izquierda">'+value.Descripcion+
+				'</div><div class="listado2 div_centro">'+value.Fecha+'</div></a></li>';
+				$('#lvGastos').append(html);
+				TotalGastos = TotalGastos + parseFloat(value.Monto);
+				});
+				
+				$('#gTotal').text("$ "+Math.round(parseFloat(TotalGastos)*100)/100);
+				$('#lvGastos').show();
+				$('#lvGastos').listview("refresh");
+			}
+			else
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
+			},
+			error:function(e){
+				alert("Error: "+e.responseText);
+			}
+	});
+}
+
+function limpiarPantallaGastos(pEnviarPantalla){
+	GastosID = 0;
+	$("#tbMontoGasto").val("");
+	$("#tbFechaGasto").val("");
+	$("#tbProveedorGasto").val("");
+	$("#tbCategoriaGasto").val("");
+	$("#tbDescripcionGasto").val("");
+	$('#cbImpuestosGasto').children().remove('option');
+
+	if (pEnviarPantalla == true)
+		$.mobile.changePage("#pGastos");
+}
+
+function insertGasto(){
+	var n;
+	var json;
+	var xml;
+	xml = '&lt;Gasto&gt;';
+	xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
+	//xml = xml + '&lt;GastoID&gt;'+GastoID+'&lt;/ClienteID&gt;';
+	xml = xml + '&lt;Fecha&gt;'+$("#tbFechaGasto").val()+'&lt;/Fecha&gt;';
+	xml = xml + '&lt;Proveedor&gt;'+$("#tbProveedorGasto").val()+'&lt;/Proveedor&gt;';
+	xml = xml + '&lt;Categoria&gt;'+$("#tbCategoriaGasto").val()+'&lt;/Categoria&gt;';
+	xml = xml + '&lt;Descripcion&gt;'+$("#tbDescripcionGasto").val()+'&lt;/Descripcion&gt;';
+	xml = xml + '&lt;Impuesto&gt;'+$("#cbImpuestosGasto option:selected").val()+'&lt;/Impuesto&gt;';
+	
+	$.ajax({
+		cache: false,
+		type: 'post',
+		async: false,
+		dataType: 'xml',
+		url:'http://192.168.0.103/app/Service1.asmx/saveGastos',
+		data: {"xml" : xml},
+		success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				$.mobile.changePage("#pListaGastos");
+			}
+			else
+			{
+				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+			}
+		},
+		 error: function (xhr, ajaxOptions, thrownError) {
+		alert("Error: " + xhr.status +" | "+xhr.responseText);
+		}
+	});
+}
+
+////////////////////////////////////////////////////////       METODOS GENERALES         ////////////////////////////////////////////////////
+function cargarImpuestos(){
+	var html;
+	$.ajax({
+		cache : false,
+		type : 'post',
+		async : false,
+		dataType : 'xml',
+		url : 'http://192.168.0.103/app/Service1.asmx/getImpuestos',
+		data : {'pEmpresaID' : EmpresaID},
+		success: function(xml){
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion=="true"){
+				ImpuestosJSON = obj;
+			}
+			else
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
+		},
+		error:function(e){
+			alert("Error: "+e.responseText);
+		}
+	});
+}
+
+function insertarImpuestos(id){
+	var html;
+	$.each(ImpuestosJSON.Impuestos, function(index,value){
+		html='<option value="'+value.ImpuestosID+'">'+value.Nombre+' '+((parseFloat(value.Tasa*100)*100)/100)+'%</option>';
+		$('#'+id).append(html);
+	});
 }
