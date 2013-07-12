@@ -74,6 +74,18 @@
 	background-repeat:no-repeat;
 }
 
+.bEliminar {
+	background: url('../botones/b-eliminar.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 60px;
+    width: 130px;
+}
+.bEliminar:hover {
+	background: url('../botones/b-eliminar-over.png');
+	background-repeat:no-repeat;
+}
+
 .bGuardar {
 	background: url('../botones/b-guardar.png');
 	background-repeat:no-repeat;
@@ -291,6 +303,16 @@
 .bGenerarFactura:hover {
 	background: url('../botones/b-generar-factura-over.png');
 }
+.bGuardarPiePagina {
+	background: url('../botones/b-iguardar.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 90px;
+    width: 180px;
+}
+.bGuardarPiePagina:hover {
+	background: url('../botones/b-iguardar-over.png');
+}
 /*Botones Configuraciones*/
 .bDatosFiscales {
 	background: url('../botones/b-datosfiscales.png');
@@ -453,22 +475,18 @@ float:right;
 }
 .div1{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:50%;
 }
 .div2{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:25%;
 }
 .div3{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:100%;
 }
 .div4{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:49.5%;
 }
 .div5{
@@ -478,7 +496,6 @@ float:right;
 }
 .div6{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:5%;
 }
 .div7{
@@ -488,38 +505,39 @@ float:right;
 }
 .div8{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:33%;
 }
 .div9{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:34%;
 }
-
 .div10{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:90%;
 }
 .div11{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:10%;
 }
 .div12{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:80%;
 }
 .div13{
 	 display:block-inline;
-	 /*float:left;*/
 	 width:45%;
 }
 .div14{
 	 display:block-inline;
 	 width:99%;
+}
+.div15{
+	 display:block-inline;
+	 width:85%;
+}
+.div16{
+	 display:block-inline;
+	 width:3%;
 }
 .divSucursal{
 	border: 1px solid #BDC2C9;
@@ -635,7 +653,18 @@ float:right;
 	font-stretch:bold;
 	font-style:italic;
 }
+/*Configuracion*/
+#ulImpuestos 
+{ 
+	display: inline-block;
+    padding: 0;
+	width:   100%;
+}
 
+#ulImpuestos li 
+{ 
+	list-style: none;
+}
 
 /*Clientes*/
 .cargando{
@@ -648,7 +677,7 @@ float:right;
 { 
 	display: inline-block;
     padding: 0;
-   width:   100%;
+	width:   100%;
 }
 
 #ulSucursales li 
@@ -720,3 +749,18 @@ float:right;
 	font-style:italic;
 }
 
+.barra_azul{
+	background: url('../imagenes/barra.png');
+	color:#fff;
+	font:Arial;
+	font-family:Arial;
+	height:60px;
+	line-height:60px;
+	padding-left:20px;
+}
+
+.div_add_impuesto{
+	border-bottom:1px solid #000;
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+}

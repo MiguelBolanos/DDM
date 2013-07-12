@@ -1,11 +1,17 @@
 /*Variables*/
 var EmpresaID = 0;
 var ClienteID = 0;
+var Empresa_SucursalID = 0;
+var SeriesID = 0;
 var Login = "";
 var Paginacion = 1;
 /*Variables pantalla clientes*/
 var contadorSucursales = 0;
 var contadorContactos = 0;
+var contadorImpuestos = 0;
+var JSonSucursales;
+var JSonSeries;
+var JSonTiposImpuestos;
 /*Login*/
 function autentifica(){
 var usuario = $("#tbUsuario").val();
@@ -18,7 +24,7 @@ var pass = $("#tbContrasena").val();
 				async: false,
 				//contentType: "text/xml; charset=utf-8",
 				dataType: "xml",
-				url:'http://192.168.0.102/app/Service1.asmx/Login',
+				url:'http://192.168.0.103/app/Service1.asmx/Login',
 				data: {"sUsuario" : usuario,"sContrasena" : pass},
 				success: function (xml) {
 				var r = $(xml).text();
@@ -55,7 +61,7 @@ function recuperarContrasena(pLogin)
 			async: false,
 			//contentType: "text/xml; charset=utf-8",
 			dataType: "xml",
-			url:'http://192.168.0.102/app/Service1.asmx/recuperarContrasena',
+			url:'http://192.168.0.103/app/Service1.asmx/recuperarContrasena',
 			data: {"pLogin" : pLogin},
 			success: function (xml) {
 				var r = $(xml).text();
@@ -92,7 +98,16 @@ function limpiarConfiguracion()
 	$("#tbMunicipio").val("");
 	$("#tbEstado").val("");
 	$("#tbPais").val("");
+	$("#tbRegimenFiscal").val("");
+	$("#tbLugarExpedicion").val("");
 	$("#tbCodigoPostal").val("");
+	$("#tbFolio").val("");
+	$('#cbSucursalEmpresa').children().remove('option');
+	$("#cbSucursalEmpresa").append('<option value="" selected="selected">Sucursal</option>');
+	$("#cbSucursalEmpresa").val("0");
+	$('#cbSerieEmpresa').children().remove('option');
+	$("#cbSerieEmpresa").append('<option value="" selected="selected">Serie</option>');
+	$("#cbSerieEmpresa").val("0");
 }
 
 function populateConfiguracion()
@@ -104,31 +119,48 @@ $.ajax({
         type: 'post',
         async: false,
         dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getEmpresa',
+        url:'http://192.168.0.103/app/Service1.asmx/getEmpresa',
         data: {"EmpresaID" : EmpresaID},
         success: function (xml) {
 		var r = $(xml).text();
 		var obj = jQuery.parseJSON(r);
 		if(obj.Validacion == "true")
 		{	
-			$("#tbRazonSocial").val(obj.RazonSocial);
-			$("#tbRFC").val(obj.RFC);
-			$("#tbCalle").val(obj.Calle);
-			$("#tbNumExt").val(obj.NoExterior);
-			$("#tbNumInt").val(obj.NoInterior);
-			$("#tbColonia").val(obj.Colonia);
-			$("#tbCiudad").val(obj.Localidad);
-			$("#tbReferencias").val(obj.Referencia);
-			$("#tbMunicipio").val(obj.Municipio);
-			$("#tbEstado").val(obj.Estado);
-			$("#tbPais").val(obj.Pais);
-			$("#tbCodigoPostal").val(obj.CodigoPostal);
+			JSonSucursales = obj.Sucursales
 			$.each(obj.Sucursales, function(index,value){
 				html= '<option value="'+value.Empresa_SucursalID+'" selected="selected">'+value.Sucursal_Nombre+'</option>';
 				$("#cbSucursalEmpresa").append(html);
+				if(Empresa_SucursalID == value.Empresa_SucursalID)
+				{
+					if(Empresa_SucursalID == 0)
+						$("#tbRegimenFiscal").attr('readonly', false);
+					else
+						$("#tbRegimenFiscal").attr('readonly', true);
+					$("#tbRazonSocial").val(value.RazonSocial);
+					$("#tbRFC").val(value.RFC);
+					$("#tbCalle").val(value.Calle);
+					$("#tbNumExt").val(value.NoExterior);
+					$("#tbNumInt").val(value.NoInterior);
+					$("#tbColonia").val(value.Colonia);
+					$("#tbCiudad").val(value.Localidad);
+					$("#tbReferencias").val(value.Referencia);
+					$("#tbMunicipio").val(value.Municipio);
+					$("#tbEstado").val(value.Estado);
+					$("#tbPais").val(value.Pais);
+					$("#tbCodigoPostal").val(value.CodigoPostal);
+					$("#tbRegimenFiscal").val(value.Regimen_Fiscal);
+					$("#tbLugarExpedicion").val(value.LugarExpedicion);
+				}
 			});
-			
-			$.mobile.changePage("#pDatosFiscales");
+					$("#cbSucursalEmpresa").val(Empresa_SucursalID);
+					/*Series*/
+					JSonSeries = obj.Series;
+					$.each(obj.Series, function(index,value){
+						html= '<option value="'+value.SeriesID+'" selected="selected">'+value.Serie+'</option>';
+						$("#cbSerieEmpresa").append(html);
+					});
+					$("#cbSerieEmpresa").val("");
+					$.mobile.changePage("#pDatosFiscales");
 		}
 		else
 				alert("A ocuurido un error, por favor verifique su conexion a internet.");
@@ -138,44 +170,224 @@ $.ajax({
         }
 });
 }
+function populateSucursal()
+{
+	Empresa_SucursalID  = $("#cbSucursalEmpresa").val() != "" ? $("#cbSucursalEmpresa").val() : "0";
+	$.each(JSonSucursales, function(index,value){
+		if(Empresa_SucursalID == value.Empresa_SucursalID)
+		{
+			if(Empresa_SucursalID == 0)
+			$("#tbRegimenFiscal").attr('readonly', false);
+			else
+			$("#tbRegimenFiscal").attr('readonly', true);
+			$("#tbRazonSocial").val(value.RazonSocial);
+			$("#tbRFC").val(value.RFC);
+			$("#tbCalle").val(value.Calle);
+			$("#tbNumExt").val(value.NoExterior);
+			$("#tbNumInt").val(value.NoInterior);
+			$("#tbColonia").val(value.Colonia);
+			$("#tbCiudad").val(value.Localidad);
+			$("#tbReferencias").val(value.Referencia);
+			$("#tbMunicipio").val(value.Municipio);
+			$("#tbEstado").val(value.Estado);
+			$("#tbPais").val(value.Pais);
+			$("#tbCodigoPostal").val(value.CodigoPostal);
+			$("#tbRegimenFiscal").val(value.Regimen_Fiscal);
+			$("#tbLugarExpedicion").val(value.LugarExpedicion);
+			return;
+		}
+	});
+}
+function changeSerie()
+{
+  $("#tbFolio").val("");
+  SeriesID =  $("#cbSerieEmpresa").val();
+  $.each(JSonSeries, function(index,value){
+	 if(SeriesID == value.SeriesID)
+	 {
+		$("#tbFolio").val(value.Folio);
+		return;
+	 }
+  });
+}
 
+function validaConfiguracion()
+{
+	if($("#tbRazonSocial").val() == ""){
+		alert("Por favor capture la razon social");
+		$("#tbRazonSocial").focus();
+		return false;
+	}
+	else
+	if($("#tbCalle").val() == ""){
+		alert("Por favor capture la calle");
+		$("#tbCalle").focus();
+		return false;
+	}
+	else
+	if($("#tbNumExt").val() == ""){
+		alert("Por favor capture el numero exterior");
+		$("#tbNumExt").focus();
+		return false;
+	}
+	else
+	if($("#tbMunicipio").val() == ""){
+		alert("Por favor capture el municipio");
+		$("#tbMunicipio").focus();
+		return false;
+	}
+	else
+	if($("#tbEstado").val() == ""){
+		alert("Por favor capture el estado");
+		$("#tbEstado").focus();
+		return false;
+	}
+	else
+	if($("#tbPais").val() == ""){
+		alert("Por favor capture el pais");
+		$("#tbPais").focus();
+		return false;
+	}
+	else
+	if($("#tbCodigoPostal").val() == ""){
+		alert("Por favor capture el codigo postal");
+		$("#tbCodigoPostal").focus();
+		return false;
+	}
+	else
+	if($("#tbRegimenFiscal").val() == ""){
+		alert("Por favor capture el regimen fiscal");
+		$("#tbRegimenFiscal").focus();
+		return false;
+	}
+	else
+	if($("#tbLugarExpedicion").val() == ""){
+		alert("Por favor capture el lugar de expedicion");
+		$("#tbLugarExpedicion").focus();
+		return false;
+	}
+	else
+	return true;
+}
 function updateConfiguracion(){
-var Json;
-Json = '{"EmpresaID" : "'+EmpresaID+'",';
-Json = Json + '"RazonSocial" : "'+$("#tbRazonSocial").val()+'",';
-Json = Json + '"RFC" : "'+$("#tbRFC").val()+'",';
-Json = Json + '"Calle" : "'+$("#tbCalle").val()+'",';
-Json = Json + '"NoExterior" : "'+$("#tbNumExt").val()+'",';
-Json = Json + '"NoInterior" : "'+$("#tbNumInt").val()+'",';
-Json = Json + '"Colonia" : "'+$("#tbColonia").val()+'",';
-Json = Json + '"Localidad" : "'+$("#tbCiudad").val()+'",';
-Json = Json + '"Referencia" : "'+$("#tbReferencias").val()+'",';
-Json = Json + '"Municipio" : "'+$("#tbMunicipio").val()+'",';
-Json = Json + '"Estado" : "'+$("#tbEstado").val()+'",';
-Json = Json + '"Pais" : "'+$("#tbPais").val()+'",';
-Json = Json + '"CodigoPostal" : "'+$("#tbCodigoPostal").val()+'"}';
+	if (validaConfiguracion())
+	{
+		var xml;
+		xml = '&lt;Empresa&gt;';
+		xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;'
+		xml = xml + '&lt;Empresa_SucursalID&gt;'+Empresa_SucursalID+'&lt;/Empresa_SucursalID&gt;'
+		xml = xml + '&lt;RazonSocial&gt;'+$("#tbRazonSocial").val()+'&lt;/RazonSocial&gt;'
+		xml = xml + '&lt;Calle&gt;'+$("#tbCalle").val()+'&lt;/Calle&gt;'
+		xml = xml + '&lt;NoExterior&gt;'+$("#tbNumExt").val()+'&lt;/NoExterior&gt;'
+		xml = xml + '&lt;NoInterior&gt;'+$("#tbNumInt").val()+'&lt;/NoInterior&gt;'
+		xml = xml + '&lt;Colonia&gt;'+$("#tbColonia").val()+'&lt;/Colonia&gt;'
+		xml = xml + '&lt;Ciudad&gt;'+$("#tbCiudad").val()+'&lt;/Ciudad&gt;'
+		xml = xml + '&lt;Referencia&gt;'+$("#tbReferencias").val()+'&lt;/Referencia&gt;'
+		xml = xml + '&lt;Municipio&gt;'+$("#tbMunicipio").val()+'&lt;/Municipio&gt;'
+		xml = xml + '&lt;Estado&gt;'+$("#tbEstado").val()+'&lt;/Estado&gt;'
+		xml = xml + '&lt;Pais&gt;'+$("#tbPais").val()+'&lt;/Pais&gt;'
+		xml = xml + '&lt;CodigoPostal&gt;'+$("#tbCodigoPostal").val()+'&lt;/CodigoPostal&gt;'
+		xml = xml + '&lt;RegimenFiscal&gt;'+$("#tbRegimenFiscal").val()+'&lt;/RegimenFiscal&gt;'
+		xml = xml + '&lt;LugarExpedicion&gt;'+$("#tbLugarExpedicion").val()+'&lt;/LugarExpedicion&gt;'
+		xml = xml + '&lt;/Empresa&gt;';
+			$.ajax({
+					cache: false,
+					type: 'post',
+					async: false,
+					dataType: 'xml',
+					url:'http://192.168.0.103/app/Service1.asmx/updateEmpresa',
+					data: {"pXml" : xml },
+					success: function (xml) {
+					var r = $(xml).text();
+					var obj = jQuery.parseJSON(r);
+					if(obj.Validacion == "true")
+					{	
+						$.mobile.changePage("#pMenu");
+					}
+					else
+						alert("A ocuurido un error, por favor verifique su conexion a internet.");
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+					alert("Error: " + xhr.status +" | "+xhr.responseText);
+					}
+			});
+	}		
+}
+
+function populateImpuestos(){
+var html = "";	
+contadorImpuestos = 1;
 	$.ajax({
-			cache: false,
-			type: 'post',
-			async: false,
-			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/updateEmpresa',
-			data: {"jSon" : Json },
-			success: function (xml) {
+		cache: false,
+		type: 'post',
+		async: false,
+		dataType: 'xml',
+		url:'http://192.168.0.103/app/Service1.asmx/getImpuestos',
+		data: {"pEmpresaID" : EmpresaID },
+		success: function (xml) {
 			var r = $(xml).text();
 			var obj = jQuery.parseJSON(r);
 			if(obj.Validacion == "true")
 			{	
-				$.mobile.changePage("#pMenu");
+				JSonTiposImpuestos = obj.TiposImpuestos;
+				$.each(obj.Impuestos, function(index,value){
+					html = '<li id="liImpuestos'+contadorImpuestos+'">';
+					html = html + '<div class="espacio2 limpiar"></div>';
+					html = html + '<div class="div16 izquierda"><a class="bQuitar" href="" id="bQuitarImpuesto'+contadorImpuestos+'" onclick="closeImpuesto('+contadorImpuestos+')"></a></div>';
+					html = html + '<div class="div15 izquierda"><input type="text" name="tbImpuesto" value="'+value.Nombre+'" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto'+contadorImpuestos+'"></input></div>';
+					html = html + '<div class="div11 izquierda"><a class="bEliminar" href="" id="bEliminarImpuesto'+contadorImpuestos+'" onclick="eliminarImpuesto('+contadorImpuestos+')"></a></div>';
+					html = html + '<div id="divDetalleImpuestos'+contadorImpuestos+'" class="Visible">';
+					html = html + '<div class="div1 izquierda"><input type="text" name="tbTasa" value="'+value.Tasa+'" placeholder=" Tasa" data-role="none" class="campo6" id="tbTasa'+contadorImpuestos+'"></input></div>';
+					html = html + '<div class="div1 izquierda">';
+					html = html + '<select class="campo7" data-role="none" id="cbTipoPago'+contadorImpuestos+'">';
+					html = html + '<option value="" selected="selected">Tipo de impuesto</option>';
+						$.each(obj.TiposImpuestos, function(index2,value2){
+							html = html + '<option value="'+value2.TipoImpuestoID+'">'+value2.Nombre+'</option>'
+						});
+					html = html + '</select> ';
+					html = html + '</div>';
+					html = html + '</div>';//Detalle
+					html = html + '</li> ';
+					$("#ulImpuestos").append(html);
+					$("#cbTipoPago"+contadorImpuestos).val(value.TipoImpuestoID);
+					contadorImpuestos++;
+				});
+				$.each(JSonTiposImpuestos, function(index,value){
+					html = '<option value="'+value.TipoImpuestoID+'">'+value.Nombre+'</option>'
+					$("#cbTipoPago").append(html);
+				});
+				$.mobile.changePage("#pImpuestos");
 			}
 			else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
-			},
-			error: function (xhr, ajaxOptions, thrownError) {
+			alert("A ocuurido un error, por favor verifique su conexion a internet.");
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
 			alert("Error: " + xhr.status +" | "+xhr.responseText);
-			}
+		}
 	});
 }
+
+function closeImpuesto(row)
+{
+	var x = $("#divDetalleImpuestos"+row).attr("class");
+	x = x.replace("divDetalleImpuestos ","");
+	if(x == "NoVisible")
+	{
+		$("#divDetalleImpuestos"+row).removeClass("NoVisible");	
+		$("#divDetalleImpuestos"+row).addClass("Visible");
+	}
+	else
+	{
+		$("#divDetalleImpuestos"+row).removeClass("Visible");	
+		$("#divDetalleImpuestos"+row).addClass("NoVisible");
+	}
+}
+
+function eliminarImpuesto(row)
+{
+	$("#liImpuestos"+row).remove();
+}
+
 /*Clientes*/
 function populateAllClientes()
 {
@@ -186,7 +398,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
+			url:'http://192.168.0.103/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -226,7 +438,7 @@ function populatePerfil(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getPerfilCliente',
+        url:'http://192.168.0.103/app/Service1.asmx/getPerfilCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -263,7 +475,7 @@ function populateCliente(pClienteID){
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getCliente',
+        url:'http://192.168.0.103/app/Service1.asmx/getCliente',
         data: {"pClienteID":pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -348,7 +560,7 @@ function deleteCliente(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/deleteCliente',
+        url:'http://192.168.0.103/app/Service1.asmx/deleteCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -384,7 +596,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
+			url:'http://192.168.0.103/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -731,7 +943,7 @@ function validaCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/validateUsuarioCliente',
+			url:'http://192.168.0.103/app/Service1.asmx/validateUsuarioCliente',
 			data: {"xml" : contactos },
 			success: function (xml) {
 				var r = $(xml).text();
@@ -820,7 +1032,7 @@ function insertCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/saveClientes',
+			url:'http://192.168.0.103/app/Service1.asmx/saveClientes',
 			data: {"xml" : xml},
 			success: function (xml) {
 				var r = $(xml).text();

@@ -150,7 +150,7 @@
 			</div>
 			<div data-role="content">
 				<div class="texto_principal">Datos fiscales</div>
-				<div class="div1 izquierda"><input type="text" name="tbRazonSocial" value="" placeholder=" Razon Social" data-role="none" class="campo6" id="tbRazonSocial"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbRazonSocial" value="" maxlength="255" placeholder=" Razon Social" data-role="none" class="campo6" id="tbRazonSocial"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbRFC" value="" placeholder=" RFC" data-role="none" class="campo7" id="tbRFC" readonly></input></div>
 				<div class="espacio1 limpiar"></div>
 				<div class="div1">
@@ -159,22 +159,26 @@
 					</select>
 				</div>
 				<div class="espacio2 limpiar"></div>
-				<div class="div1 izquierda"><input type="text" name="tbCalle" value="" placeholder=" Calle" data-role="none" class="campo2" id="tbCalle"></input></div>
-				<div class="div2 izquierda"><input type="text" name="tbNumExt" value="" placeholder=" Numero ext." data-role="none" class="campo8" id="tbNumExt"></input></div>
-				<div class="div2 izquierda"><input type="text" name="tbNumInt" value="" placeholder=" Numero int." data-role="none" class="campo3" id="tbNumInt"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbColonia" value="" placeholder=" Colonia" data-role="none" class="campo8" id="tbColonia"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbCiudad" value="" placeholder=" Ciudad" data-role="none" class="campo8" id="tbCiudad"></input></div>
-				<div class="div3 izquierda"><input type="text" name="tbReferencias" value="" placeholder=" Referencias" data-role="none" class="campo8" id="tbReferencias"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbMunicipio" value="" placeholder=" Municipio" data-role="none" class="campo8"id="tbMunicipio"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbEstado" value="" placeholder=" Estado" data-role="none" class="campo8" id="tbEstado"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbPais" value="" placeholder=" Pais" data-role="none" class="campo5" id="tbPais"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbCodigoPostal" value="" placeholder=" Codigo postal" data-role="none" class="campo4" id="tbCodigoPostal"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbCalle" value="" maxlength="255" placeholder=" Calle" data-role="none" class="campo2" id="tbCalle"></input></div>
+				<div class="div2 izquierda"><input type="text" name="tbNumExt" value="" maxlength="30" placeholder=" Numero ext." data-role="none" class="campo8" id="tbNumExt"></input></div>
+				<div class="div2 izquierda"><input type="text" name="tbNumInt" value="" maxlength="30" placeholder=" Numero int." data-role="none" class="campo3" id="tbNumInt"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbColonia" value="" maxlength="255" placeholder=" Colonia" data-role="none" class="campo8" id="tbColonia"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbCiudad" value="" maxlength="255" placeholder=" Ciudad" data-role="none" class="campo8" id="tbCiudad"></input></div>
+				<div class="div3 izquierda"><input type="text" name="tbReferencias" value="" maxlength="255" placeholder=" Referencias" data-role="none" class="campo8" id="tbReferencias"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbMunicipio" value="" maxlength="255" placeholder=" Municipio" data-role="none" class="campo8"id="tbMunicipio"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbEstado" value="" maxlength="255" placeholder=" Estado" data-role="none" class="campo8" id="tbEstado"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbPais" value="" maxlength="255" placeholder=" Pais" data-role="none" class="campo5" id="tbPais"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbCodigoPostal" maxlength="12" value="" placeholder=" Codigo postal" data-role="none" class="campo4" id="tbCodigoPostal"></input></div>
 				<div class="espacio1 limpiar"></div>
-				<div class="div1 izquierda"><input type="text" name="tbRegimenFiscal" value="" placeholder=" Regimen fiscal" data-role="none" class="campo6"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbLugarExpedicion" value="" placeholder=" Lugar de expedicion" data-role="none" class="campo7"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbRegimenFiscal" value="" maxlength="128" placeholder=" Regimen fiscal" data-role="none" class="campo6" id="tbRegimenFiscal"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbLugarExpedicion" value=""  maxlength="25" placeholder=" Lugar de expedicion" data-role="none" class="campo7" id="tbLugarExpedicion"></input></div>
 				<div class="espacio2 limpiar"></div>
-				<div class="div1 izquierda"><input type="text" name="tbFolio" value="" placeholder=" Folio" data-role="none" class="campo6"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbSerie" value="" placeholder=" Serie" data-role="none" class="campo7"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbFolio" value="" placeholder=" Folio" data-role="none" class="campo6" id="tbFolio"></input></div>
+				<div class="div1 izquierda">
+					<select class="campo7" data-role="none" id="cbSerieEmpresa">
+						<option value="" selected="selected">Serie</option>
+					</select>
+				</div>
 				<div class="espacio2 limpiar"></div>
 				<div class="texto_principal">Impuestos</div>
 				<div class="espacio1 limpiar"></div>
@@ -183,8 +187,37 @@
 				<div class="espacio1 limpiar"></div>
 				<div class="div1 izquierda">&nbsp;</div>
 				<div class="div1 izquierda"><input type="text" name="cbTipoImpuesto" value="" placeholder=" Tipo de impuesto" data-role="none" class="campo1"></input></div>
-		     </div>
+			 </div>
 		</div>
+		<!--Impuestos-->
+		<div data-role="page" id="pImpuestos">
+			<div class="barra_Header_Listado">
+				<div>
+					<a class="bInicio" href="#pMenu"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<div class="barra_azul">Impuestos</div>
+				<div class="div_add_impuesto div3 izquierda">
+					<div class="espacio2 limpiar"></div>
+					<div class="div16 izquierda"><a class="bNuevo" href="" id="bNuevoImpuesto"></a></div>
+					<div class="div15 izquierda"><input type="text" name="tbImpuesto" value="" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto"></input></div>
+					<div class="div11 izquierda">&nbsp;</div>
+					<div class="div1 izquierda limpiar"><input type="text" name="tbTasa" value="" placeholder=" Tasa" data-role="none" class="campo6" id="tbTasa"></input></div>
+					<div class="div1 izquierda">
+						<select class="campo7" data-role="none" id="cbTipoPago">
+							<option value="" selected="selected">Tipo de impuesto</option>
+						</select> 
+					</div>
+					<div class="espacio2 limpiar"></div>
+				</div>
+				<ul id="ulImpuestos">
+				</ul>
+			</div>
+			<div class="piePagina">
+				<a class="bGuardarPiePagina" href="#" id="bGuardarImpuesto"></a>
+			</div>
+		</div>	
 		<!--Perfil Clientes-->
 		<div data-role="page" id="pPerfilClientes">
 			<div class="barra_Header_Listado">
@@ -229,7 +262,6 @@
 				</div>
 			</div>
 		</div>	
-				
 		<!--Administrar Clientes-->
 		<div data-role="page" id="pClientes">
 				<div class="barra_Header_Listado">
@@ -339,7 +371,10 @@
 			$("#bRecuperarContrasena").on("click",function(){recuperarContrasena($("#tbUsuario").val());});
 			//Configuracion
 			$("#bDatosFiscales").on("click",function(){populateConfiguracion();});
+			$("#bImpuestos").on("click",function(){populateImpuestos();});
 			$("#bGuardarConfiguracion").on("click",function(){updateConfiguracion();});
+			$("#cbSucursalEmpresa").on("change",function(){populateSucursal();});
+			$("#cbSerieEmpresa").on("change",function(){changeSerie();});
 			//Clientes
 			$("#bClientes").on("click",function(){populateAllClientes();});
 			$("#bInicioListaClientes").on("click",function(){setInicioListaClientes();});
@@ -352,7 +387,6 @@
 			$("#bAgregarCliente").on("click",function(){limpiarPantallaCliente(true);});
 			$("#bEditarCliente").on("click",function(){populateCliente(ClienteID);});
 			$("#bEliminarCliente").on("click",function(){ if(confirm("¿Confirma la eliminacion de este cliente?")){ deleteCliente(ClienteID);}});
-			
 			/*Listview infinite clientes*/
 			$('#lvClientes').onScrollBeyond(function() {
 			  if(EmpresaID > 0)
