@@ -24,11 +24,11 @@
 				<div class="div2 izquierda">&nbsp;</div>
 				<div class="espacio1 limpiar"></div>
 				<div class="div2 izquierda">&nbsp;</div>
-				<div class="div1 izquierda"><input type="text" name="tbUsuario" value="" placeholder=" Usuario" data-role="none" class="campo9" id="tbUsuario"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbUsuario" value="oscar.castillo@docdigitales.com" placeholder=" Usuario" data-role="none" class="campo9" id="tbUsuario"></input></div>
 				<div class="div2 izquierda">&nbsp;</div>
 				<div class="limpiar"></div>
 				<div class="div2 izquierda">&nbsp;</div>
-				<div class="div1 izquierda"><input type="password" name="tbConstrasena" value="" placeholder=" Contrase&ntilde;a" data-role="none" class="campo10" id="tbContrasena"></input></div>
+				<div class="div1 izquierda"><input type="password" name="tbConstrasena" value="123123" placeholder=" Contrase&ntilde;a" data-role="none" class="campo10" id="tbContrasena"></input></div>
 				<div class="div2 izquierda">&nbsp;</div>
 				<div class="espacio2 limpiar"></div>
 				<div class="texto-centro">
@@ -63,7 +63,7 @@
 							<div class="boton_grid"><a class="bClientes" href="#" id="bClientes"></a></div>
 						</div>
 						<div class="ui-block-b">
-							<div class="boton_grid"><a class="bFacturas" href="#pListaFacturas"></a></div>
+							<div class="boton_grid"><a class="bFacturas" href="#pListaFacturas" id="bFacturas"></a></div>
 						</div>
 						<div class="ui-block-c">
 							<div class="boton_grid"><a class="bCotizacion" href="#"></a></div>
@@ -96,32 +96,14 @@
 		</div>
 	    <!--Lista Facturas-->
 		<div data-role="page" id="pListaFacturas">
-		    <div class="barra_Header_Listado">
+		    <div class="header_facturas">
 				<div>
 					<a class="bInicio" href="#pMenu"></a>
-					<a class="bAgregar" href="#"></a>
+					<a class="bAgregar" href="#" id="bAgregarFactura"></a>
 				</div>
 			</div>
 			<div data-role="content">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Busca una factura..." data-inset="true" data-icon="false">
-					<li>
-						<a href="#">
-						<div class="listado1">Documentos Digitales...</div>
-						<div class="listado2">DDM090629R13</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-						<div class="listado1">Ana Garcia...</div>
-						<div class="listado2">GAFA800703VA1</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-						<div class="listado1">Gaxiola y Asociados...</div>
-						<div class="listado2">DDM090629R13</div>
-						</a>
-					</li>
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Busca una factura..." data-inset="true" data-icon="false" id="lvFacturas">
 				</ul>
 			</div>
 		</div>
@@ -214,8 +196,8 @@
 				</div>
 			</div>
 			<div data-role="content">
-				<div class="barra_azul">Impuestos</div>
 				<div class="div_add_impuesto div3 izquierda">
+				<div class="barra_azul">Impuestos</div>
 					<div class="espacio2 limpiar"></div>
 					<div class="div16 izquierda"><a class="bNuevo" href="" id="bNuevoImpuesto"></a></div>
 					<div class="div15 izquierda"><input type="text" name="tbImpuesto" value="" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto"></input></div>
@@ -348,32 +330,109 @@
 					</div>
 				</div>
 				<div data-role="content">
-				<div class="div3"><input type="text" name="tbCliente" value="" placeholder=" Cliente" data-role="none" class="campo1"></input></div>
+				<div class="div3">
+					<select class="campo1 " data-role="none" id="cbClienteFactura">
+						<option value="" selected="selected">Cliente</option>
+					</select>		
+				</div>
 				<div class="espacio1 limpiar"></div>
 				<div class="div4"><input type="date" name="tbFecha" value="" placeholder=" Fecha" data-role="none" class="campo1 izquierda"></input></div>
-				<div class="div5"><input type="text" name="tbTipoCFDI" value="" placeholder=" Tipo CFDI" data-role="none" class="campo1 derecha"></input></div>
+				<div class="div5">
+					<select class="campo1 " data-role="none" id="cbtipoCFDIFactura">
+						<option value="" selected="selected">Tipo CFDI</option>
+						<option value="1">Ingreso</option>
+						<option value="2">Egreso</option>
+						<option value="3">Translado</option>
+					</select>		
+				</div>
 				<div class="espacio1 limpiar"></div>
-				<div class="div1"><input type="text" name="tbDescuento" value="" placeholder=" Desc. (%)" data-role="none" class="campo6"></input></div>
-				<div class="div1"><input type="text" name="tbMoneda" value="" placeholder=" Moneda" data-role="none" class="campo7"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbDescuento" value="" placeholder=" Desc. (%)" data-role="none" class="campo6" id="tbDescuentoFactura"></input></div>
+				<div class="div1 izquierda">
+					<select class="campo7" data-role="none" id="cbMonedaFactura">
+						<option value="" selected="selected">Moneda</option>
+					</select>		
+				</div>
 				<div class="espacio2 limpiar"></div>
 				<div class="texto_principal">Concepto</div>
 				<div class="espacio1 limpiar"></div>
-				<div class="div6"><a class="bNuevo" href="#"></a></div>
-				<div class="div7"><input type="text" name="tbArticulo" value="" placeholder=" Articulo" data-role="none" class="campo1"></input></div>
-				<div class="espacio1 limpiar"></div>
-				<div class="div3"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo9"></input></div>
-				<div class="div8"><input type="text" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo5"></input></div>
-				<div class="div9"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8"></input></div>
-				<div class="div8"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo4"></input></div>
-				<div class="espacio2 limpiar"></div>
-				<div class="div8"><input type="checkbox" name="Iva" value="unit-in-group" /></div>
-				<div class="espacio2 limpiar"></div>
-				<div class="div1"><input type="text" name="tbNotaOpcional" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
-				<div class="div1"><input type="text" name="tbTerminos" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
-				<div class="espacio2 limpiar"></div>	
-				<div class="texto_centro"><a class="bGenerarFactura" href="#"></a></div>
+				<div class="div6"><a class="bNuevo" href="#" id="bNuevoProductoFactura"></a></div>
+				<div class="div7">
+					<select class="campo1 " data-role="none" id="cbArticuloFactura">
+						<option value="" selected="selected">Articulo</option>
+						<option value="0" selected="selected">Articulo Nuevo</option>
+					</select>		
 				</div>
-			</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div3"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo9" id="tbDescripcionArticuloFactura"></input></div>
+				<div class="div8 izquierda"><input type="text" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo8" id="tbCantidadFactura"></input></div>
+				<div class="div9 izquierda"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidadFactura"></input></div>
+				<div class="div8 izquierda"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecioFactura"></input></div>
+				<div class="div1 izquierda"><input type="text" name="Importe" value="" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporteFactura"></input></div>
+				<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosFactura"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<ul id="ulProductosFactura">
+				</ul>
+				<div class="div1 izquierda"><input type="text" name="tbNotaOpcional" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbTerminos" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
+				<div class="espacio2 limpiar"></div>	
+				<div id="dSubTotalFactura" class="divSubTotales"><div class="div11 izquierda">Subtotal</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divSubTotalFactura">$ 0.00</div></div>
+				<div id="dDescuentoFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Descuentos</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divDescuentoFactura">$ 0.00</div></div>
+				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de ISR</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dTotalFactura" class="divTotales"><div class="div11 izquierda">total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalFactura">$ 0.00</div></div>
+				<div class="espacio2 limpiar"></div>	
+				<div class="div3">
+					<select class="campo1 " data-role="none" id="cbFormaPagoFactura">
+						<option value="" selected="selected">Forma de pago</option>
+						<option value="1">Pago en una sola exhibicion</option>
+						<option value="2">Pago de parcialidad</option>
+						<option value="3">Pago en parcialidades</option>
+					</select>		
+				</div>
+				<div class="espacio1 limpiar"></div>	
+				<div id="divDetalleFormaPagoFactura" class="div3 izquierda NoVisible">
+					<div class="div16 izquierda"><input type="text" name="tbFormaPago1Factura" value="0" placeholder="" data-role="none" class="campo1" id="tbMetodoPago1Factura"></input></div>
+					<div class="div19 izquierda">&nbsp;</div>
+					<div class="div16 izquierda"><input type="text" name="tbFormaPago2Factura" value="" placeholder=" De" data-role="none" class="campo1" id="tbMetodoPago2Factura"></input></div>
+				</div>	
+				<div class="espacio1 limpiar"></div>
+				<div class="div7 izquierda">
+					<select class="campo1 " data-role="none" id="cbMetodoPagoFactura">
+						<option value="" selected="selected">Metodo de pago</option>
+						<option value="1">No identificado</option>
+						<option value="2">Efectivo</option>
+						<option value="3">Cheque</option>
+						<option value="4">Transferencia electronica</option>
+						<option value="5">Tarjeta</option>
+						<option value="6">Otro</option>
+				</select>		
+				</div>
+				<div class="div6 izquierda"><input type="text" name="tbNoCuentaFactura" value="" placeholder=" No. cuenta" data-role="none" class="campo1" id="tbNoCuentaFactura" readonly></input></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div1 izquierda texto_centro"><a class="bGuardarFactura" href="#"></a></div>
+				<div class="div1 izquierda texto_centro"><a class="bGenerarFactura" href="#"></a></div>
+					<div data-role="popup" id="pAgregarProducto" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
+						<div class="popUpContenido">
+							<div class="popUpBotones">
+								<div class="div1 izquierda"><a href="#" class="bAgregarPopUp" id="bAgregarProductoFactura"></a></div>
+								<div class="div1 izquierda"><a href="#" class="bCancelarPopUp" id="bCancelarProductoFactura"></a></div>
+							</div>
+							<div class="popUpCampos">
+								<div class="div3"><span class="popUpTexto">Nuevo articulo</span></div>
+								<div class="espacio2 limpiar"></div>
+								<div class="div8 izquierda"><input type="text" name="tbArticulo" value="" placeholder=" Articulo" data-role="none" class="campo2" id="tbNuevoArticuloFactura"></input></div>
+								<div class="div20 izquierda"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo3" id="tbDescripcionNuevoArticuloFactura"></input></div>
+								<div class="div8 izquierda"><input type="text" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo5" id="tbNuevaCantidadFactura"></input></div>
+								<div class="div9 izquierda"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8" id="tbNuevaUnidadFactura"></input></div>
+								<div class="div8 izquierda"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo4" id="tbNuevoPrecioFactura"></input></div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+			
 		<!--Administrar Cotizaciones-->
 		<!--Administrar Gastos-->
 		<div data-role="page" id="pGastos">
@@ -414,6 +473,21 @@
 			$("#bGuardarConfiguracion").on("click",function(){updateConfiguracion();});
 			$("#cbSucursalEmpresa").on("change",function(){populateSucursal();});
 			$("#cbSerieEmpresa").on("change",function(){changeSerie();});
+			$("#bNuevoImpuesto").on("click",function(){addImpuesto();});
+			$("#bGuardarImpuesto").on("click",function(){insertImpuestos();});
+			//Facturas
+			$("#bFacturas").on("click",function(){populateAllFacturas();});
+			$("#bAgregarFactura").on("click",function(){populateFactura();});
+			$("#bNuevoProductoFactura").on("click",function(){addProductosFacturas();});
+			$("#cbArticuloFactura").on("change",function(){selectArticulo();});
+			$("#tbCantidadFactura").on("change",function(){calculaImporte();});
+			$("#tbPrecioFactura").on("change",function(){calculaImporte();});
+			$("#tbDescuentoFactura").on("change",function(){descuentoFactura();});
+			$("#cbFormaPagoFactura").on("change",function(){mostrarFormaPago();});
+			$("#cbMetodoPagoFactura").on("change",function(){habilitaNumeroCuenta();});
+			$("#bAgregarProductoFactura").on("click",function(){saveNuevoProductoFactura();});
+			$("#bCancelarProductoFactura").on("click",function(){$('#pAgregarProducto').popup("close");$("#cbArticuloFactura").val("");});
+			//populateFactura
 			//Clientes
 			$("#bClientes").on("click",function(){populateAllClientes();});
 			$("#bInicioListaClientes").on("click",function(){setInicioListaClientes();});
@@ -428,9 +502,10 @@
 			$("#bEliminarCliente").on("click",function(){ if(confirm("¿Confirma la eliminacion de este cliente?")){ deleteCliente(ClienteID);}});
 			/*Listview infinite clientes*/
 			$('#lvClientes').onScrollBeyond(function() {
-			  if(EmpresaID > 0)
+			var page = $.mobile.activePage;//.attr('id');
+			page = $(page).attr('id');
+				if(EmpresaID > 0)
 				{	
-					var page = $.mobile.activePage.attr("id");
 					if(page=="pListaClientes"){
 						$("#CargandoListaCliente").addClass("cargando");
 						getMoreClientes();
@@ -458,6 +533,16 @@
 				alert('entro gastos');
 				}
 			});*/
+			});
+			
+			/*popUp agregar Producto*/
+			$( "#pAgregarProducto" ).on({
+				popupbeforeposition: function() {
+					var h = $( window ).height();
+					var w = $( window ).width();
+					$( "#pAgregarProducto" ).css( "height", h );
+					$( "#pAgregarProducto" ).css( "width", w );
+				}
 			});
 		</script>
     </body>

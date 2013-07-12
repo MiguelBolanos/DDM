@@ -1,31 +1,29 @@
 /*Variables*/
 var EmpresaID = 0;
 var ClienteID = 0;
-<<<<<<< HEAD
 var Empresa_SucursalID = 0;
 var SeriesID = 0;
-=======
 var GastosID = 0;
->>>>>>> Lista Gastos, Impuestos al inicio.
 var Login = "";
 var Paginacion = 1;
 var ImpuestosJSON;
 /*Variables pantalla clientes*/
 var contadorSucursales = 0;
 var contadorContactos = 0;
-<<<<<<< HEAD
 var contadorImpuestos = 0;
+var contadorProductos = 0;
 var JSonSucursales;
 var JSonSeries;
 var JSonTiposImpuestos;
-=======
 /*Variables Gastos*/
 var TotalGastos = 0;
->>>>>>> Lista Gastos, Impuestos al inicio.
+var JSonMonedas;
+var JSonProductos;
 /*Login*/
 function autentifica(){
 var usuario = $("#tbUsuario").val();
 var pass = $("#tbContrasena").val();
+var resultado = false;
 	if(usuario != "" && pass != "")
 	{
 		$.ajax({
@@ -34,7 +32,7 @@ var pass = $("#tbContrasena").val();
 				async: false,
 				//contentType: "text/xml; charset=utf-8",
 				dataType: "xml",
-				url:'http://192.168.0.103/app/Service1.asmx/Login',
+				url:'http://192.168.0.102/app/Service1.asmx/Login',
 				data: {"sUsuario" : usuario,"sContrasena" : pass},
 				success: function (xml) {
 				var r = $(xml).text();
@@ -45,7 +43,7 @@ var pass = $("#tbContrasena").val();
 						Login = obj.Login;
 						$("#errorLogin").removeClass("Visible");
 						$("#errorLogin").addClass("NoVisible");
-						$.mobile.changePage("#pMenu");
+						resultado = true;
 					}
 					else
 					{
@@ -58,6 +56,12 @@ var pass = $("#tbContrasena").val();
 					alert("Error: " + xhr.status +" | "+xhr.responseText);
 				}
 		});
+		if (resultado)
+		{
+			populateMonedas();
+			populateProductos();
+			$.mobile.changePage("#pMenu");
+		}
 	}
 }
 
@@ -71,7 +75,7 @@ function recuperarContrasena(pLogin)
 			async: false,
 			//contentType: "text/xml; charset=utf-8",
 			dataType: "xml",
-			url:'http://192.168.0.103/app/Service1.asmx/recuperarContrasena',
+			url:'http://192.168.0.102/app/Service1.asmx/recuperarContrasena',
 			data: {"pLogin" : pLogin},
 			success: function (xml) {
 				var r = $(xml).text();
@@ -92,6 +96,55 @@ function recuperarContrasena(pLogin)
 		$("#errorLogin").removeClass("NoVisible");
 		$("#errorLogin").addClass("Visible"); 
 	}
+}
+
+/*Generales*/
+function populateMonedas()
+{
+	var n = 0;
+	$.ajax({
+		cache: false,
+		type: 'POST',
+		async: false,
+		dataType: "xml",
+		url:'http://192.168.0.102/app/Service1.asmx/getAllMonedas',
+		data: {},
+		success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				JSonMonedas = obj.Monedas;
+			}
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
+		}
+	});
+}
+
+function populateProductos()
+{
+	var n = 0;
+	$.ajax({
+		cache: false,
+		type: 'POST',
+		async: false,
+		dataType: "xml",
+		url:'http://192.168.0.102/app/Service1.asmx/getAllProductos',
+		data: {"pEmpresaID" : EmpresaID},
+		success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				JSonProductos = obj.Productos;
+			}
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
+		}
+	});
 }
 
 /*Configuración*/
@@ -129,7 +182,7 @@ $.ajax({
         type: 'post',
         async: false,
         dataType: "xml",
-        url:'http://192.168.0.103/app/Service1.asmx/getEmpresa',
+        url:'http://192.168.0.102/app/Service1.asmx/getEmpresa',
         data: {"EmpresaID" : EmpresaID},
         success: function (xml) {
 		var r = $(xml).text();
@@ -139,7 +192,7 @@ $.ajax({
 			JSonSucursales = obj.Sucursales
 			$.each(obj.Sucursales, function(index,value){
 				html= '<option value="'+value.Empresa_SucursalID+'" selected="selected">'+value.Sucursal_Nombre+'</option>';
-				$("#cbSucursalEmpresa").append(html);
+				$("#cbSucursalEmpresa").append('<option value="" selected="selected">Sucursal</option>');
 				if(Empresa_SucursalID == value.Empresa_SucursalID)
 				{
 					if(Empresa_SucursalID == 0)
@@ -305,7 +358,7 @@ function updateConfiguracion(){
 					type: 'post',
 					async: false,
 					dataType: 'xml',
-					url:'http://192.168.0.103/app/Service1.asmx/updateEmpresa',
+					url:'http://192.168.0.102/app/Service1.asmx/updateEmpresa',
 					data: {"pXml" : xml },
 					success: function (xml) {
 					var r = $(xml).text();
@@ -324,29 +377,19 @@ function updateConfiguracion(){
 	}		
 }
 
+/*Impuestos*/
 function populateImpuestos(){
 var html = "";	
+$("#ulImpuestos").children().remove('li');
 contadorImpuestos = 1;
 	$.ajax({
-<<<<<<< HEAD
 		cache: false,
 		type: 'post',
 		async: false,
 		dataType: 'xml',
-		url:'http://192.168.0.103/app/Service1.asmx/getImpuestos',
+		url:'http://192.168.0.102/app/Service1.asmx/getImpuestos',
 		data: {"pEmpresaID" : EmpresaID },
 		success: function (xml) {
-=======
-			cache: false,
-			type: 'post',
-			async: false,
-			dataType: 'xml',
-			url:'http://192.168.0.103/app/Service1.asmx/updateEmpresa',
-			data: {"jSon" : Json },
-			success: function (xml) {
->>>>>>> Lista Gastos, Impuestos al inicio.
-			var r = $(xml).text();
-			var obj = jQuery.parseJSON(r);
 			if(obj.Validacion == "true")
 			{	
 				JSonTiposImpuestos = obj.TiposImpuestos;
@@ -367,6 +410,7 @@ contadorImpuestos = 1;
 					html = html + '</select> ';
 					html = html + '</div>';
 					html = html + '</div>';//Detalle
+					html = html + '<input id="tbImpuestosID'+contadorImpuestos+'" type="hidden" value="'+value.ImpuestosID+'"></input>'
 					html = html + '</li> ';
 					$("#ulImpuestos").append(html);
 					$("#cbTipoPago"+contadorImpuestos).val(value.TipoImpuestoID);
@@ -385,6 +429,61 @@ contadorImpuestos = 1;
 			alert("Error: " + xhr.status +" | "+xhr.responseText);
 		}
 	});
+	$.mobile.changePage("#pImpuestos");
+}
+
+function addImpuesto()
+{
+	var impuesto,tasa,tipo;
+	impuesto = $("#tbImpuesto").val();
+	tasa = $("#tbTasa").val();
+	tipo = $("#cbTipoPago").val();
+	if(impuesto == "")
+	{
+		alert("Favor de capturar impuesto");
+		$("#tbImpuesto").focus();
+	}
+	else
+	if(tasa == "")
+	{
+		alert("Favor de capturar tasa");
+		$("#tbTasa").focus();
+	}
+	else
+	if(tipo == "")
+	{
+		alert("Favor de capturar tipo de pago");
+		$("#cbTipoPago").focus();
+	}
+	else
+	{
+		var html;
+		html = '<li id="liImpuestos'+contadorImpuestos+'">';
+		html = html + '<div class="espacio2 limpiar"></div>';
+		html = html + '<div class="div16 izquierda"><a class="bQuitar" href="" id="bQuitarImpuesto'+contadorImpuestos+'" onclick="closeImpuesto('+contadorImpuestos+')"></a></div>';
+		html = html + '<div class="div15 izquierda"><input type="text" name="tbImpuesto" value="'+impuesto+'" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto'+contadorImpuestos+'"></input></div>';
+		html = html + '<div class="div11 izquierda"><a class="bEliminar" href="" id="bEliminarImpuesto'+contadorImpuestos+'" onclick="eliminarImpuesto('+contadorImpuestos+')"></a></div>';
+		html = html + '<div id="divDetalleImpuestos'+contadorImpuestos+'" class="Visible">';
+		html = html + '<div class="div1 izquierda"><input type="text" name="tbTasa" value="'+tasa+'" placeholder=" Tasa" data-role="none" class="campo6" id="tbTasa'+contadorImpuestos+'"></input></div>';
+		html = html + '<div class="div1 izquierda">';
+		html = html + '<select class="campo7" data-role="none" id="cbTipoPago'+contadorImpuestos+'">';
+		html = html + '<option value="" selected="selected">Tipo de impuesto</option>';
+		$.each(JSonTiposImpuestos, function(index2,value2){
+			html = html + '<option value="'+value2.TipoImpuestoID+'">'+value2.Nombre+'</option>'
+		});
+		html = html + '</select> ';
+		html = html + '</div>';
+		html = html + '</div>';//Detalle
+		html = html + '<input id="tbImpuestosID'+contadorImpuestos+'" type="hidden" value="0"></input>'
+		html = html + '</li> ';
+		$("#ulImpuestos").prepend(html);
+		$("#cbTipoPago"+contadorImpuestos).val(tipo);
+		contadorImpuestos++;
+		//impiamos los campos
+		$("#tbImpuesto").val("");
+		$("#tbTasa").val("");
+		$("#cbTipoPago").val("");
+	}
 }
 
 function closeImpuesto(row)
@@ -407,6 +506,486 @@ function eliminarImpuesto(row)
 {
 	$("#liImpuestos"+row).remove();
 }
+function validarImpuestos()
+{
+	var impuesto,tasa,tipo,n,resultado = true;
+	$('#ulImpuestos li').each(function(){
+		n = this.id.replace("liImpuestos","");
+		impuesto = $("#tbImpuesto"+n).val();
+		tasa = $("#tbTasa"+n).val();
+		tipo = $("#cbTipoPago"+n).val();
+		if(impuesto == "")
+		{
+			alert("Favor de capturar impuesto");
+			$("#tbImpuesto"+n).focus();
+			resultado = false;
+			return;
+		}
+		else
+		if(tasa == "")
+		{
+			alert("Favor de capturar tasa");
+			$("#tbTasa"+n).focus();
+			resultado = false;
+			return;
+		}
+		else
+		if(tipo == "")
+		{
+			alert("Favor de capturar tipo de pago");
+			$("#cbTipoPago"+n).focus();
+			resultado = false;
+			return;
+		}
+	});
+	return resultado;
+}
+function insertImpuestos(){
+	if(validarImpuestos())
+	{
+		var xml,n;
+		xml = '&lt;Impuestos&gt;';
+		xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
+		$('#ulImpuestos li').each(function(){
+			n = this.id.replace("liImpuestos","");
+			xml = xml + '&lt;Impuesto ';
+			xml = xml + 'ImpuestosID="'+ $("#tbImpuestosID"+n).val() +'" ';
+			xml = xml + 'Nombre="'+ $("#tbImpuesto"+n).val() +'" ';
+			xml = xml + 'Tasa="'+ $("#tbTasa"+n).val() +'" ';
+			xml = xml + 'Tipo="'+ $("#cbTipoPago"+n).val() +'"&gt;';
+			xml = xml + '&lt;/Impuesto&gt;';
+		});
+		xml = xml + '&lt;/Impuestos&gt;'
+		$.ajax({
+			cache: false,
+			type: 'post',
+			async: false,
+			dataType: 'xml',
+			url:'http://192.168.0.102/app/Service1.asmx/saveImpuestos',
+			data: {"pXML" : xml },
+			success: function (xml) {
+				var r = $(xml).text();
+				var obj = jQuery.parseJSON(r);
+				if(obj.Validacion == "true")
+				{	
+					$.mobile.changePage("#pMenu");
+				}
+				else
+				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert("Error: " + xhr.status +" | "+xhr.responseText);
+			}
+		});
+	}
+}
+/*Facturas*/
+function populateFactura()
+{
+	//Clientes
+	$('#cbClienteFactura').children().remove('option');
+	$.ajax({
+		cache: false,
+		type: 'post',
+		async: false,
+		dataType: 'xml',
+		url:'http://192.168.0.102/app/Service1.asmx/getAllClienteComboBox',
+		data: {"pEmpresaID" : EmpresaID },
+		success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				$.each(obj.Clientes, function(index,value){
+					$("#cbClienteFactura").append('<option value='+value.ClienteID+'>'+value.Nombre+'</option>');
+				});
+			}
+			else
+			alert("A ocuurido un error, por favor verifique su conexion a internet.");
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
+		}
+	});
+	//Moneda
+	$.each(JSonMonedas, function(index,value){
+		$("#cbMonedaFactura").append('<option value="'+ value.MonedasID +'">'+ value.Sigla +'</option>');
+	});
+	$("#cbMonedaFactura").val("1");
+	//Productos
+	$.each(JSonProductos, function(index,value){
+		$("#cbArticuloFactura").append('<option value="'+ value.Empresa_Catalogo_ProductosID +'">'+ value.NoIdentificacion +'</option>');
+	});
+	$("#cbArticuloFactura").val("");
+	
+	$.mobile.changePage("#pFacturas");
+	
+}
+
+function populateAllFacturas()
+{
+Paginacion = 1;
+var html;
+	$.ajax({
+			cache: false,
+			type: 'post',
+			async: false,
+			dataType: 'xml',
+			url:'http://192.168.0.102/app/Service1.asmx/getAllFacturas',
+			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
+			success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				$.mobile.changePage("#pListaFacturas");
+				$.each(obj.Facturas, function(index,value){
+				html= '<li>';
+				html = html + '<a href="#">';
+				html = html + '<div class="div1 izquierda">';
+				html = html + '<div class="listado1">'+ value.NombreCliente +'...</div>';
+				html = html + '<div class="listado2">'+ value.Fecha +'</div>';
+				html = html + '</div>';
+				html = html + '<div class="div1 izquierda texto_derecha">';
+				html = html + '<div class="listado1">$ '+ value.Total +'</div>';
+				html = html + '<div class="listado2">'+ value.Estatus +'</div>';
+				html = html + '</div>';
+				html = html + '</a>';
+				html = html + '</li>';
+					$("#lvFacturas").append(html);
+				});
+					$("#lvFacturas").show();
+					$("#lvFacturas").listview("refresh");
+			}
+			else
+				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+			},
+			error: function (e) {
+			alert("Error: " + e.responseText);
+			}
+	});
+}
+
+function getMoreFacturas()
+{
+Paginacion++;
+var html;
+	$.ajax({
+			cache: false,
+			type: 'post',
+			async: false,
+			dataType: 'xml',
+			url:'http://192.168.0.102/app/Service1.asmx/getAllFacturas',
+			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
+			success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{	
+				$.each(obj.Facturas, function(index,value){
+					html= '<li>';
+					html = html + '<a href="#">';
+					html = html + '<div class="div1 izquierda">';
+					html = html + '<div class="listado1">'+ value.NombreCliente +'...</div>';
+					html = html + '<div class="listado2">'+ value.Fecha +'</div>';
+					html = html + '</div>';
+					html = html + '<div class="div1 izquierda texto_derecha">';
+					html = html + '<div class="listado1">$ '+ value.Total +'</div>';
+					html = html + '<div class="listado2">'+ value.Estatus +'</div>';
+					html = html + '</div>';
+					html = html + '</a>';
+					html = html + '</li>';
+					$("#lvFacturas").append(html);
+				});
+					$("#lvFacturas").show();
+					$("#lvFacturas").listview("refresh");
+			}
+			else
+				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+			},
+			 error: function (xhr, ajaxOptions, thrownError) {
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
+			}
+	});
+}
+
+function addProductosFacturas()
+{
+	var producto = $("#cbArticuloFactura").val();
+	var descripcion = $("#tbDescripcionArticuloFactura").val();
+	var cantidad = $("#tbCantidadFactura").val();
+	var unidad = $("#tbUnidadFactura").val();
+	var precio = $("#tbPrecioFactura").val();
+	var importe = $("#tbImporteFactura").val();
+	if(producto == "")
+	{
+		alert("Favor de seleccionar un producto");
+		$("#cbArticuloFactura").focus();
+	}else
+	if(descripcion == "")
+	{
+		alert("Favor de capturar descripcion");
+		$("#tbDescripcionFactura").focus();
+	}else
+	if(cantidad == "")
+	{
+		alert("Favor de capturar cantidad");
+		$("#tbCantidadFactura").focus();
+	}else
+	if(unidad == "")
+	{
+		alert("Favor de capturar unidad");
+		$("#tbUnidadFactura").focus();
+	}else
+	if(precio == "")
+	{
+		alert("Favor de capturar unidad");
+		$("#tbPrecioFactura").focus();
+	}else
+	if(importe == "")
+	{
+		alert("Favor de capturar importe");
+		$("#tbImportefactura").focus();
+	}
+	else{
+		contadorProductos++;
+		var html;
+		html = '<li id="liProductosFactura'+contadorProductos+'">';
+		html = html + '<div class="espacio1 limpiar"></div>';
+		html = html + '<div class="div16 izquierda"><a class="bQuitar" href="" id="bQuitarProductoFactura'+contadorProductos+'" onclick="closeProductoFactura('+contadorProductos+')"></a></div>';
+		html = html + '<div class="div15 izquierda">';
+		html = html + '<select class="campo1 " data-role="none" id="cbArticuloFactura'+contadorProductos+'">';
+			$.each(JSonProductos, function(index,value){
+				html = html + '<option value=' + value.Empresa_Catalogo_ProductosID + '>'+ value.NoIdentificacion +'</option>';		
+			});
+		html = html + '</select>';		
+		html = html + '</div>';
+		html = html + '<div class="div11 izquierda"><a class="bEliminar" href="" id="bEliminarProductoFactura'+contadorProductos+'" onclick="eliminarProductoFactura('+contadorProductos+')"></a></div>';
+		html = html + '<div class="espacio1 limpiar"></div>';
+		html = html + '<div id="contenidoProducto'+ contadorProductos +'" class="Visible" >';
+		html = html + '<div class="div3"><input type="text" name="tbDescripcion" value="'+ descripcion +'" placeholder=" Descripcion" data-role="none" class="campo9" id="tbDescripcionFactura'+contadorProductos+'"></input></div>';
+		html = html + '<div class="div8 izquierda"><input type="text" name="tbCantidad" value="'+ cantidad +'" placeholder=" Cantidad" data-role="none" class="campo8" id="tbCantidadFactura'+contadorProductos+'" onChange="calculaImporte2('+contadorProductos+')"></input></div>';
+		html = html + '<div class="div9 izquierda"><input type="text" name="tbUnidad" value="'+ unidad +'" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidadFactura'+contadorProductos+'"></input></div>';
+		html = html + '<div class="div8 izquierda"><input type="text" name="Precio" value="'+ precio +'" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecioFactura'+contadorProductos+'" onChange="calculaImporte2('+contadorProductos+')"></input></div>';
+		html = html + '<div class="div1 izquierda"><input type="text" name="Importe" value="'+ importe +'" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporteFactura'+contadorProductos+'"></input></div>';
+		html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosFactura'+contadorProductos+'"></input></div>';
+		html = html + '</div>';
+		html = html + '</li>';
+		$("#ulProductosFactura").prepend(html);
+		$("#cbArticuloFactura"+contadorProductos).val(producto);
+		totalGeneralFacturas();
+		/*Limpiamos los campos*/
+		$("#cbArticuloFactura").val("");
+		$("#tbDescripcionArticuloFactura").val("");
+		$("#tbCantidadFactura").val("");
+		$("#tbUnidadFactura").val("");
+		$("#tbPrecioFactura").val("");
+		$("#tbImporteFactura").val("");
+	}
+}
+
+function closeProductoFactura(row){
+	var x = $("#contenidoProducto"+row).attr("class");
+	if(x == "NoVisible")
+	{
+		$("#contenidoProducto"+row).removeClass("NoVisible");	
+		$("#contenidoProducto"+row).addClass("Visible");
+	}
+	else
+	{
+		$("#contenidoProducto"+row).removeClass("Visible");	
+		$("#contenidoProducto"+row).addClass("NoVisible");
+	}	
+}
+
+function selectArticulo(){
+	var id = $("#cbArticuloFactura").val();
+	var x = $("#tbCantidadFactura").val() != "" ? $("#tbCantidadFactura").val() : 0;
+	/*Limpiamos los campos*/
+	$("#tbDescripcionArticuloFactura").val("");
+	$("#tbCantidadFactura").val("");
+	$("#tbUnidadFactura").val("");
+	$("#tbPrecioFactura").val("");
+	$("#tbImporteFactura").val("");
+	if(id != "" && id != "0")
+	{
+		$.each(JSonProductos, function(index,value){
+			if (value.Empresa_Catalogo_ProductosID == id)
+			{
+				$("#tbDescripcionArticuloFactura").val(value.Producto);
+				$("#tbUnidadFactura").val(value.Unidad);
+				$("#tbPrecioFactura").val(value.Precio);
+				$("#tbImportefactura").val( (x * value.Precio));
+				return;
+			}
+		});
+	}
+	else
+	if(id == "0")
+	{
+		limpiarNuevoProductoFactura();
+		$("#pAgregarProducto").popup("open");
+	}
+}
+
+function calculaImporte(){
+	var x = $("#tbCantidadFactura").val() != "" ? $("#tbCantidadFactura").val() : 0;
+	var y = $("#tbPrecioFactura").val() != "" ? $("#tbPrecioFactura").val() : 0;
+	$("#tbImporteFactura").val( (x * y));
+}
+
+function calculaImporte2(id){
+	var x = $("#tbCantidadFactura"+id).val() != "" ? $("#tbCantidadFactura"+id).val() : 0;
+	var y = $("#tbPrecioFactura"+id).val() != "" ? $("#tbPrecioFactura"+id).val() : 0;
+	$("#tbImporteFactura"+id).val( (x * y));
+	totalGeneralFacturas();
+}
+
+function totalGeneralFacturas()
+{
+	var total = 0,descuento = 0, n;
+	descuento = $("#tbDescuentoFactura").val() != "" ? $("#tbDescuentoFactura").val() : 0;
+	$('#ulProductosFactura li').each(function(){
+		n = this.id.replace("liProductosFactura","");
+		total = total + $("#tbImporteFactura"+n).val() != "" ? $("#tbImporteFactura"+n).val() : 0;
+	});
+	//p(%) = (P / T) * 100
+	if( total > 0)
+	{
+		descuento = (descuento / total) * 100;
+		$("#divSubTotalFactura").text("$ "+total);
+		$("#divDescuentoFactura").text("$ "+descuento);
+		$("#divTotalFactura").text("$ "+(total - descuento));
+	}
+}
+
+function eliminarProductoFactura(id){
+	$("#liProductosFactura"+id).remove();
+}
+
+function descuentoFactura(){
+	var descuento = $("#tbDescuentoFactura").val();
+	if(descuento == "" || descuento == "0")
+	{
+		$("#dDescuentoFactura").val("");
+		$("#dDescuentoFactura").removeClass("Visible");
+		$("#dDescuentoFactura").addClass("NoVisible");
+	}
+	else
+	{
+		totalGeneralFacturas();
+		$("#dDescuentoFactura").removeClass("NoVisible");
+		$("#dDescuentoFactura").addClass("Visible");
+	}
+}
+
+function mostrarFormaPago()
+{
+	var id = $("#cbFormaPagoFactura").val();
+	if(id == 2)
+	{
+		$("#divDetalleFormaPagoFactura").removeClass("NoVisible");
+		$("#divDetalleFormaPagoFactura").addClass("Visible");
+	}
+	else{
+		$("#tbFormaPago1Factura").val("0");
+		$("#tbFormaPago2Factura").val("");
+		$("#divDetalleFormaPagoFactura").removeClass("Visible");
+		$("#divDetalleFormaPagoFactura").addClass("NoVisible");
+	}
+}
+
+function habilitaNumeroCuenta()
+{
+	var id = $("#cbMetodoPagoFactura").val();
+	if(id !="" && id != "1" && id != "2")
+	{
+		$("#tbNoCuentaFactura").attr('readonly', false);
+	}
+	else
+	{
+		$("#tbNoCuentaFactura").val("");
+		$("#tbNoCuentaFactura").attr('readonly', true);
+	}
+}
+
+function limpiarNuevoProductoFactura()
+{
+	$("#tbNuevoArticuloFactura").val("");
+	$("#tbDescripcionNuevoArticuloFactura").val("");
+	$("#tbNuevaCantidadFactura").val("");
+	$("#tbNuevaUnidadFactura").val("");
+	$("#tbNuevoPrecioFactura").val("");
+}
+function saveNuevoProductoFactura(){
+	var articulo = $("#tbNuevoArticuloFactura").val();
+	var descripcion = $("#tbDescripcionNuevoArticuloFactura").val();
+	var cantidad = $("#tbNuevaCantidadFactura").val() != "" ? $("#tbNuevaCantidadFactura").val() : 0;
+	var unidad = $("#tbNuevaUnidadFactura").val();
+	var precio = $("#tbNuevoPrecioFactura").val();
+	if(articulo == "")
+	{
+		alert("Favor de capturar articulo");
+		$("#tbNuevoArticuloFactura").focus();
+	}else
+	if(descripcion == "")
+	{
+		alert("Favor de capturar descripcion");
+		$("#tbDescripcionNuevoArticuloFactura").focus();
+	}else
+	if(unidad == "")
+	{
+		alert("Favor de capturar unidad");
+		$("#tbNuevaUnidadFactura").focus();
+	}else
+	if(precio == "")
+	{
+		alert("Favor de capturar precio");
+		$("#tbNuevoPrecioFactura").focus();
+	}
+	else
+	{
+		var xml;
+		xml = '&lt;NuevoArticulo&gt;';
+		xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
+		xml = xml + '&lt;Articulo&gt;'+articulo+'&lt;/Articulo&gt;';
+		xml = xml + '&lt;Descripcion&gt;'+descripcion+'&lt;/Descripcion&gt;';
+		xml = xml + '&lt;Cantidad&gt;'+cantidad+'&lt;/Cantidad&gt;';
+		xml = xml + '&lt;Unidad&gt;'+unidad+'&lt;/Unidad&gt;';
+		xml = xml + '&lt;Precio&gt;'+precio+'&lt;/Precio&gt;';
+		xml = xml + '&lt;/NuevoArticulo&gt;';
+		
+		$.ajax({
+			cache: false,
+			type: 'POST',
+			async: false,
+			//contentType: "text/xml; charset=utf-8",
+			dataType: "xml",
+			url:'http://192.168.0.102/app/Service1.asmx/saveNuevoArticulo',
+			data: {"pXML" : xml},
+			success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+				if(obj.Validacion == "true")
+				{	
+					if (obj.Estatus == "1")
+					{
+						if (cantidad > 0)
+							$("#tbCantidadFactura").val(cantidad);
+						$('#pAgregarProducto').popup("close");	
+					}
+					else
+					{
+						alert("El articulo ya existe");
+					}
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert("Error: " + xhr.status +" | "+xhr.responseText);
+			}
+		});
+	}
+}
 
 /*Clientes*/
 function populateAllClientes()
@@ -418,7 +997,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.103/app/Service1.asmx/getAllClientes',
+			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -458,7 +1037,7 @@ function populatePerfil(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.103/app/Service1.asmx/getPerfilCliente',
+        url:'http://192.168.0.102/app/Service1.asmx/getPerfilCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -495,7 +1074,7 @@ function populateCliente(pClienteID){
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.103/app/Service1.asmx/getCliente',
+        url:'http://192.168.0.102/app/Service1.asmx/getCliente',
         data: {"pClienteID":pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -580,7 +1159,7 @@ function deleteCliente(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.103/app/Service1.asmx/deleteCliente',
+        url:'http://192.168.0.102/app/Service1.asmx/deleteCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -616,7 +1195,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.103/app/Service1.asmx/getAllClientes',
+			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -624,7 +1203,7 @@ var html;
 			if(obj.Validacion == "true")
 			{	
 				$.each(obj.Clientes, function(index,value){
-				html= '<li data-icon="false"><a href="#" onclick="populateCliente('+value.ClienteID+')><div class="listado1">'+value.Nombre +'...</div><div class="listado2">'+ value.RFC +'</div></a></li>';
+				html= '<li data-icon="false"><a href="#" onclick="populateCliente('+value.ClienteID+')"><div class="listado1">'+value.Nombre +'...</div><div class="listado2">'+ value.RFC +'</div></a></li>';
 					$("#lvClientes").append(html);
 				});
 					$("#lvClientes").show();
@@ -963,7 +1542,7 @@ function validaCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.103/app/Service1.asmx/validateUsuarioCliente',
+			url:'http://192.168.0.102/app/Service1.asmx/validateUsuarioCliente',
 			data: {"xml" : contactos },
 			success: function (xml) {
 				var r = $(xml).text();
@@ -1052,7 +1631,7 @@ function insertCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.103/app/Service1.asmx/saveClientes',
+			url:'http://192.168.0.102/app/Service1.asmx/saveClientes',
 			data: {"xml" : xml},
 			success: function (xml) {
 				var r = $(xml).text();
@@ -1084,7 +1663,7 @@ var html;
 			type: 'post',
 			async:false,
 			dataType:'xml',
-			url:'http://192.168.0.103/app/Service1.asmx/getAllGastos',
+			url:'http://192.168.0.102/app/Service1.asmx/getAllGastos',
 			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
 			success: function (json){
 			var r = $(json).text();
@@ -1128,7 +1707,7 @@ var html;
 			type: 'post',
 			async:false,
 			dataType:'xml',
-			url:'http://192.168.0.103/app/Service1.asmx/getAllGastos',
+			url:'http://192.168.0.102/app/Service1.asmx/getAllGastos',
 			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
 			success: function (xml){
 			var r = $(xml).text();
@@ -1187,7 +1766,7 @@ function insertGasto(){
 		type: 'post',
 		async: false,
 		dataType: 'xml',
-		url:'http://192.168.0.103/app/Service1.asmx/saveGastos',
+		url:'http://192.168.0.102/app/Service1.asmx/saveGastos',
 		data: {"xml" : xml},
 		success: function (xml) {
 			var r = $(xml).text();
@@ -1215,7 +1794,7 @@ function cargarImpuestos(){
 		type : 'post',
 		async : false,
 		dataType : 'xml',
-		url : 'http://192.168.0.103/app/Service1.asmx/getImpuestos',
+		url : 'http://192.168.0.102/app/Service1.asmx/getImpuestos',
 		data : {'pEmpresaID' : EmpresaID},
 		success: function(xml){
 			var r = $(xml).text();
