@@ -196,13 +196,8 @@
 				</div>
 			</div>
 			<div data-role="content">
-<<<<<<< HEAD
 				<div class="div_add_impuesto div3 izquierda">
 				<div class="barra_azul">Impuestos</div>
-=======
-				<div class="barra_azul">Impuestos</div>
-				<div class="div_add_impuesto div3 izquierda">
->>>>>>> Pantalla de gastos, Impuestos
 					<div class="espacio2 limpiar"></div>
 					<div class="div16 izquierda"><a class="bNuevo" href="" id="bNuevoImpuesto"></a></div>
 					<div class="div15 izquierda"><input type="text" name="tbImpuesto" value="" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto"></input></div>
@@ -444,11 +439,7 @@
 			<div class="barra_Header_Listado">
 				<div>
 					<a class="bCancelar" href="#pListaGastos"></a>
-<<<<<<< HEAD
 					<a class="bGuardar" href="#"></a>
-=======
-					<a class="bGuardar" href="#" id="bGuardarGasto"></a>
->>>>>>> Pantalla de gastos, Impuestos
 				</div>
 			</div>
 			<div data-role="content">
@@ -482,7 +473,6 @@
 			$("#bGuardarConfiguracion").on("click",function(){updateConfiguracion();});
 			$("#cbSucursalEmpresa").on("change",function(){populateSucursal();});
 			$("#cbSerieEmpresa").on("change",function(){changeSerie();});
-<<<<<<< HEAD
 			$("#bNuevoImpuesto").on("click",function(){addImpuesto();});
 			$("#bGuardarImpuesto").on("click",function(){insertImpuestos();});
 			//Facturas
@@ -498,8 +488,6 @@
 			$("#bAgregarProductoFactura").on("click",function(){saveNuevoProductoFactura();});
 			$("#bCancelarProductoFactura").on("click",function(){$('#pAgregarProducto').popup("close");$("#cbArticuloFactura").val("");});
 			//populateFactura
-=======
->>>>>>> Pantalla de gastos, Impuestos
 			//Clientes
 			$("#bClientes").on("click",function(){populateAllClientes();});
 			$("#bInicioListaClientes").on("click",function(){setInicioListaClientes();});
@@ -518,10 +506,6 @@
 			page = $(page).attr('id');
 				if(EmpresaID > 0)
 				{	
-<<<<<<< HEAD
-=======
-					var page = $.mobile.activePage.attr("id");
->>>>>>> Pantalla de gastos, Impuestos
 					if(page=="pListaClientes"){
 						$("#CargandoListaCliente").addClass("cargando");
 						getMoreClientes();
@@ -539,26 +523,16 @@
 			$("#dOtraInformacion").on("click",function(){otraInformacion();});
 			$("#dContacto").on("click",function(){contacto();});
 			$("#bContactoCliente").on("click",function(){addContacto(false,0);});
-<<<<<<< HEAD
 			//Gastos
 			$("#bGastos").on("click",function(){populateAllGastos();});
 			$("#bInicioListaGastos").on("click",function(){setInicioListaGastos();});
 			$("#bAgregarGasto").on("click",function(){limpiarPantallaGastos(true);insertarImpuestos("cbImpuestosGasto");});
-=======
-///////////////////////      Gastos      //////////////////////////////
-			$("#bGastos").on("click",function(){populateAllGastos();});
-			$("#bInicioListaGastos").on("click",function(){setInicioListaGastos();});
-			$("#bAgregarGasto").on("click",function(){limpiarPantallaGastos(true);insertarImpuestos("cbImpuestosGasto");});
-			$("#bGuardarGasto").on("click",function(){insertGasto();});
-
->>>>>>> Pantalla de gastos, Impuestos
 /*			$('#lvGastos').onScrollBeyond(function() {
 			  if(EmpresaID > 0)
 				{	
 				alert('entro gastos');
 				}
 			});*/
-<<<<<<< HEAD
 			});
 			
 			/*popUp agregar Producto*/
@@ -569,8 +543,6 @@
 					$( "#pAgregarProducto" ).css( "height", h );
 					$( "#pAgregarProducto" ).css( "width", w );
 				}
-=======
->>>>>>> Pantalla de gastos, Impuestos
 			});
 		</script>
     </body>
