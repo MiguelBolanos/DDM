@@ -23,11 +23,16 @@
 	text-align:center;
 }
 
+<<<<<<< HEAD
 
 /*.header_gastos{
 	background: url('../imagenes/barra-gastos.png');*/
 .header_facturas{
 	background: url('../imagenes/barra-facturacion.png');
+=======
+.header_gastos{
+	background: url('../imagenes/barra-gastos.png');
+>>>>>>> Pantalla de gastos, Impuestos
 	background-color:#00294B;
 	background-position:center;
 	background-repeat:no-repeat;
@@ -315,6 +320,16 @@
 .bGuardarPiePagina:hover {
 	background: url('../botones/b-iguardar-over.png');
 }
+.bGuardarPiePagina {
+	background: url('../botones/b-iguardar.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 90px;
+    width: 180px;
+}
+.bGuardarPiePagina:hover {
+	background: url('../botones/b-iguardar-over.png');
+}
 /*Botones Configuraciones*/
 .bDatosFiscales {
 	background: url('../botones/b-datosfiscales.png');
@@ -346,6 +361,7 @@
   font:Arial;
   font-family:Arial;
   font-size:8pt;
+  display: inline;
  }
 
 .listado2{
@@ -353,6 +369,7 @@
   font:Arial;
   font-family:Arial;
   font-size:6.5pt;
+  display: inline;
  }
 
 
@@ -541,6 +558,7 @@ float:right;
 	 display:block-inline;
 	 width:3%;
 }
+<<<<<<< HEAD
 .div17{
 	 display:block-inline;
 	 width:70%;
@@ -557,6 +575,8 @@ float:right;
 	 display:block-inline;
 	 width:67%;
 }
+=======
+>>>>>>> Pantalla de gastos, Impuestos
 .divSucursal{
 	border: 1px solid #BDC2C9;
 	border-collapse:collapse;
@@ -801,6 +821,7 @@ float:right;
 	border-left:1px solid #000;
 	border-right:1px solid #000;
 }
+<<<<<<< HEAD
 
 /*Facturas*/
 #ulProductosFactura 
@@ -922,3 +943,5 @@ float:right;
 	font-size:8.5pt;
 	margin-left:10px;
 }
+=======
+>>>>>>> Pantalla de gastos, Impuestos

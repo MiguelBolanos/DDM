@@ -11,14 +11,20 @@ var ImpuestosJSON;
 var contadorSucursales = 0;
 var contadorContactos = 0;
 var contadorImpuestos = 0;
+<<<<<<< HEAD
 var contadorProductos = 0;
+=======
+>>>>>>> Pantalla de gastos, Impuestos
 var JSonSucursales;
 var JSonSeries;
 var JSonTiposImpuestos;
 /*Variables Gastos*/
 var TotalGastos = 0;
+<<<<<<< HEAD
 var JSonMonedas;
 var JSonProductos;
+=======
+>>>>>>> Pantalla de gastos, Impuestos
 /*Login*/
 function autentifica(){
 var usuario = $("#tbUsuario").val();
@@ -32,7 +38,7 @@ var resultado = false;
 				async: false,
 				//contentType: "text/xml; charset=utf-8",
 				dataType: "xml",
-				url:'http://192.168.0.102/app/Service1.asmx/Login',
+				url:'http://eduardo-pc/app/Service1.asmx/Login',
 				data: {"sUsuario" : usuario,"sContrasena" : pass},
 				success: function (xml) {
 				var r = $(xml).text();
@@ -75,7 +81,7 @@ function recuperarContrasena(pLogin)
 			async: false,
 			//contentType: "text/xml; charset=utf-8",
 			dataType: "xml",
-			url:'http://192.168.0.102/app/Service1.asmx/recuperarContrasena',
+			url:'http://eduardo-pc/app/Service1.asmx/recuperarContrasena',
 			data: {"pLogin" : pLogin},
 			success: function (xml) {
 				var r = $(xml).text();
@@ -182,7 +188,7 @@ $.ajax({
         type: 'post',
         async: false,
         dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getEmpresa',
+        url:'http://eduardo-pc/app/Service1.asmx/getEmpresa',
         data: {"EmpresaID" : EmpresaID},
         success: function (xml) {
 		var r = $(xml).text();
@@ -192,7 +198,11 @@ $.ajax({
 			JSonSucursales = obj.Sucursales
 			$.each(obj.Sucursales, function(index,value){
 				html= '<option value="'+value.Empresa_SucursalID+'" selected="selected">'+value.Sucursal_Nombre+'</option>';
+<<<<<<< HEAD
 				$("#cbSucursalEmpresa").append('<option value="" selected="selected">Sucursal</option>');
+=======
+				$("#cbSucursalEmpresa").append(html);
+>>>>>>> Pantalla de gastos, Impuestos
 				if(Empresa_SucursalID == value.Empresa_SucursalID)
 				{
 					if(Empresa_SucursalID == 0)
@@ -358,7 +368,11 @@ function updateConfiguracion(){
 					type: 'post',
 					async: false,
 					dataType: 'xml',
+<<<<<<< HEAD
 					url:'http://192.168.0.102/app/Service1.asmx/updateEmpresa',
+=======
+					url:'http://eduardo-pc/app/Service1.asmx/updateEmpresa',
+>>>>>>> Pantalla de gastos, Impuestos
 					data: {"pXml" : xml },
 					success: function (xml) {
 					var r = $(xml).text();
@@ -377,6 +391,7 @@ function updateConfiguracion(){
 	}		
 }
 
+<<<<<<< HEAD
 /*Impuestos*/
 function populateImpuestos(){
 var html = "";	
@@ -634,10 +649,24 @@ var html;
 			url:'http://192.168.0.102/app/Service1.asmx/getAllFacturas',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
+=======
+function populateImpuestos(){
+var html = "";	
+contadorImpuestos = 1;
+	$.ajax({
+		cache: false,
+		type: 'post',
+		async: false,
+		dataType: 'xml',
+		url:'http://eduardo-pc/app/Service1.asmx/getImpuestos',
+		data: {"pEmpresaID" : EmpresaID },
+		success: function (xml) {
+>>>>>>> Pantalla de gastos, Impuestos
 			var r = $(xml).text();
 			var obj = jQuery.parseJSON(r);
 			if(obj.Validacion == "true")
 			{	
+<<<<<<< HEAD
 				$.mobile.changePage("#pListaFacturas");
 				$.each(obj.Facturas, function(index,value){
 				html= '<li>';
@@ -704,11 +733,47 @@ var html;
 				alert("A ocuurido un error, por favor verifique su conexion a internet.");
 			},
 			 error: function (xhr, ajaxOptions, thrownError) {
-			alert("Error: " + xhr.status +" | "+xhr.responseText);
+=======
+				JSonTiposImpuestos = obj.TiposImpuestos;
+				$.each(obj.Impuestos, function(index,value){
+					html = '<li id="liImpuestos'+contadorImpuestos+'">';
+					html = html + '<div class="espacio2 limpiar"></div>';
+					html = html + '<div class="div16 izquierda"><a class="bQuitar" href="" id="bQuitarImpuesto'+contadorImpuestos+'" onclick="closeImpuesto('+contadorImpuestos+')"></a></div>';
+					html = html + '<div class="div15 izquierda"><input type="text" name="tbImpuesto" value="'+value.Nombre+'" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto'+contadorImpuestos+'"></input></div>';
+					html = html + '<div class="div11 izquierda"><a class="bEliminar" href="" id="bEliminarImpuesto'+contadorImpuestos+'" onclick="eliminarImpuesto('+contadorImpuestos+')"></a></div>';
+					html = html + '<div id="divDetalleImpuestos'+contadorImpuestos+'" class="Visible">';
+					html = html + '<div class="div1 izquierda"><input type="text" name="tbTasa" value="'+value.Tasa+'" placeholder=" Tasa" data-role="none" class="campo6" id="tbTasa'+contadorImpuestos+'"></input></div>';
+					html = html + '<div class="div1 izquierda">';
+					html = html + '<select class="campo7" data-role="none" id="cbTipoPago'+contadorImpuestos+'">';
+					html = html + '<option value="" selected="selected">Tipo de impuesto</option>';
+						$.each(obj.TiposImpuestos, function(index2,value2){
+							html = html + '<option value="'+value2.TipoImpuestoID+'">'+value2.Nombre+'</option>'
+						});
+					html = html + '</select> ';
+					html = html + '</div>';
+					html = html + '</div>';//Detalle
+					html = html + '</li> ';
+					$("#ulImpuestos").append(html);
+					$("#cbTipoPago"+contadorImpuestos).val(value.TipoImpuestoID);
+					contadorImpuestos++;
+				});
+				$.each(JSonTiposImpuestos, function(index,value){
+					html = '<option value="'+value.TipoImpuestoID+'">'+value.Nombre+'</option>'
+					$("#cbTipoPago").append(html);
+				});
+				$.mobile.changePage("#pImpuestos");
 			}
+			else
+			alert("A ocuurido un error, por favor verifique su conexion a internet.");
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+>>>>>>> Pantalla de gastos, Impuestos
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
+		}
 	});
 }
 
+<<<<<<< HEAD
 function addProductosFacturas()
 {
 	var producto = $("#cbArticuloFactura").val();
@@ -985,6 +1050,27 @@ function saveNuevoProductoFactura(){
 			}
 		});
 	}
+=======
+function closeImpuesto(row)
+{
+	var x = $("#divDetalleImpuestos"+row).attr("class");
+	x = x.replace("divDetalleImpuestos ","");
+	if(x == "NoVisible")
+	{
+		$("#divDetalleImpuestos"+row).removeClass("NoVisible");	
+		$("#divDetalleImpuestos"+row).addClass("Visible");
+	}
+	else
+	{
+		$("#divDetalleImpuestos"+row).removeClass("Visible");	
+		$("#divDetalleImpuestos"+row).addClass("NoVisible");
+	}
+}
+
+function eliminarImpuesto(row)
+{
+	$("#liImpuestos"+row).remove();
+>>>>>>> Pantalla de gastos, Impuestos
 }
 
 /*Clientes*/
@@ -997,7 +1083,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -1037,7 +1123,7 @@ function populatePerfil(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getPerfilCliente',
+        url:'http://eduardo-pc/app/Service1.asmx/getPerfilCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -1074,7 +1160,7 @@ function populateCliente(pClienteID){
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getCliente',
+        url:'http://eduardo-pc/app/Service1.asmx/getCliente',
         data: {"pClienteID":pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -1159,7 +1245,7 @@ function deleteCliente(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/deleteCliente',
+        url:'http://eduardo-pc/app/Service1.asmx/deleteCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -1195,7 +1281,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -1542,7 +1628,7 @@ function validaCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/validateUsuarioCliente',
+			url:'http://eduardo-pc/app/Service1.asmx/validateUsuarioCliente',
 			data: {"xml" : contactos },
 			success: function (xml) {
 				var r = $(xml).text();
@@ -1631,7 +1717,7 @@ function insertCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/saveClientes',
+			url:'http://eduardo-pc/app/Service1.asmx/saveClientes',
 			data: {"xml" : xml},
 			success: function (xml) {
 				var r = $(xml).text();
@@ -1663,7 +1749,11 @@ var html;
 			type: 'post',
 			async:false,
 			dataType:'xml',
+<<<<<<< HEAD
 			url:'http://192.168.0.102/app/Service1.asmx/getAllGastos',
+=======
+			url:'http://eduardo-pc/app/Service1.asmx/getAllGastos',
+>>>>>>> Pantalla de gastos, Impuestos
 			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
 			success: function (json){
 			var r = $(json).text();
@@ -1707,7 +1797,11 @@ var html;
 			type: 'post',
 			async:false,
 			dataType:'xml',
+<<<<<<< HEAD
 			url:'http://192.168.0.102/app/Service1.asmx/getAllGastos',
+=======
+			url:'http://eduardo-pc/app/Service1.asmx/getAllGastos',
+>>>>>>> Pantalla de gastos, Impuestos
 			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
 			success: function (xml){
 			var r = $(xml).text();
@@ -1750,24 +1844,41 @@ function limpiarPantallaGastos(pEnviarPantalla){
 
 function insertGasto(){
 	var n;
+<<<<<<< HEAD
 	var json;
 	var xml;
 	xml = '&lt;Gasto&gt;';
 	xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
 	//xml = xml + '&lt;GastoID&gt;'+GastoID+'&lt;/ClienteID&gt;';
+=======
+	var xml;
+	xml = '&lt;Gasto&gt;';
+	xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
+	xml = xml + '&lt;GastosID&gt;'+GastosID+'&lt;/GastosID&gt;';
+	xml = xml + '&lt;Monto&gt;'+$("#tbMontoGasto").val()+'&lt;/Monto&gt;';
+>>>>>>> Pantalla de gastos, Impuestos
 	xml = xml + '&lt;Fecha&gt;'+$("#tbFechaGasto").val()+'&lt;/Fecha&gt;';
 	xml = xml + '&lt;Proveedor&gt;'+$("#tbProveedorGasto").val()+'&lt;/Proveedor&gt;';
 	xml = xml + '&lt;Categoria&gt;'+$("#tbCategoriaGasto").val()+'&lt;/Categoria&gt;';
 	xml = xml + '&lt;Descripcion&gt;'+$("#tbDescripcionGasto").val()+'&lt;/Descripcion&gt;';
 	xml = xml + '&lt;Impuesto&gt;'+$("#cbImpuestosGasto option:selected").val()+'&lt;/Impuesto&gt;';
+<<<<<<< HEAD
+=======
+	xml = xml + '&lt;/Gasto&gt;';
+>>>>>>> Pantalla de gastos, Impuestos
 	
 	$.ajax({
 		cache: false,
 		type: 'post',
 		async: false,
 		dataType: 'xml',
+<<<<<<< HEAD
 		url:'http://192.168.0.102/app/Service1.asmx/saveGastos',
 		data: {"xml" : xml},
+=======
+		url:'http://eduardo-pc/app/Service1.asmx/saveGastos',
+		data: {"pXML" : xml},
+>>>>>>> Pantalla de gastos, Impuestos
 		success: function (xml) {
 			var r = $(xml).text();
 			var obj = jQuery.parseJSON(r);
@@ -1786,6 +1897,43 @@ function insertGasto(){
 	});
 }
 
+<<<<<<< HEAD
+=======
+function populateGasto(pGastoID){
+	var html;
+	limpiarPantallaGastos(false);
+	insertarImpuestos("cbImpuestosGasto");
+	$.ajax({
+		cache : false,
+		type : 'post',
+		async : false,
+		dataType : 'xml',
+		url : 'http://eduardo-pc/app/Service1.asmx/getGasto',
+		data : {'pGastoID':pGastoID},
+		success : function(xml){
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion =="true"){
+				GastosID = obj.GastosID;
+				$("#tbMontoGasto").val(obj.Monto);
+				$("#tbFechaGasto").val(obj.Fecha);
+				$("#tbProveedorGasto").val(obj.Proveedor);
+				$("#tbCategoriaGasto").val(obj.Categoria);
+				$("#tbDescripcionGasto").val(obj.Descripcion);
+				$("#cbImpuestosGasto").val(obj.Impuesto);
+
+				$.mobile.changePage("#pGastos");
+			}
+			else
+				alert("A ocurrido un error, por favor verfique su conexion a internet.");
+		},
+		error : function(e){
+			alert("Error: "+e.responseText);
+		}
+	});
+}
+
+>>>>>>> Pantalla de gastos, Impuestos
 ////////////////////////////////////////////////////////       METODOS GENERALES         ////////////////////////////////////////////////////
 function cargarImpuestos(){
 	var html;
@@ -1794,7 +1942,11 @@ function cargarImpuestos(){
 		type : 'post',
 		async : false,
 		dataType : 'xml',
+<<<<<<< HEAD
 		url : 'http://192.168.0.102/app/Service1.asmx/getImpuestos',
+=======
+		url : 'http://eduardo-pc/app/Service1.asmx/getImpuestos',
+>>>>>>> Pantalla de gastos, Impuestos
 		data : {'pEmpresaID' : EmpresaID},
 		success: function(xml){
 			var r = $(xml).text();
