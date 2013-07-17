@@ -439,18 +439,18 @@
 			<div class="barra_Header_Listado">
 				<div>
 					<a class="bCancelar" href="#pListaGastos"></a>
-					<a class="bGuardar" href="#"></a>
+					<a class="bGuardar" href="#" id="bGuardarGasto"></a>
 				</div>
 			</div>
 			<div data-role="content">
 				<div class="div3 texto_azul">Gasto</div>
 				<div class="div1 izquierda"><input type="text" id="tbMontoGasto" value="" placeholder=" Monto " data-role="none" class="campo6"></input></div>
 				<div class="div1 izquierda"><input type="date" id="tbFechaGasto" value="" placeholder=" Fecha " data-role="none" class="campo7"></input></div>
-				<div class="espacio limpiar"></div>
+				<div class="espacio1 limpiar"></div>
 				<div class="div3"><input type="text" id="tbProveedorGasto" value="" placeholder=" Proveedor " data-role="none" class="campo9"></input></div>
 				<div class="div3"><input type="text" id="tbCategoriaGasto" value="" placeholder=" Categoria " data-role="none" class="campo8"></input></div>
 				<div class="div3"><input type="text" id="tbDescripcionGasto" value="" placeholder=" Descripcion " data-role="none" class="campo10"></input></div>
-				<div class="espacio limpiar"></div>
+				<div class="espacio1 limpiar"></div>
 				<select  class="campo1 div1 derecha" data-role="none" placeholder=" Impuestos " id="cbImpuestosGasto">
 					<!--option value="-1"  selected="selected">Impuestos</option>-->
 				</select>
@@ -523,27 +523,25 @@
 			$("#dOtraInformacion").on("click",function(){otraInformacion();});
 			$("#dContacto").on("click",function(){contacto();});
 			$("#bContactoCliente").on("click",function(){addContacto(false,0);});
-			//Gastos
+
+//////////////////////////////    Gastos    ////////////////////////////////////////
 			$("#bGastos").on("click",function(){populateAllGastos();});
 			$("#bInicioListaGastos").on("click",function(){setInicioListaGastos();});
-			$("#bAgregarGasto").on("click",function(){limpiarPantallaGastos(true);insertarImpuestos("cbImpuestosGasto");});
-/*			$('#lvGastos').onScrollBeyond(function() {
-			  if(EmpresaID > 0)
-				{	
-				alert('entro gastos');
-				}
-			});*/
-			});
+			$("#bAgregarGasto").on("click",function(){limpiarPantallaGastos(true);
+				insertarImpuestos("cbImpuestosGasto");});
+			$("#bGuardarGasto").on("click",function(){insertGasto();});
+
+		});
 			
-			/*popUp agregar Producto*/
-			$( "#pAgregarProducto" ).on({
-				popupbeforeposition: function() {
-					var h = $( window ).height();
-					var w = $( window ).width();
-					$( "#pAgregarProducto" ).css( "height", h );
-					$( "#pAgregarProducto" ).css( "width", w );
-				}
-			});
+		/*popUp agregar Producto*/
+		$( "#pAgregarProducto" ).on({
+			popupbeforeposition: function() {
+				var h = $( window ).height();
+				var w = $( window ).width();
+				$( "#pAgregarProducto" ).css( "height", h );
+				$( "#pAgregarProducto" ).css( "width", w );
+			}
+		});
 		</script>
     </body>
 </html>

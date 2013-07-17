@@ -1750,39 +1750,51 @@ function limpiarPantallaGastos(pEnviarPantalla){
 function insertGasto(){
 	var n;
 	var xml;
-	xml = '&lt;Gasto&gt;';
-	xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
-	xml = xml + '&lt;GastoID&gt;'+GastoID+'&lt;/ClienteID&gt;';
-	xml = xml + '&lt;Fecha&gt;'+$("#tbFechaGasto").val()+'&lt;/Fecha&gt;';
-	xml = xml + '&lt;Proveedor&gt;'+$("#tbProveedorGasto").val()+'&lt;/Proveedor&gt;';
-	xml = xml + '&lt;Categoria&gt;'+$("#tbCategoriaGasto").val()+'&lt;/Categoria&gt;';
-	xml = xml + '&lt;Descripcion&gt;'+$("#tbDescripcionGasto").val()+'&lt;/Descripcion&gt;';
-	xml = xml + '&lt;Impuesto&gt;'+$("#cbImpuestosGasto option:selected").val()+'&lt;/Impuesto&gt;';
-	xml = xml + '&lt;/Gasto&gt;';
-	
-	$.ajax({
-		cache: false,
-		type: 'post',
-		async: false,
-		dataType: 'xml',
-		url:'http://eduardo-pc/app/Service1.asmx/saveGastos',
-		data: {"xml" : xml},
-		success: function (xml) {
-			var r = $(xml).text();
-			var obj = jQuery.parseJSON(r);
-			if(obj.Validacion == "true")
-			{	
-				$.mobile.changePage("#pListaGastos");
+
+	if ($("#tbMontoGasto").val() == ""){
+		alert("Favor de agregar un monto para el gasto");
+		$("#tbMontoGasto").focus();
+	} else if($("#tbDescripcionGasto").val() == ""){
+		alert("Favor de agregar la descripcion del gasto");
+		$("#tbDescripcionGasto").focus();
+	}else if($("#tbFechaGasto").val()==""){
+		alert("Favor de agregar una fecha");
+		$("#tbFechaGasto").focus();
+	}else{
+		xml = '&lt;Gasto&gt;';
+		xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
+		xml = xml + '&lt;GastoID&gt;'+GastoID+'&lt;/ClienteID&gt;';
+		xml = xml + '&lt;Fecha&gt;'+$("#tbFechaGasto").val()+'&lt;/Fecha&gt;';
+		xml = xml + '&lt;Proveedor&gt;'+$("#tbProveedorGasto").val()+'&lt;/Proveedor&gt;';
+		xml = xml + '&lt;Categoria&gt;'+$("#tbCategoriaGasto").val()+'&lt;/Categoria&gt;';
+		xml = xml + '&lt;Descripcion&gt;'+$("#tbDescripcionGasto").val()+'&lt;/Descripcion&gt;';
+		xml = xml + '&lt;Impuesto&gt;'+$("#cbImpuestosGasto option:selected").val()+'&lt;/Impuesto&gt;';
+		xml = xml + '&lt;/Gasto&gt;';
+
+		$.ajax({
+			cache: false,
+			type: 'post',
+			async: false,
+			dataType: 'xml',
+			url:'http://eduardo-pc/app/Service1.asmx/saveGastos',
+			data: {"xml" : xml},
+			success: function (xml) {
+				var r = $(xml).text();
+				var obj = jQuery.parseJSON(r);
+				if(obj.Validacion == "true")
+				{
+					$.mobile.changePage("#pListaGastos");
+				}
+				else
+				{
+					alert("A ocurrido un error, por favor verifique su conexion a internet.");
+				}
+			},
+			 error: function (xhr, ajaxOptions, thrownError) {
+			alert("Error: " + xhr.status +" | "+xhr.responseText);
 			}
-			else
-			{
-				alert("A ocurrido un error, por favor verifique su conexion a internet.");
-			}
-		},
-		 error: function (xhr, ajaxOptions, thrownError) {
-		alert("Error: " + xhr.status +" | "+xhr.responseText);
-		}
-	});
+		});
+	}
 }
 
 function populateGasto(pGastoID){
@@ -1846,6 +1858,7 @@ function cargarImpuestos(){
 
 function insertarImpuestos(id){
 	var html;
+	$('#'+id).append('<option value="0">Sin Impuesto</option>');
 	$.each(ImpuestosJSON.Impuestos, function(index,value){
 		html='<option value="'+value.ImpuestosID+'">'+value.Nombre+' '+((parseFloat(value.Tasa*100)*100)/100)+'%</option>';
 		$('#'+id).append(html);
