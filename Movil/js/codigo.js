@@ -32,7 +32,7 @@ var resultado = false;
 				async: false,
 				//contentType: "text/xml; charset=utf-8",
 				dataType: "xml",
-				url:'http://192.168.0.102/app/Service1.asmx/Login',
+				url:'http://eduardo-pc/app/Service1.asmx/Login',
 				data: {"sUsuario" : usuario,"sContrasena" : pass},
 				success: function (xml) {
 				var r = $(xml).text();
@@ -75,7 +75,7 @@ function recuperarContrasena(pLogin)
 			async: false,
 			//contentType: "text/xml; charset=utf-8",
 			dataType: "xml",
-			url:'http://192.168.0.102/app/Service1.asmx/recuperarContrasena',
+			url:'http://eduardo-pc/app/Service1.asmx/recuperarContrasena',
 			data: {"pLogin" : pLogin},
 			success: function (xml) {
 				var r = $(xml).text();
@@ -107,7 +107,7 @@ function populateMonedas()
 		type: 'POST',
 		async: false,
 		dataType: "xml",
-		url:'http://192.168.0.102/app/Service1.asmx/getAllMonedas',
+		url:'http://eduardo-pc/app/Service1.asmx/getAllMonedas',
 		data: {},
 		success: function (xml) {
 			var r = $(xml).text();
@@ -131,7 +131,7 @@ function populateProductos()
 		type: 'POST',
 		async: false,
 		dataType: "xml",
-		url:'http://192.168.0.102/app/Service1.asmx/getAllProductos',
+		url:'http://eduardo-pc/app/Service1.asmx/getAllProductos',
 		data: {"pEmpresaID" : EmpresaID},
 		success: function (xml) {
 			var r = $(xml).text();
@@ -182,7 +182,7 @@ $.ajax({
         type: 'post',
         async: false,
         dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getEmpresa',
+        url:'http://eduardo-pc/app/Service1.asmx/getEmpresa',
         data: {"EmpresaID" : EmpresaID},
         success: function (xml) {
 		var r = $(xml).text();
@@ -358,7 +358,7 @@ function updateConfiguracion(){
 					type: 'post',
 					async: false,
 					dataType: 'xml',
-					url:'http://192.168.0.102/app/Service1.asmx/updateEmpresa',
+					url:'http://eduardo-pc/app/Service1.asmx/updateEmpresa',
 					data: {"pXml" : xml },
 					success: function (xml) {
 					var r = $(xml).text();
@@ -387,7 +387,7 @@ contadorImpuestos = 1;
 		type: 'post',
 		async: false,
 		dataType: 'xml',
-		url:'http://192.168.0.102/app/Service1.asmx/getImpuestos',
+		url:'http://eduardo-pc/app/Service1.asmx/getImpuestos',
 		data: {"pEmpresaID" : EmpresaID },
 		success: function (xml) {
 			if(obj.Validacion == "true")
@@ -561,7 +561,7 @@ function insertImpuestos(){
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/saveImpuestos',
+			url:'http://eduardo-pc/app/Service1.asmx/saveImpuestos',
 			data: {"pXML" : xml },
 			success: function (xml) {
 				var r = $(xml).text();
@@ -589,7 +589,7 @@ function populateFactura()
 		type: 'post',
 		async: false,
 		dataType: 'xml',
-		url:'http://192.168.0.102/app/Service1.asmx/getAllClienteComboBox',
+		url:'http://eduardo-pc/app/Service1.asmx/getAllClienteComboBox',
 		data: {"pEmpresaID" : EmpresaID },
 		success: function (xml) {
 			var r = $(xml).text();
@@ -631,7 +631,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllFacturas',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllFacturas',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -675,7 +675,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllFacturas',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllFacturas',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -961,7 +961,7 @@ function saveNuevoProductoFactura(){
 			async: false,
 			//contentType: "text/xml; charset=utf-8",
 			dataType: "xml",
-			url:'http://192.168.0.102/app/Service1.asmx/saveNuevoArticulo',
+			url:'http://eduardo-pc/app/Service1.asmx/saveNuevoArticulo',
 			data: {"pXML" : xml},
 			success: function (xml) {
 			var r = $(xml).text();
@@ -997,7 +997,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -1037,7 +1037,7 @@ function populatePerfil(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getPerfilCliente',
+        url:'http://eduardo-pc/app/Service1.asmx/getPerfilCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -1074,7 +1074,7 @@ function populateCliente(pClienteID){
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/getCliente',
+        url:'http://eduardo-pc/app/Service1.asmx/getCliente',
         data: {"pClienteID":pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -1159,7 +1159,7 @@ function deleteCliente(pClienteID)
         async: false,
 		//contentType: "text/xml; charset=utf-8",
 		dataType: "xml",
-        url:'http://192.168.0.102/app/Service1.asmx/deleteCliente',
+        url:'http://eduardo-pc/app/Service1.asmx/deleteCliente',
         data: {"pClienteID" : pClienteID},
         success: function (xml) {
 			var r = $(xml).text();
@@ -1195,7 +1195,7 @@ var html;
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllClientes',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllClientes',
 			data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
 			success: function (xml) {
 			var r = $(xml).text();
@@ -1542,7 +1542,7 @@ function validaCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/validateUsuarioCliente',
+			url:'http://eduardo-pc/app/Service1.asmx/validateUsuarioCliente',
 			data: {"xml" : contactos },
 			success: function (xml) {
 				var r = $(xml).text();
@@ -1631,7 +1631,7 @@ function insertCliente()
 			type: 'post',
 			async: false,
 			dataType: 'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/saveClientes',
+			url:'http://eduardo-pc/app/Service1.asmx/saveClientes',
 			data: {"xml" : xml},
 			success: function (xml) {
 				var r = $(xml).text();
@@ -1663,7 +1663,7 @@ var html;
 			type: 'post',
 			async:false,
 			dataType:'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllGastos',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllGastos',
 			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
 			success: function (json){
 			var r = $(json).text();
@@ -1706,7 +1706,7 @@ var html;
 			type: 'post',
 			async:false,
 			dataType:'xml',
-			url:'http://192.168.0.102/app/Service1.asmx/getAllGastos',
+			url:'http://eduardo-pc/app/Service1.asmx/getAllGastos',
 			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
 			success: function (xml){
 			var r = $(xml).text();
@@ -1765,7 +1765,7 @@ function insertGasto(){
 		type: 'post',
 		async: false,
 		dataType: 'xml',
-		url:'http://192.168.0.102/app/Service1.asmx/saveGastos',
+		url:'http://eduardo-pc/app/Service1.asmx/saveGastos',
 		data: {"xml" : xml},
 		success: function (xml) {
 			var r = $(xml).text();
@@ -1827,7 +1827,7 @@ function cargarImpuestos(){
 		type : 'post',
 		async : false,
 		dataType : 'xml',
-		url : 'http://192.168.0.102/app/Service1.asmx/getImpuestos',
+		url : 'http://eduardo-pc/app/Service1.asmx/getImpuestos',
 		data : {'pEmpresaID' : EmpresaID},
 		success: function(xml){
 			var r = $(xml).text();
