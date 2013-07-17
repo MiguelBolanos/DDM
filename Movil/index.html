@@ -326,7 +326,7 @@
 				<div class="barra_Header_Listado">
 					<div>
 						<a class="bCancelar" href="#pMenu"></a>
-						<a class="bGuardar" href="#"></a>
+						<!--<a class="bGuardar" href="#" id="bGuardarFactura"></a>-->
 					</div>
 				</div>
 				<div data-role="content">
@@ -336,7 +336,7 @@
 					</select>		
 				</div>
 				<div class="espacio1 limpiar"></div>
-				<div class="div4"><input type="date" name="tbFecha" value="" placeholder=" Fecha" data-role="none" class="campo1 izquierda"></input></div>
+				<div class="div4"><input type="date" name="tbFecha" value="" placeholder=" Fecha" data-role="none" class="campo1 izquierda" id="tbFechaFactura"></input></div>
 				<div class="div5">
 					<select class="campo1 " data-role="none" id="cbtipoCFDIFactura">
 						<option value="" selected="selected">Tipo CFDI</option>
@@ -372,15 +372,15 @@
 				<div class="espacio2 limpiar"></div>
 				<ul id="ulProductosFactura">
 				</ul>
-				<div class="div1 izquierda"><input type="text" name="tbNotaOpcional" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbTerminos" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbNotaOpcional" id="tbNotaOpcionalFactura" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbTerminos" id="tbTerminosFactura" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
 				<div class="espacio2 limpiar"></div>	
 				<div id="dSubTotalFactura" class="divSubTotales"><div class="div11 izquierda">Subtotal</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divSubTotalFactura">$ 0.00</div></div>
 				<div id="dDescuentoFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Descuentos</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divDescuentoFactura">$ 0.00</div></div>
-				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
-				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
-				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
-				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de ISR</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divIVAFactura">$ 0.00</div></div>
+				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divIEPSFactura">$ 0.00</div></div>
+				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de IVA</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divRetencionIVAFactura">$ 0.00</div></div>
+				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de ISR</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divRetencionISRFactura">$ 0.00</div></div>
 				<div id="dTotalFactura" class="divTotales"><div class="div11 izquierda">total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalFactura">$ 0.00</div></div>
 				<div class="espacio2 limpiar"></div>	
 				<div class="div3">
@@ -411,8 +411,8 @@
 				</div>
 				<div class="div6 izquierda"><input type="text" name="tbNoCuentaFactura" value="" placeholder=" No. cuenta" data-role="none" class="campo1" id="tbNoCuentaFactura" readonly></input></div>
 				<div class="espacio2 limpiar"></div>
-				<div class="div1 izquierda texto_centro"><a class="bGuardarFactura" href="#"></a></div>
-				<div class="div1 izquierda texto_centro"><a class="bGenerarFactura" href="#"></a></div>
+				<div class="div1 izquierda texto_centro"><a class="bGuardarFactura" href="#" id="bGuardarFactura"></a></div>
+				<div class="div1 izquierda texto_centro"><a class="bGenerarFactura" href="#" id="bGenerarFactura"></a></div>
 					<div data-role="popup" id="pAgregarProducto" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
 						<div class="popUpContenido">
 							<div class="popUpBotones">
@@ -487,6 +487,8 @@
 			$("#cbMetodoPagoFactura").on("change",function(){habilitaNumeroCuenta();});
 			$("#bAgregarProductoFactura").on("click",function(){saveNuevoProductoFactura();});
 			$("#bCancelarProductoFactura").on("click",function(){$('#pAgregarProducto').popup("close");$("#cbArticuloFactura").val("");});
+			$("#bGuardarFactura").on("click",function(){insertFactura(5);});
+			$("#bGenerarFactura").on("click",function(){insertFactura(1);});
 			//populateFactura
 			//Clientes
 			$("#bClientes").on("click",function(){populateAllClientes();});

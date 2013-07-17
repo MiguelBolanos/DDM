@@ -4,6 +4,7 @@ var ClienteID = 0;
 var Empresa_SucursalID = 0;
 var SeriesID = 0;
 var GastosID = 0;
+var FacturaID = 0;
 var Login = "";
 var Paginacion = 1;
 var ImpuestosJSON;
@@ -582,6 +583,7 @@ function insertImpuestos(){
 /*Facturas*/
 function populateFactura()
 {
+	FacturaID = 0;
 	//Clientes
 	$('#cbClienteFactura').children().remove('option');
 	$.ajax({
@@ -985,6 +987,69 @@ function saveNuevoProductoFactura(){
 			}
 		});
 	}
+}
+
+function insertFactura(status){
+	var xml = "";
+	xml = '&lt;Factura&gt;';
+	xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
+	xml = xml + '&lt;FacturaID&gt;'+FacturaID+'&lt;/FacturaID&gt;';
+	xml = xml + '&lt;ClienteID&gt;'+$("#cbClienteFactura option:selected").val()+'&lt;/ClienteID&gt;';
+	xml = xml + '&lt;Fecha&gt;'+$("#tbFechaFactura").val()+'&lt;/Fecha&gt;';
+	xml = xml + '&lt;Descuento&gt;'+$("#tbDescuentoFactura").val()+'&lt;/Descuento&gt;';
+	xml = xml + '&lt;Moneda&gt;'+$("#cbMonedaFactura option:selected").val()+'&lt;/Moneda&gt;';
+
+	$("#ulProductosFactura li").each(function(){
+		n = this.id.replace("liProductosFactura","");
+		xml = xml + '&lt;Concepto ';
+		xml = xml + 'ConceptoID="'+$("#cbArticuloFactura"+n+" option:selected").val()+'" ';
+		xml = xml + 'Descripcion="'+$("#tbDescripcionFactura"+n).val()+'" ';
+		xml = xml + 'Cantidad="'+$("#tbCantidadFactura"+n).val()+'" ';
+		xml = xml + 'Unidad="'+$("#tbUnidadFactura"+n).val()+'" ';
+		xml = xml + 'Precio="'+$("#tbPrecioFactura"+n).val()+'" ';
+		xml = xml + 'Importe="'+$("#tbImporteFactura"+n).val()+'" ';
+		xml = xml + 'Impuestos="'+$("#tbImpuestosFactura"+n).val()+'" &gt;';
+		xml = xml + '&lt;/Concepto&gt;';
+	});
+
+	xml = xml + '&lt;Subtotal&gt;'+$("#divSubTotalFactura").val()+'&lt;/Subtotal&gt;';
+	xml = xml + '&lt;DescuentoImporte&gt;'+$("#divDescuentoFactura").val()+'&lt;/DescuentoImporte&gt;';
+	xml = xml + '&lt;IVA&gt;'+$("#divIVAFactura").val()+'&lt;/IVA&gt;';
+	xml = xml + '&lt;IEPS&gt;'+$("#divIEPSFactura").val()+'&lt;/IEPS&gt;';
+	xml = xml + '&lt;RetencionIVA&gt;'+$("#divRetencionIVAFactura").val()+'&lt;/RetencionIVA&gt;';
+	xml = xml + '&lt;RetencionISR&gt;'+$("#divRetencionISRFactura").val()+'&lt;/RetencionISR&gt;';
+	xml = xml + '&lt;Total&gt;'+$("#divTotalFactura").val()+'&lt;/Total&gt;';
+	xml = xml + '&lt;NotaOpcional&gt;'+$("#tbNotaOpcionalFactura").val()+'&lt;/NotaOpcional&gt;';
+	xml = xml + '&lt;Terminos&gt;'+$("#tbTerminosFactura").val()+'&lt;/Terminos&gt;';
+	xml = xml + '&lt;FormaPago&gt;'+$("#cbFormaPagoFactura option:selected").text()+'&lt;/FormaPago&gt;';
+	xml = xml + '&lt;MetodoPago&gt;'+$("#cbMetodoPagoFactura option:selected").text()+'&lt;/MetodoPago&gt;';
+	xml = xml + '&lt;NoCuenta&gt;'+$("#tbNoCuentaFactura").val()+'&lt;/NoCuenta&gt;';
+	xml = xml + '&lt;Status;'+status+'&lt;/Status&gt;';
+	xml = xml + '&lt;/Factura&gt;';
+
+	$.ajax({
+		cache: false,
+		type: 'post',
+		async: false,
+		dataType: 'xml',
+		url:'http://eduardo-pc/app/Service1.asmx/saveFactura',
+		data: {"xml" : xml},
+		success: function (xml) {
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion == "true")
+			{
+				$.mobile.changePage("#pListaGastos");
+			}
+			else
+			{
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
+			}
+		},
+		 error: function (xhr, ajaxOptions, thrownError) {
+		alert("Error: " + xhr.status +" | "+xhr.responseText);
+		}
+	});
 }
 
 /*Clientes*/
