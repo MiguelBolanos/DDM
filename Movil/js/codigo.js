@@ -1667,7 +1667,6 @@ var html;
 			data:{"EmpresaID":EmpresaID,"Paginacion":Paginacion},
 			success: function (json){
 			var r = $(json).text();
-			//alert(r);
 			var obj = jQuery.parseJSON(r);
 			if(obj.Validacion == "true"){
 				$.mobile.changePage("#pListaGastos");
@@ -1750,16 +1749,16 @@ function limpiarPantallaGastos(pEnviarPantalla){
 
 function insertGasto(){
 	var n;
-	var json;
 	var xml;
 	xml = '&lt;Gasto&gt;';
 	xml = xml + '&lt;EmpresaID&gt;'+EmpresaID+'&lt;/EmpresaID&gt;';
-	//xml = xml + '&lt;GastoID&gt;'+GastoID+'&lt;/ClienteID&gt;';
+	xml = xml + '&lt;GastoID&gt;'+GastoID+'&lt;/ClienteID&gt;';
 	xml = xml + '&lt;Fecha&gt;'+$("#tbFechaGasto").val()+'&lt;/Fecha&gt;';
 	xml = xml + '&lt;Proveedor&gt;'+$("#tbProveedorGasto").val()+'&lt;/Proveedor&gt;';
 	xml = xml + '&lt;Categoria&gt;'+$("#tbCategoriaGasto").val()+'&lt;/Categoria&gt;';
 	xml = xml + '&lt;Descripcion&gt;'+$("#tbDescripcionGasto").val()+'&lt;/Descripcion&gt;';
 	xml = xml + '&lt;Impuesto&gt;'+$("#cbImpuestosGasto option:selected").val()+'&lt;/Impuesto&gt;';
+	xml = xml + '&lt;/Gasto&gt;';
 	
 	$.ajax({
 		cache: false,
@@ -1777,11 +1776,45 @@ function insertGasto(){
 			}
 			else
 			{
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 			}
 		},
 		 error: function (xhr, ajaxOptions, thrownError) {
 		alert("Error: " + xhr.status +" | "+xhr.responseText);
+		}
+	});
+}
+
+function populateGasto(pGastoID){
+	var html;
+	limpiarPantallaGastos(false);
+	insertarImpuestos("cbImpuestosGasto");
+	$.ajax({
+		cache : false,
+		type : 'post',
+		async : false,
+		dataType : 'xml',
+		url : 'http://eduardo-pc/app/Service1.asmx/getGasto',
+		data : {'pGastoID':pGastoID},
+		success : function(xml){
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if(obj.Validacion =="true"){
+				GastosID = obj.GastosID;
+				$("#tbMontoGasto").val(obj.Monto);
+				$("#tbFechaGasto").val(obj.Fecha);
+				$("#tbProveedorGasto").val(obj.Proveedor);
+				$("#tbCategoriaGasto").val(obj.Categoria);
+				$("#tbDescripcionGasto").val(obj.Descripcion);
+				$("#cbImpuestosGasto").val(obj.Impuesto);
+
+				$.mobile.changePage("#pGastos");
+			}
+			else
+				alert("A ocurrido un error, por favor verfique su conexion a internet.");
+		},
+		error : function(e){
+			alert("Error: "+e.responseText);
 		}
 	});
 }
