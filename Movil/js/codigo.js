@@ -1024,7 +1024,7 @@ function insertFactura(status){
 	xml = xml + '&lt;FormaPago&gt;'+$("#cbFormaPagoFactura option:selected").text()+'&lt;/FormaPago&gt;';
 	xml = xml + '&lt;MetodoPago&gt;'+$("#cbMetodoPagoFactura option:selected").text()+'&lt;/MetodoPago&gt;';
 	xml = xml + '&lt;NoCuenta&gt;'+$("#tbNoCuentaFactura").val()+'&lt;/NoCuenta&gt;';
-	xml = xml + '&lt;Status;'+status+'&lt;/Status&gt;';
+	xml = xml + '&lt;Status&gt;'+status+'&lt;/Status&gt;';
 	xml = xml + '&lt;/Factura&gt;';
 
 	$.ajax({
@@ -1039,7 +1039,7 @@ function insertFactura(status){
 			var obj = jQuery.parseJSON(r);
 			if(obj.Validacion == "true")
 			{
-				$.mobile.changePage("#pListaGastos");
+				$.mobile.changePage("#pListaFacturas");
 			}
 			else
 			{
