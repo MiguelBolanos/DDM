@@ -1138,6 +1138,11 @@ function validaDatosFactura(){
 		return false;
 	}
 
+	if ($("#ulProductosFactura li").length == 0){
+		alert("Favor de agregar un concepto");
+		return false;
+	}
+
 	$("#ulProductosFactura li").each(function(){
 		n = this.id.replace("liProductosFactura","");
 
