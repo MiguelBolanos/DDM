@@ -35,10 +35,10 @@
 					<a class="bEntrar" href="#" id="bEntrar"></a>
 				</div>
 				<div class="espacio2 limpiar"></div>
-				<div class="texto_centro"><a href="#" class="olvide_pass" id="bRecuperarContrasena">Olvide contraseña</a></div>
+				<div class="texto_centro"><a href="#" class="olvide_pass" id="bRecuperarContrasena">Olvide contraseÃ±a</a></div>
 			</div>
 		</div>
-		<!--Recuperar Contraseña-->
+		<!--Recuperar ContraseÃ±a-->
 		<div data-role="page" id="pRecuperarContrasena">
 			<div data-role="content">
 			<div class="logo">&nbsp;</div>
@@ -325,7 +325,7 @@
 		<div data-role="page" id="pFacturas">
 				<div class="barra_Header_Listado">
 					<div>
-						<a class="bCancelar" href="#pMenu"></a>
+						<a class="bCancelar" href="#pListaFacturas"></a>
 						<!--<a class="bGuardar" href="#" id="bGuardarFactura"></a>-->
 					</div>
 				</div>
@@ -342,7 +342,7 @@
 						<option value="" selected="selected">Tipo CFDI</option>
 						<option value="1">Ingreso</option>
 						<option value="2">Egreso</option>
-						<option value="3">Translado</option>
+						<option value="3">Traslado</option>
 					</select>		
 				</div>
 				<div class="espacio1 limpiar"></div>
@@ -432,9 +432,58 @@
 							</div>
 						</div>
 					</div>
+					<div data-role="popup" id="pAgregarImpuestos" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
+						<div class="popUpContenido">
+							<div class="popUpBotones">
+								<div class="div1 izquierda"><a href="#" class="bAgregarPopUp" id="bAgregarImpuestosFactura"></a></div>
+								<div class="div1 izquierda"><a href="#" class="bCancelarPopUp" id="bCancelarImpuestosFactura"></a></div>
+							</div>
+							<div class="popUpCampos">
+								<div class="div3"><span class="popUpTexto">Impuestos</span></div>
+								<div class="espacio2 limpiar"></div>
+								<div data-role="fieldcontain">
+  									<fieldset data-role="controlgroup" id="lvImpuestosFactura">
+  									</fieldset>
+  								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 		</div>
-			
+		<!--Resumen Factura-->
+		<div data-role="page" id="pResumenFactura">
+			<div class="barra_Header_Listado">
+				<div>
+					<a class="bInicio" href="#pMenu"></a>
+					<a class="bEditar" href="#" id="bEditarResumenFactura"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<div class="NoVisible" id="StatusResumenFactura"></div>
+				<div class="div3 header_azul" id="FolioFactura"></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div3 izquierda" id="NombreClienteResumenFactura"></div>
+				<div class="div3 izquierda" id="RFCClienteResumenFactura"></div>
+				<div class="div3 izquierda" id="CalleNumClienteResumenFactura"></div>
+				<div class="div3 izquierda" id="ColoniaClienteResumenFactura"></div>
+				<div class="div3 izquierda" id="CiudadEstadoClienteResumenFactura"></div>
+				<div class="div3 izquierda" id="CodigoPostalClienteResumenFactura"></div>
+				<div class="espacio1 limpiar header_azul"></div>
+				<div class="espacio1 limpiar"></div>
+				<div id="dSubTotalFactura" class="divSubTotales"><div class="div11 izquierda">Subtotal</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divSubTotalResumenFactura">$0.00</div></div>
+				<div id="dDescuentoFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Descuentos</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divDescuentoResumenFactura">$0.00</div></div>
+				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divIVAResumenFactura">$0.00</div></div>
+				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divIEPSResumenFactura">$0.00</div></div>
+				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de IVA</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divRetencionIVAResumenFactura">$0.00</div></div>
+				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de ISR</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divRetencionISRResumenFactura">$0.00</div></div>
+				<div id="dOtrasRetencionesFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Otras Retenciones</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divOtrasRetencionesResumenFactura">$0.00</div></div>
+				<div id="dOtrosTrasladosFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Otros Traslados</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divOtrosTrasladosResumenFactura">$0.00</div></div>
+				<div id="dTotalFactura" class="divTotales"><div class="div11 izquierda">Total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalResumenFactura">$0.00</div></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div3 izquierda" id="FormaPagoResumenFactura"></div>
+				<div class="div3 izquierda" id="MetodoPagoResumenFactura"></div>
+			</div>
+		</div>
 		<!--Administrar Cotizaciones-->
 		<!--Administrar Gastos-->
 		<div data-role="page" id="pGastos">
@@ -479,7 +528,7 @@
 			$("#bGuardarImpuesto").on("click",function(){insertImpuestos();});
 			//Facturas
 			$("#bFacturas").on("click",function(){populateAllFacturas();});
-			$("#bAgregarFactura").on("click",function(){populateFactura();});
+			$("#bAgregarFactura").on("click",function(){populateFactura(false);});
 			$("#bNuevoProductoFactura").on("click",function(){addProductosFacturas();});
 			$("#cbArticuloFactura").on("change",function(){selectArticulo();});
 			$("#tbCantidadFactura").on("change",function(){calculaImporte();});
@@ -491,6 +540,8 @@
 			$("#bCancelarProductoFactura").on("click",function(){$('#pAgregarProducto').popup("close");$("#cbArticuloFactura").val("");});
 			$("#bGuardarFactura").on("click",function(){insertFactura(5);});
 			$("#bGenerarFactura").on("click",function(){insertFactura(1);});
+			$("#bEditarResumenFactura").on("click",function(){populateFactura(true);});
+			$("#tbImpuestosFactura").on("focus",function(){$("#pAgregarImpuestos").popup("open");});
 			//populateFactura
 			//Clientes
 			$("#bClientes").on("click",function(){populateAllClientes();});
@@ -503,7 +554,7 @@
 			$("#bCancelarAccion").on("click",function(){ $('#pAccionesCliente').popup("close");});
 			$("#bAgregarCliente").on("click",function(){limpiarPantallaCliente(true);});
 			$("#bEditarCliente").on("click",function(){populateCliente(ClienteID);});
-			$("#bEliminarCliente").on("click",function(){ if(confirm("¿Confirma la eliminacion de este cliente?")){ deleteCliente(ClienteID);}});
+			$("#bEliminarCliente").on("click",function(){ if(confirm("Â¿Confirma la eliminacion de este cliente?")){ deleteCliente(ClienteID);}});
 			/*Listview infinite clientes*/
 			$('#lvClientes').onScrollBeyond(function() {
 			var page = $.mobile.activePage;//.attr('id');
@@ -546,6 +597,16 @@
 				$( "#pAgregarProducto" ).css( "width", w );
 			}
 		});
+
+		$("#pAgregarImpuestos").on({
+			popupbeforeposition: function() {
+				var h = $( window ).height();
+				var w = $( window ).width();
+				$( "#pAgregarImpuestos" ).css( "height", h );
+				$( "#pAgregarImpuestos" ).css( "width", w );
+			}
+		});
+		
 		</script>
     </body>
 </html>

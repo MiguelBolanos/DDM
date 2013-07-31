@@ -544,8 +544,17 @@ function insertImpuestos() {
 	}
 }
 /*Facturas*/
-function populateFactura() {
-	FacturaID = 0;
+function populateFactura(edicion) {
+
+	if(edicion){
+		if($("#StatusResumenFactura").text()!="5"){
+			alert("Solo se pueden editar factura preliminares");
+			return;
+		}
+	}else{
+		FacturaID = 0;
+	}
+	
 	//Clientes
 	$('#cbClienteFactura').children().remove('option');
 	$.ajax({
@@ -579,13 +588,138 @@ function populateFactura() {
 	$("#cbMonedaFactura").val("1");
 	//Productos
 	$("#cbArticuloFactura option").remove();
+	$("#cbArticuloFactura").append('<option value="" selected="selected">Articulo</option>');
+	$("#cbArticuloFactura").append('<option value="0" selected="selected">Articulo Nuevo</option>');
 	$.each(JSonProductos, function (index, value) {
 		$("#cbArticuloFactura").append('<option value="' + value.Empresa_Catalogo_ProductosID + '">' + value.NoIdentificacion + '</option>');
 	});
 	$("#cbArticuloFactura").val("");
 
-	$.mobile.changePage("#pFacturas");
+	//Impuestos
+	$("#lvImpuestosFactura").children().remove();
+	insertarImpuestosLista("lvImpuestosFactura");
 
+	if (edicion){
+
+		var soap;
+		soap = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Webservice1">';
+		soap = soap + '<soapenv:Header/>';
+		soap = soap + '<soapenv:Body>';
+		soap = soap + '<urn:getFactura>';
+		soap = soap + '<urn:pFacturaID>'+FacturaID+'</urn:pFacturaID>';
+		soap = soap + '</urn:getFactura>';
+		soap = soap + '</soapenv:Body>';
+		soap = soap + '</soapenv:Envelope>';
+		$.ajax({
+			cache : false,
+			type : 'post',
+			async : false,
+			dataType : 'xml',
+			url : 'http://50.56.197.123/app/Webservice1.awws',
+			data : soap,
+			contentType : 'text/xml;charset=utf-8',
+			success : function(xml){
+				var r = $(xml).text();
+				var obj = jQuery.parseJSON(r);
+				if(obj.Validacion=="true"){
+					$("#cbClienteFactura").val(obj.ClienteID);
+					$("#tbFechaFactura").val(obj.Fecha);
+
+					if(obj.TipoCFDI == 'ingreso'){
+						$("#cbtipoCFDIFactura").val(1);
+					}else if(obj.TipoCFDI=='egreso'){
+						$("#cbtipoCFDIFactura").val(2);
+					}else if(obj.TipoCFDI=='traslado'){
+						$("#cbtipoCFDIFactura").val(3);
+					}
+
+					$("#tbDescuentoFactura").val(obj.Descuento);
+					$("#cbMonedaFactura").val(obj.Moneda);
+					$("#tbNotaOpcionalFactura").val(obj.NotaOpcional);
+					$("#tbTerminosFactura").val(obj.Terminos);
+					$("#divSubTotalFactura").text("$ "+agregarDecimales(obj.Subtotal));
+					$("#divDescuentoFactura").text("$ "+agregarDecimales(obj.DescuentoImporte));
+					$("#divIVAFactura").text("$ "+agregarDecimales(obj.IVA));
+					$("#divIEPSFactura").text("$ "+agregarDecimales(obj.IEPS));
+					$("#divRetencionIVAFactura").text("$ "+agregarDecimales(obj.RetencionIVA));
+					$("#divRetencionISRFactura").text("$ "+agregarDecimales(obj.RetencionISR));
+					$("#divOtrasRetencionesResumenFactura").text("$ "+agregarDecimales(obj.OtrasRetenciones));
+					$("#divOtrosTrasladosResumenFactura").text("$ "+agregarDecimales(obj.OtrosTraslados));
+					$("#divTotalFactura").text("$ "+agregarDecimales(obj.Total));
+
+					if(obj.FormaPago=='Pago en una sola exhibicion'){
+						$("#cbFormaPagoFactura").val(1);
+					}else if(obj.FormaPago=='Pago de parcialidad'){
+						$("#cbFormaPagoFactura").val(2);
+						$("#tbFormaPago1Factura").val(obj.Parcialidad1);
+						$("#tbFormaPago2Factura").val(obj.Parcialidad2);
+						$("#divDetalleFormaPagoFactura").removeClass("NoVisible");
+					}else if(obj.FormaPago=='Pago en parcialidades'){
+						$("#cbFormaPagoFactura").val(3);
+					}
+
+					if(obj.MetodoPago=='No identificado'){
+						$("#cbMetodoPagoFactura").val(1);
+					}else if(obj.MetodoPago=='Efectivo'){
+						$("#cbMetodoPagoFactura").val(2);
+					}else if(obj.MetodoPago=='Cheque'){
+						$("#cbMetodoPagoFactura").val(3);
+					}else if(obj.MetodoPago=='Transferencia electronica'){
+						$("#cbMetodoPagoFactura").val(4);
+					}else if(obj.MetodoPago=='Tarjeta'){
+						$("#cbMetodoPagoFactura").val(5);
+					}else if(obj.MetodoPago=='Otro'){
+						$("#cbMetodoPagoFactura").val(6);
+					}
+
+					$("#tbNoCuentaFactura").val(obj.NoCuenta);
+					
+					$("#ulProductosFactura li").remove();
+					contadorProductos = 0;
+					$.each(obj.Conceptos, function (index, value) {
+						contadorProductos++;
+						var html;
+						html = '<li id="liProductosFactura' + contadorProductos + '">';
+						html = html + '<div class="espacio1 limpiar"></div>';
+						html = html + '<div class="div16 izquierda"><a class="bQuitar" href="" id="bQuitarProductoFactura' + contadorProductos + '" onclick="closeProductoFactura(' + contadorProductos + ')"></a></div>';
+						html = html + '<div class="div15 izquierda">';
+						html = html + '<select class="campo1 " data-role="none" id="cbArticuloFactura' + contadorProductos + '">';
+						$.each(JSonProductos, function (index, value) {
+							html = html + '<option value=' + value.Empresa_Catalogo_ProductosID + '>' + value.NoIdentificacion + '</option>';
+						});
+						html = html + '</select>';
+						html = html + '</div>';
+						html = html + '<div class="div11 izquierda"><a class="bEliminar" href="" id="bEliminarProductoFactura' + contadorProductos + '" onclick="eliminarProductoFactura(' + contadorProductos + ')"></a></div>';
+						html = html + '<div class="espacio1 limpiar"></div>';
+						html = html + '<div id="contenidoProducto' + contadorProductos + '" class="Visible" >';
+						html = html + '<div class="div3"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo9" id="tbDescripcionFactura' + contadorProductos + '"></input></div>';
+						html = html + '<div class="div8 izquierda"><input type="text" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo8" id="tbCantidadFactura' + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ')"></input></div>';
+						html = html + '<div class="div9 izquierda"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidadFactura' + contadorProductos + '"></input></div>';
+						html = html + '<div class="div8 izquierda"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecioFactura' + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ')"></input></div>';
+						html = html + '<div class="div1 izquierda"><input type="text" name="Importe" value="" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporteFactura' + contadorProductos + '"></input></div>';
+						html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosFactura' + contadorProductos + '"></input></div>';
+						html = html + '</div>';
+						html = html + '</li>';
+
+						$("#ulProductosFactura").append(html);
+						$("#cbArticuloFactura"+contadorProductos).val(value.Empresa_Catalogo_ProductosID);
+						$("#tbDescripcionFactura"+contadorProductos).val(value.Descripcion);
+						$("#tbCantidadFactura"+contadorProductos).val(value.Cantidad);
+						$("#tbUnidadFactura"+contadorProductos).val(value.Unidad);
+						$("#tbPrecioFactura"+contadorProductos).val(agregarDecimales(value.Precio));
+						$("#tbImporteFactura"+contadorProductos).val(agregarDecimales(parseFloat(value.Cantidad) * parseFloat(value.Precio)));
+						$("#tbImpuestosFactura"+contadorProductos).val();
+					});
+				}
+			},
+			error: function(e){
+				alert('Error: '+e.responseText);
+				return;
+			}
+		});
+	}
+	
+	$.mobile.changePage("#pFacturas");
 }
 
 function populateAllFacturas() {
@@ -608,7 +742,7 @@ function populateAllFacturas() {
 				$.mobile.changePage("#pListaFacturas");
 				$.each(obj.Facturas, function (index, value) {
 					html = '<li>';
-					html = html + '<a href="#">';
+					html = html + '<a href="#" onclick="populateResumenFactura(' + value.FacturaID + ')">';
 					html = html + '<div class="div1 izquierda">';
 					html = html + '<div class="listado1">' + value.NombreCliente + '...</div>';
 					html = html + '<div class="listado2">' + value.Fecha + '</div>';
@@ -651,7 +785,7 @@ function getMoreFacturas() {
 			if (obj.Validacion == "true") {
 				$.each(obj.Facturas, function (index, value) {
 					html = '<li>';
-					html = html + '<a href="#">';
+					html = html + '<a href="#" onclick="populateResumenFactura(' + value.FacturaID + ')">';
 					html = html + '<div class="div1 izquierda">';
 					html = html + '<div class="listado1">' + value.NombreCliente + '...</div>';
 					html = html + '<div class="listado2">' + value.Fecha + '</div>';
@@ -978,7 +1112,8 @@ function insertFactura(status) {
 				var r = $(xml).text();
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
-					$.mobile.changePage("#pListaFacturas");
+					$("#lvFacturas li").remove();
+					populateAllFacturas();
 				} else {
 					alert("A ocurrido un error, por favor verifique su conexion a internet.");
 					alert("Error: " + obj.Error);
@@ -1065,6 +1200,80 @@ function validaDatosFactura(){
 	}
 
 	return true;
+}
+
+function populateResumenFactura(facturaID){
+	$("#StatusResumenFactura").text("");
+	$("#NombreClienteResumenFactura").text("");
+	$("#RFCClienteResumenFactura").text("");
+	$("#CalleNumClienteResumenFactura").text("");
+	$("#ColoniaClienteResumenFactura").text("");
+	$("#CiudadEstadoClienteResumenFactura").text("");
+	$("#CodigoPostalClienteResumenFactura").text("");
+	$("#divSubTotalResumenFactura").text("");
+	$("#divDescuentoResumenFactura").text("");
+	$("#divIVAResumenFactura").text("");
+	$("#divIEPSResumenFactura").text("");
+	$("#divRetencionIVAResumenFactura").text("");
+	$("#divRetencionISRResumenFactura").text("");
+	$("#divOtrasRetencionesResumenFactura").text("");
+	$("#divOtrosTrasladosResumenFactura").text("");
+	$("#divTotalResumenFactura").text("");
+	$("#FormaPagoResumenFactura").text("");
+	$("#MetodoPagoResumenFactura").text("");
+
+	var soap;
+	soap = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Webservice1">';
+	soap = soap + '<soapenv:Header/>';
+	soap = soap + '<soapenv:Body>';
+	soap = soap + '<urn:getResumenFactura>';
+	soap = soap + '<urn:pFacturaID>'+facturaID+'</urn:pFacturaID>';
+	soap = soap + '</urn:getResumenFactura>';
+	soap = soap + '</soapenv:Body>';
+	soap = soap + '</soapenv:Envelope>';
+
+	$.ajax({
+		cache : false,
+		type : 'post',
+		async : false,
+		dataType : 'xml',
+		url : 'http://50.56.197.123/app/Webservice1.awws',
+		data : soap,
+		contentType : 'text/xml;charset=utf-8',
+		success : function(xml){
+			var r = $(xml).text();
+			var obj = jQuery.parseJSON(r);
+			if (obj.Validacion == "true"){
+				$("#StatusResumenFactura").text(obj.Status);
+				$("#FolioFactura").text("Factura "+obj.Serie+obj.Folio);
+				$("#NombreClienteResumenFactura").text(obj.NombreCliente);
+				$("#RFCClienteResumenFactura").text(obj.RFCCliente);
+				$("#CalleNumClienteResumenFactura").text(obj.CalleNumCliente);
+				$("#ColoniaClienteResumenFactura").text(obj.ColoniaCliente);
+				$("#CiudadEstadoClienteResumenFactura").text(obj.CiudadEstadoCliente);
+				$("#CodigoPostalClienteResumenFactura").text(obj.CodigoPostalCliente);
+				$("#divSubTotalResumenFactura").text('$'+agregarDecimales(obj.Subtotal));
+				$("#divDescuentoResumenFactura").text('$'+agregarDecimales(obj.Descuento));
+				$("#divIVAResumenFactura").text('$'+agregarDecimales(obj.IVA));
+				$("#divIEPSResumenFactura").text('$'+agregarDecimales(obj.IEPS));
+				$("#divRetencionIVAResumenFactura").text('$'+agregarDecimales(obj.RetencionIVA));
+				$("#divRetencionISRResumenFactura").text('$'+agregarDecimales(obj.RetencionISR));
+				$("#divOtrasRetencionesResumenFactura").text('$'+agregarDecimales(obj.OtrasRetenciones));
+				$("#divOtrosTrasladosResumenFactura").text('$'+agregarDecimales(obj.OtrosTraslados));
+				$("#divTotalResumenFactura").text('$'+agregarDecimales(obj.Total));
+				$("#FormaPagoResumenFactura").text(obj.FormaPago);
+				$("#MetodoPagoResumenFactura").text(obj.MetodoPago);
+
+				FacturaID = facturaID;
+				$.mobile.changePage("#pResumenFactura");
+			}else{
+				alert("A ocurrido un error, por favor verifique su conexion a internet");
+			}
+		},
+		error: function(e){
+			alert("Error: "+ e.responseText);
+		}
+	});
 }
 
 /*Clientes*/
@@ -1780,7 +1989,6 @@ function limpiarPantallaGastos(pEnviarPantalla) {
 function insertGasto() {
 	var n;
 	var xml;
-
 	if ($("#tbMontoGasto").val() == "") {
 		alert("Favor de agregar un monto para el gasto");
 		$("#tbMontoGasto").focus();
@@ -1829,7 +2037,7 @@ function insertGasto() {
 function populateGasto(pGastoID) {
 	var html;
 	limpiarPantallaGastos(false);
-	insertarImpuestos("cbImpuestosGasto");
+	insertarImpuestosCombo("cbImpuestosGasto");
 	$.ajax({
 		cache : false,
 		type : 'post',
@@ -1886,12 +2094,20 @@ function cargarImpuestos() {
 		}
 	});
 }
-
-function insertarImpuestos(id) {
+function insertarImpuestosCombo(id) {
 	var html;
 	$('#' + id).append('<option value="0">Sin Impuesto</option>');
 	$.each(ImpuestosJSON.Impuestos, function (index, value) {
 		html = '<option value="' + value.ImpuestosID + '">' + value.Nombre + ' ' + ((parseFloat(value.Tasa * 100) * 100) / 100) + '%</option>';
+		$('#' + id).append(html);
+	});
+}
+
+function insertarImpuestosLista(id) {
+	var html;
+	$.each(ImpuestosJSON.Impuestos, function (index, value) {
+		html = '<input type="checkbox" name="checkImpuestoFactura'+index+'" id="checkImpuestoFactura'+index+'" class="custom"/>'
+		html = html + '<label for="checkImpuestoFactura'+index+'">'+value.Nombre + ' ' + ((parseFloat(value.Tasa * 100) * 100) / 100) +'%</label>';
 		$('#' + id).append(html);
 	});
 }
