@@ -7,11 +7,15 @@
        <link rel="stylesheet" href="js/jQueryMobile/jquery.mobile.theme-1.3.1.min.css" />
 	   <link rel="stylesheet" href="js/jQueryMobile/jquery.mobile.structure-1.3.1.min.css" />
 	   <link rel="stylesheet" href="css/estilo.css" />
+	   <!--Calendarios-->
+	   <link href="mobilscroll/css/mobiscroll.custom-2.6.2.min.css" rel="stylesheet" type="text/css" />
 	   <style>
 		 .ui-page { background: #fff;}
 	   </style>
 	   <script src="js/jquery.js"></script>
        <script src="js/jQueryMobile/jquery.mobile-1.3.1.min.js"></script>
+	   <!--Calendarios-->
+		<script src="mobilscroll/js/mobiscroll.custom-2.6.2.min.js" type="text/javascript"></script>
        <!--<script src="cordova-2.3.0"></script>-->
     </head>
     <body>
@@ -19,30 +23,33 @@
 		<div data-role="page" id="login">
 			<div data-role="content">
 				<div class="logo">&nbsp;</div>
-				<div class="div2 izquierda">&nbsp;</div>
-				<div class="div1 izquierda"><span class="error NoVisible" id="errorLogin">*Su contrasena es incorrecta.</span></div>
-				<div class="div2 izquierda">&nbsp;</div>
-				<div class="espacio1 limpiar"></div>
-				<div class="div2 izquierda">&nbsp;</div>
-				<div class="div1 izquierda"><input type="text" name="tbUsuario" value="oscar.castillo@docdigitales.com" placeholder=" Usuario" data-role="none" class="campo9" id="tbUsuario"></input></div>
-				<div class="div2 izquierda">&nbsp;</div>
-				<div class="limpiar"></div>
-				<div class="div2 izquierda">&nbsp;</div>
-				<div class="div1 izquierda"><input type="password" name="tbConstrasena" value="123123" placeholder=" Contrase&ntilde;a" data-role="none" class="campo10" id="tbContrasena"></input></div>
-				<div class="div2 izquierda">&nbsp;</div>
 				<div class="espacio2 limpiar"></div>
-				<div class="texto-centro">
+				<div class="div22 izquierda">&nbsp;</div>
+				<div class="div21 izquierda"><span class="error NoVisible" id="errorLogin">*Su contrasena es incorrecta.</span></div>
+				<div class="div22 izquierda">&nbsp;</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div22 izquierda">&nbsp;</div>
+				<div class="div21 izquierda"><input type="text" name="tbUsuario" value="oscar.castillo@docdigitales.com" placeholder=" Usuario" data-role="none" class="campo11 padding_izquierda" id="tbUsuario"></input></div>
+				<div class="div22 izquierda">&nbsp;</div>
+				<div class="limpiar"></div>
+				<div class="div22 izquierda">&nbsp;</div>
+				<div class="div21 izquierda"><input type="password" name="tbConstrasena" value="123123" placeholder=" Contrase&ntilde;a" data-role="none" class="campo12 padding_izquierda" id="tbContrasena"></input></div>
+				<div class="div22 izquierda">&nbsp;</div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div3">
 					<a class="bEntrar" href="#" id="bEntrar"></a>
 				</div>
-				<div class="espacio2 limpiar"></div>
-				<div class="texto_centro"><a href="#" class="olvide_pass" id="bRecuperarContrasena">Olvide contraseña</a></div>
+				<div class="espacio3 limpiar"></div>
+				<div class="div3 izquierda texto_centro">
+					<a href="#" class="olvide_pass" id="bRecuperarContrasena">Olvide contraseña</a>
+				</div>
 			</div>
 		</div>
 		<!--Recuperar Contraseña-->
 		<div data-role="page" id="pRecuperarContrasena">
 			<div data-role="content">
 			<div class="logo">&nbsp;</div>
-			<div class="espacio2 limpiar"></div>
+			<div class="espacio3 limpiar"></div>
 			<div class="div3 texto_centro olvide_pass_mensaje">Se ha enviado un link a su</div>
 			<div class="div3 texto_centro olvide_pass_mensaje">correo electronico para generar</div>
 			<div class="div3 texto_centro olvide_pass_mensaje">una nueva contrasena</div>
@@ -53,7 +60,7 @@
 		    <div class="barra_Header">
 				<div>
 					<a class="bAyuda" href="#"></a>
-					<a class="bConfiguracion" href="#pConfiguracion" id="bConfiguracion"></a>
+					<a class="bConfiguracion" href="#" id="bConfiguracion"></a>
 				</div>
 			</div>
 			<div data-role="content">
@@ -63,17 +70,17 @@
 							<div class="boton_grid"><a class="bClientes" href="#" id="bClientes"></a></div>
 						</div>
 						<div class="ui-block-b">
-							<div class="boton_grid"><a class="bFacturas" href="#pListaFacturas" id="bFacturas"></a></div>
+							<div class="boton_grid"><a class="bFacturas" href="#" id="bFacturas"></a></div>
 						</div>
 						<div class="ui-block-c">
-							<div class="boton_grid"><a class="bCotizacion" href="#"></a></div>
+							<div class="boton_grid"><a class="bCotizacion" href="#" id="bCotizaciones"></a></div>
 						</div>
 					</div>
 				</div>
 				<div class="menu">
 					<div class="ui-grid-b">
 						<div class="ui-block-a">
-							<div class="boton_grid"><a class="bGastos" href="#pListaGastos" id="bGastos"></a></div></div>
+							<div class="boton_grid"><a class="bGastos" href="#" id="bGastos"></a></div></div>
 						<div class="ui-block-b"></div>
 						<div class="ui-block-c"></div>
 					</div>
@@ -89,7 +96,7 @@
 				</div>
 			</div>
 			<div data-role="content">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Busca un cliente..." data-inset="true" data-icon="false" id="lvClientes">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar" data-inset="true" data-icon="false" id="lvClientes">
 				</ul>
 				<div id="CargandoListaCliente">&nbsp;</div>
 			</div>
@@ -103,11 +110,24 @@
 				</div>
 			</div>
 			<div data-role="content">
-				<ul data-role="listview" data-filter="true" data-filter-placeholder="Busca una factura..." data-inset="true" data-icon="false" id="lvFacturas">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar..." data-inset="true" data-icon="false" id="lvFacturas">
 				</ul>
+				<div id="CargandoListaFacturas">&nbsp;</div>
 			</div>
 		</div>
 		<!--Lista Cotizaciones-->
+		<div data-role="page" id="pListaCotizaciones">
+		    <div class="header_cotizaciones">
+				<div>
+					<a class="bInicio" href="#pMenu"></a>
+					<a class="bAgregar" href="#" id="bAgregarCotizacion"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar..." data-inset="true" data-icon="false" id="lvCotizaciones">
+				</ul>
+			</div>
+		</div>
 		<!--Lista Gastos-->
 		<div data-role="page" id="pListaGastos">
 			<div class="header_gastos">
@@ -153,7 +173,7 @@
 				<div class="div1 izquierda"><input type="text" name="tbRFC" value="" placeholder=" RFC" data-role="none" class="campo7" id="tbRFC" readonly></input></div>
 				<div class="espacio1 limpiar"></div>
 				<div class="div1">
-					<select class="campo1 " data-role="none" id="cbSucursalEmpresa">
+					<select class="campo1 combobox" data-role="none" id="cbSucursalEmpresa">
 						<option value="" selected="selected">Sucursal</option>
 					</select>
 				</div>
@@ -167,14 +187,14 @@
 				<div class="div1 izquierda"><input type="text" name="tbMunicipio" value="" maxlength="255" placeholder=" Municipio" data-role="none" class="campo8"id="tbMunicipio"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbEstado" value="" maxlength="255" placeholder=" Estado" data-role="none" class="campo8" id="tbEstado"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbPais" value="" maxlength="255" placeholder=" Pais" data-role="none" class="campo5" id="tbPais"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbCodigoPostal" maxlength="12" value="" placeholder=" Codigo postal" data-role="none" class="campo4" id="tbCodigoPostal"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbCodigoPostal" maxlength="5" value="" placeholder=" Codigo postal" data-role="none" class="campo4 numeric3" id="tbCodigoPostal"></input></div>
 				<div class="espacio1 limpiar"></div>
 				<div class="div1 izquierda"><input type="text" name="tbRegimenFiscal" value="" maxlength="128" placeholder=" Regimen fiscal" data-role="none" class="campo6" id="tbRegimenFiscal"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbLugarExpedicion" value=""  maxlength="25" placeholder=" Lugar de expedicion" data-role="none" class="campo7" id="tbLugarExpedicion"></input></div>
 				<div class="espacio2 limpiar"></div>
-				<div class="div1 izquierda"><input type="text" name="tbFolio" value="" placeholder=" Folio" data-role="none" class="campo6" id="tbFolio"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbFolio" value="" maxlength="6" placeholder=" Folio" data-role="none" class="campo6 numeric3" id="tbFolio"></input></div>
 				<div class="div1 izquierda">
-					<select class="campo7" data-role="none" id="cbSerieEmpresa">
+					<select class="campo7 combobox" data-role="none" id="cbSerieEmpresa">
 						<option value="" selected="selected">Serie</option>
 					</select>
 				</div>
@@ -196,22 +216,23 @@
 				</div>
 			</div>
 			<div data-role="content">
-				<div class="div_add_impuesto div3 izquierda">
+				<div class="espacio2 limpiar"></div>
+				<div class="div_add_impuesto">
 				<div class="barra_azul">Impuestos</div>
 					<div class="espacio2 limpiar"></div>
-					<div class="div16 izquierda"><a class="bNuevo" href="" id="bNuevoImpuesto"></a></div>
-					<div class="div15 izquierda"><input type="text" name="tbImpuesto" value="" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto"></input></div>
-					<div class="div11 izquierda">&nbsp;</div>
-					<div class="div1 izquierda limpiar"><input type="text" name="tbTasa" value="" placeholder=" Tasa" data-role="none" class="campo6" id="tbTasa"></input></div>
-					<div class="div1 izquierda">
-						<select class="campo7" data-role="none" id="cbTipoPago">
-							<option value="" selected="selected">Tipo de impuesto</option>
-						</select> 
-					</div>
+						<div class="div_boton1 izquierda"><a class="bNuevo" href="" id="bNuevoImpuesto"></a></div>
+						<div class="div_impuesto izquierda"><input type="text" name="tbImpuesto" value="" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto"></input></div>
+						<div class="div11 izquierda">&nbsp;</div>
+						<div class="div1 izquierda limpiar"><input type="text" name="tbTasa" maxlength="7" value="" placeholder=" Tasa" data-role="none" class="campo6 numeric1" id="tbTasa"></input></div>
+						<div class="div1 izquierda">
+							<select class="campo7 combobox" data-role="none" id="cbTipoPago">
+								<option value="" selected="selected">Tipo de impuesto</option>
+							</select> 
+						</div>
 					<div class="espacio2 limpiar"></div>
 				</div>
-				<ul id="ulImpuestos">
-				</ul>
+					<ul id="ulImpuestos">
+					</ul>
 			</div>
 			<div class="piePagina">
 				<a class="bGuardarPiePagina" href="#" id="bGuardarImpuesto"></a>
@@ -250,7 +271,7 @@
 			</div>
 			<div class="piePagina">
 				<a class="bAcciones" href="#pAccionesCliente" data-rel="popup" data-transition="pop" data-position-to="window" id="bAccionesCliente"></a>
-				<div data-role="popup" id="pAccionesCliente" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0">
+				<div data-role="popup" id="pAccionesCliente" data-history="false" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0">
 						<div class="div3"><a class="bNuevaFactura" href="#" id="bClienteNuevaFactura"></a></div>
 						<div class="espacio1 limpiar"></div>
 						<div class="div3"><a class="bNuevaCotizacion" href="#" id="bClienteNuevaCotizacion"></a></div>
@@ -276,11 +297,11 @@
 				<div class="div1 izquierda"><input type="text" name="tbNombreComercialCliente" value="" maxlength="255" placeholder=" Nombre Comercial" data-role="none" class="campo4" id="tbNombreComercialCliente"></input></div>
 				<div class="espacio2 limpiar"></div>
 				<div class="texto_principal">Direccion fiscal</div>
-				<div class="div10 izquierda"><input type="text" name="tbCalleCliente" value="" maxlength="255" placeholder=" Calle" data-role="none" class="campo2" id="tbCalleCliente"></input></div>
-				<div class="div11 izquierda"><input type="text" name="tbNoExteriorCliente" value="" maxlength="30" placeholder=" Num ext" data-role="none" class="campo3" id="tbNoExteriorCliente"></input></div>
-				<div class="div11 izquierda"><input type="text" name="tbNoInteriorCliente" value="" maxlength="30" placeholder=" Num int" data-role="none" class="campo8" id="tbNoInteriorCliente"></input></div>
-				<div class="div12 izquierda"><input type="text" name="tbColoniaCliente" value="" maxlength="255" placeholder=" Colonia" data-role="none" class="campo8" id="tbColoniaCliente"></input></div>
-				<div class="div11 izquierda"><input type="text" name="tbCPCliente" value="" maxlength="12" placeholder=" CP" data-role="none" class="campo8" id="tbCPCliente"></input></div>
+				<div class="div15 izquierda"><input type="text" name="tbCalleCliente" value="" maxlength="255" placeholder=" Calle" data-role="none" class="campo2" id="tbCalleCliente"></input></div>
+				<div class="div23 izquierda"><input type="text" name="tbNoExteriorCliente" value="" maxlength="30" placeholder=" Num ext" data-role="none" class="campo3" id="tbNoExteriorCliente"></input></div>
+				<div class="div23 izquierda"><input type="text" name="tbNoInteriorCliente" value="" maxlength="30" placeholder=" Num int" data-role="none" class="campo8" id="tbNoInteriorCliente"></input></div>
+				<div class="div17 izquierda"><input type="text" name="tbColoniaCliente" value="" maxlength="255" placeholder=" Colonia" data-role="none" class="campo8" id="tbColoniaCliente"></input></div>
+				<div class="div23 izquierda"><input type="text" name="tbCPCliente" value="" maxlength="5" placeholder=" CP" data-role="none" class="campo8 numeric3" id="tbCPCliente"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbCiudadCliente" value="" maxlength="255" placeholder=" Ciudad" data-role="none" class="campo8" id="tbCiudadCliente"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbEstadoCliente" value="" maxlength="255" placeholder=" Estado" data-role="none" class="campo8" id="tbEstadoCliente"></input></div>
 				<div class="div1 izquierda"><input type="text" name="tbMunicipioCliente" value="" maxlength="255" placeholder=" Municipio" data-role="none" class="campo5" id="tbMunicipioCliente"></input></div>
@@ -296,13 +317,13 @@
 				<div id="dContactoContenido" class="NoVisible">
 				<ul  id="ulContactos">
 				</ul>
-				<div class="texto_izquierda"><a href="#" id="bContactoCliente" class="bNuevo derecha"> Contacto</a></div>
+				<div class="div3"><a href="#" id="bContactoCliente" class="bNuevo derecha"> Contacto</a></div>
 				</div>
-				<div class="espacio2 limpiar"></div>
-				<div id="dOtraInformacion" class="cabecera_seccion_down">Otra informacion</div>
+				<!--<div class="espacio2 limpiar"></div>-->
+				<div id="dOtraInformacion" class="cabecera_seccion_down2 limpiar">Otra informacion</div>
 				<div id="dOtraInformacionContenido" class="NoVisible">
 				<div class="div3">
-				<select class="campo1 " data-role="none" id="cbMetodoPago">
+				<select class="campo1 combobox" data-role="none" id="cbMetodoPago">
 					<option value="" selected="selected">Metodo de pago</option>
 					<option value="No identificado">No identificado</option>
 					<option value="Efectivo">Efectivo</option>
@@ -325,8 +346,8 @@
 		<div data-role="page" id="pFacturas">
 				<div class="barra_Header_Listado">
 					<div>
-						<a class="bCancelar" href="#pListaFacturas"></a>
-						<a class="bGuardar" href="#" id="bGuardarFactura"></a>
+						<a class="bCancelar" href="#pMenu"></a>
+						<a class="bGuardar" href="#"></a>
 					</div>
 				</div>
 				<div data-role="content">
@@ -336,7 +357,7 @@
 					</select>		
 				</div>
 				<div class="espacio1 limpiar"></div>
-				<div class="div4"><input type="date" name="tbFecha" value="" placeholder=" Fecha" data-role="none" class="campo1 izquierda" id="tbFechaFactura"></input></div>
+				<div class="div4"><input type="text" name="tbFechaFactura" value="" placeholder=" Fecha" data-role="none" class="campo1 date izquierda" id="tbFechaFactura"></input></div>
 				<div class="div5">
 					<select class="campo1 " data-role="none" id="cbtipoCFDIFactura">
 						<option value="" selected="selected">Tipo CFDI</option>
@@ -372,18 +393,18 @@
 				<div class="espacio2 limpiar"></div>
 				<ul id="ulProductosFactura">
 				</ul>
-				<div class="div1 izquierda"><input type="text" name="tbNotaOpcional" id="tbNotaOpcionalFactura" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbTerminos" id="tbTerminosFactura" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbNotaOpcional" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbTerminos" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
 				<div class="espacio2 limpiar"></div>	
-				<div id="dSubTotalFactura" class="divSubTotales"><div class="div11 izquierda">Subtotal</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divSubTotalFactura">$0.00</div></div>
-				<div id="dDescuentoFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Descuentos</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divDescuentoFactura">$0.00</div></div>
-				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divIVAFactura">$0.00</div></div>
-				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divIEPSFactura">$0.00</div></div>
-				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de IVA</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divRetencionIVAFactura">$0.00</div></div>
-				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de ISR</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divRetencionISRFactura">$0.00</div></div>
+				<div id="dSubTotalFactura" class="divSubTotales"><div class="div11 izquierda">Subtotal</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divSubTotalFactura">$ 0.00</div></div>
+				<div id="dDescuentoFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Descuentos</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divDescuentoFactura">$ 0.00</div></div>
+				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
+				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de ISR</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
 				<div id="dOtrasRetencionesFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Otras Retenciones</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divOtrasRetencionesFactura">$0.00</div></div>
 				<div id="dOtrosTrasladosFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Otros Traslados</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divOtrosTrasladosFactura">$0.00</div></div>
-				<div id="dTotalFactura" class="divTotales"><div class="div11 izquierda">total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalFactura">$0.00</div></div>
+				<div id="dTotalFactura" class="divTotales"><div class="div11 izquierda">total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalFactura">$ 0.00</div></div>
 				<div class="espacio2 limpiar"></div>	
 				<div class="div3">
 					<select class="campo1 " data-role="none" id="cbFormaPagoFactura">
@@ -397,7 +418,7 @@
 				<div id="divDetalleFormaPagoFactura" class="div3 izquierda NoVisible">
 					<div class="div16 izquierda"><input type="text" name="tbFormaPago1Factura" value="0" placeholder="" data-role="none" class="campo1" id="tbMetodoPago1Factura"></input></div>
 					<div class="div19 izquierda">&nbsp;</div>
-					<div class="div16 izquierda"><input type="text" name="tbFormaPago2Factura" value="0" placeholder=" De" data-role="none" class="campo1" id="tbMetodoPago2Factura"></input></div>
+					<div class="div16 izquierda"><input type="text" name="tbFormaPago2Factura" value="" placeholder=" De" data-role="none" class="campo1" id="tbMetodoPago2Factura"></input></div>
 				</div>	
 				<div class="espacio1 limpiar"></div>
 				<div class="div7 izquierda">
@@ -413,9 +434,9 @@
 				</div>
 				<div class="div6 izquierda"><input type="text" name="tbNoCuentaFactura" value="" placeholder=" No. cuenta" data-role="none" class="campo1" id="tbNoCuentaFactura" readonly></input></div>
 				<div class="espacio2 limpiar"></div>
-				<!--<div class="div1 izquierda texto_centro"><a class="bGuardarFactura" href="#" id="bGuardarFactura"></a></div>-->
-				<div class="div1 div_centro texto_centro"><a class="bGenerarFactura" href="#" id="bGenerarFactura"></a></div>
-					<div data-role="popup" id="pAgregarProducto" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
+				<div class="div1 izquierda texto_centro"><a class="bGuardarFactura" href="#"></a></div>
+				<div class="div1 izquierda texto_centro"><a class="bGenerarFactura" href="#"></a></div>
+					<div data-role="popup" id="pAgregarProductoFactura" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
 						<div class="popUpContenido">
 							<div class="popUpBotones">
 								<div class="div1 izquierda"><a href="#" class="bAgregarPopUp" id="bAgregarProductoFactura"></a></div>
@@ -485,40 +506,164 @@
 			</div>
 		</div>
 		<!--Administrar Cotizaciones-->
+		<div data-role="page" id="pCotizacion">
+			<div class="barra_Header_Listado">
+				<div>
+					<a class="bCancelar" href="#pMenu"></a>
+					<a class="bGuardar" href="#" id="bGuardarCotizacion"></a>
+				</div>
+			</div>
+			<div data-role="content">
+				<div class="div3">
+					<select class="campo1 " data-role="none" id="cbClienteCotizacion">
+						<option value="" selected="selected">Cliente</option>
+					</select>		
+				</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div4"><input type="text" name="tbFechaCotizacion" value="" placeholder=" Fecha" data-role="none" class="campo1 date izquierda" id="tbFechaCotizacion"></input></div>
+				<div class="div5"><input type="text" name="tbOrdenCompraCotizacion" value="" placeholder=" Orden de compra" data-role="none" class="campo1 izquierda" id="tbOrdenCompraCotizacion"></input></div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div1 izquierda"><input type="text" name="tbDescuentoCotizacion" value="" placeholder=" Desc. (%)" data-role="none" class="campo6" id="tbDescuentoCotizacion"></input></div>
+				<div class="div1 izquierda">
+					<select class="campo7" data-role="none" id="cbMonedaCotizacion">
+						<option value="" selected="selected">Moneda</option>
+					</select>		
+				</div>
+				<div class="espacio2 limpiar"></div>
+				<div class="texto_principal">Concepto</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div_boton1 izquierda"><a class="bNuevo" href="#" id="bNuevoProductoCotizacion"></a></div>
+				<div class="div_impuesto izquierda">
+					<select class="campo1 " data-role="none" id="cbArticuloCotizacion">
+						<option value="" selected="selected">Articulo</option>
+						<option value="0" selected="selected">Articulo Nuevo</option>
+					</select>		
+				</div>
+				<div class="espacio1 limpiar"></div>
+				<div class="div3"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo9" id="tbDescripcionArticuloCotizacion"></input></div>
+				<div class="div8 izquierda"><input type="text" name="tbCantidad" maxlength="6" value="" placeholder=" Cantidad" data-role="none" class="campo8 numeric2" id="tbCantidadCotizacion"></input></div>
+				<div class="div9 izquierda"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidadCotizacion"></input></div>
+				<div class="div8 izquierda"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecioCotizacion"></input></div>
+				<div class="div1 izquierda"><input type="text" name="Importe" value="" maxlength="15" placeholder=" Importe" data-role="none" class="campo5 importe_azul numeric1" id="tbImporteCotizacion"></input></div>
+				<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosCotizacion" onclick="populateImpuestosPopUp(2,-1)"></input></div>
+				<div class="espacio2 limpiar"></div>
+				<ul id="ulProductosCotizacion">
+				</ul>
+				<div class="div1 izquierda"><input type="text" name="tbNotaOpcional" value="" placeholder=" Nota opcional" data-role="none" class="campo6" id="tbNotaOpcionalCotizacion"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbTerminos" value="" placeholder=" Terminos" data-role="none" class="campo7" id="tbTerminosCotizacion"></input></div>
+				<div class="espacio2 limpiar"></div>	
+				<div id="dSubTotalCotizacion" class="divSubTotales"><div class="div11 izquierda">Subtotal</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divSubTotalCotizacion">$ 0.00</div></div>
+				<div id="dDescuentoCotizacion" class="NoVisible divSubTotales"><div class="div11 izquierda">Descuentos</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divDescuentoCotizacion">$ 0.00</div></div>
+				<div id="dIEPSCotizacion" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divIEPSCotizacion">$ 0.00</div></div>
+				<div id="dIVACotizacion" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior"  id="divIVACotizacion">$ 0.00</div></div>
+				<div id="dRetencionIVACotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Retenciones de IVA</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divRetencionIVACotizacion">$ 0.00</div></div>
+				<div id="dRetencionISRCotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Retenciones de ISR</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divRetencionISRCotizacion">$ 0.00</div></div>
+				<div id="dOtrasRetencionesCotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Otras Retenciones</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divOtrasRetencionesCotizacion">$ 0.00</div></div>
+				<div id="dOtrosTransladosCotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Otros Translados</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divOtrosTransladosCotizacion">$ 0.00</div></div>
+				<div id="dTotalCotizacion" class="divTotales"><div class="div11 izquierda">total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalCotizacion">$ 0.00</div></div>
+				<div class="espacio2 limpiar"></div>
+				<div class="div3 izquierda texto_centro"><a class="bEnviar" href="#" id="bEnviarCotizacion"></a></div>
+				
+				<div data-role="popup" id="pAgregarProductoCotizacion" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
+					<div class="popUpContenido">
+						<div class="popUpBotones">
+							<div class="div1 izquierda"><a href="#" class="bAgregarPopUp" id="bAgregarProductoCotizacion"></a></div>
+							<div class="div1 izquierda"><a href="#" class="bCancelarPopUp" id="bCancelarProductoCotizacion"></a></div>
+						</div>
+						<div class="popUpCampos">
+							<div class="div3"><span class="popUpTexto">Nuevo articulo</span></div>
+							<div class="espacio2 limpiar"></div>
+							<div class="div8 izquierda"><input type="text" name="tbArticulo" value="" placeholder=" Articulo" data-role="none" class="campo2" id="tbNuevoArticuloCotizacion"></input></div>
+							<div class="div20 izquierda"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo3" id="tbDescripcionNuevoArticuloCotizacion"></input></div>
+							<div class="div8 izquierda"><input type="text" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo5" id="tbNuevaCantidadCotizacion"></input></div>
+							<div class="div9 izquierda"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8" id="tbNuevaUnidadCotizacion"></input></div>
+							<div class="div8 izquierda"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo4" id="tbNuevoPrecioCotizacion"></input></div>
+						</div>
+					</div>
+				</div>
+				
+				<div data-role="popup" id="pAgregarImpuestoCotizacion" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
+					<div class="popUpContenido">
+						<div class="popUpBotones">
+							<div class="div1 izquierda"><a href="#" class="bAgregarPopUp" id="bAgregarImpuestoCotizacion"></a></div>
+							<div class="div1 izquierda"><a href="#" class="bCancelarPopUp" id="bCancelarImpuestoCotizacion"></a></div>
+						</div>
+						<div class="popUpCampos">
+							<div class="div3"><span class="popUpTexto">Impuestos</span></div>
+							<div class="espacio2 limpiar"></div>
+							<ul id="ulImpuestosCotizacion">
+								<li><input type="checkbox" id="chkImpuesto" value="" data-role="none"/><label for = "chkImpuesto">Impuesto</label></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!--Administrar Gastos-->
 		<div data-role="page" id="pGastos">
 			<div class="barra_Header_Listado">
 				<div>
 					<a class="bCancelar" href="#pListaGastos"></a>
-					<a class="bGuardar" href="#" id="bGuardarGasto"></a>
+					<a class="bGuardar" href="#"></a>
 				</div>
 			</div>
 			<div data-role="content">
-				<div class="div3 texto_azul">Gasto</div>
+				<!--<div class="div3 texto_azul">Gasto</div>-->
 				<div class="div1 izquierda"><input type="text" id="tbMontoGasto" value="" placeholder=" Monto " data-role="none" class="campo6"></input></div>
-				<div class="div1 izquierda"><input type="date" id="tbFechaGasto" value="" placeholder=" Fecha " data-role="none" class="campo7"></input></div>
-				<div class="espacio1 limpiar"></div>
+				<div class="div1 izquierda"><input type="text" id="tbFechaGasto" value="" placeholder=" Fecha " data-role="none" class="campo7 date"></input></div>
+				<div class="espacio limpiar"></div>
 				<div class="div3"><input type="text" id="tbProveedorGasto" value="" placeholder=" Proveedor " data-role="none" class="campo9"></input></div>
 				<div class="div3"><input type="text" id="tbCategoriaGasto" value="" placeholder=" Categoria " data-role="none" class="campo8"></input></div>
 				<div class="div3"><input type="text" id="tbDescripcionGasto" value="" placeholder=" Descripcion " data-role="none" class="campo10"></input></div>
-				<div class="espacio1 limpiar"></div>
-				<select  class="campo1 div1 derecha" data-role="none" placeholder=" Impuestos " id="cbImpuestosGasto">
+				<div class="espacio limpiar"></div>
+				<select  class="campo1 combobox div1 derecha" data-role="none" placeholder=" Impuestos " id="cbImpuestosGasto">
 					<!--option value="-1"  selected="selected">Impuestos</option>-->
 				</select>
 			</div>
 		</div>
+		<!--Dialogs-->
+		<div data-role="page" id="pError">
+			<div data-role="header">
+				<h2>Error</h2>
+			</div>
+			<div data-role="content">
+				<div class="pantalla_error">A ocurrido un error, por favor verifique su conexion a internet.</div>
+			</div>
+		</div>
+		<div data-role="page" id="pWarning">
+			<div data-role="header">
+				<h2>Dialog Warning</h2>
+			</div>
+			<div data-role="content">
+				<p>Warning</p>
+			</div>
+		</div>
+		<div data-role="page" id="pPermisos">
+			<div data-role="header">
+				<h2>Validacion</h2>
+			</div>
+			<div data-role="content">
+				<div class="pantalla_permisos">Lo sentimos esta opcion esta deshabilitada para su usuario.</div>
+			</div>
+		</div>
+		<!--Cargando-->
+		<div class="cargando NoVisible" id="dCargando"></div>
 		<script src="js/jquery.scrollExtend.min.js"></script>
+		<script src="js/jquery.numeric.js"></script>
+		<script type="text/javascript" src="js/BlockUI.js"></script>
 		<script src="js/codigo.js"></script>
 		<script>
 		/*variables sistema*/
 		$(document).on("ready",function(){
 			$.support.cors = true;
 			$.mobile.allowCrossDomainPages = true;
+			
 			//Login
 			$("#tbUsuario").focus();
 			$("#bEntrar").on("click",function(){autentifica();cargarImpuestos();});
 			$("#bRecuperarContrasena").on("click",function(){recuperarContrasena($("#tbUsuario").val());});
 			//Configuracion
+			$("#bConfiguracion").on("click",function(){if(permisoConfiguracion){$.mobile.changePage('#pConfiguracion');}else{$.mobile.changePage( "#pPermisos", { role: "dialog" , transition:"slidedown" } );} });
 			$("#bDatosFiscales").on("click",function(){populateConfiguracion();});
 			$("#bImpuestos").on("click",function(){populateImpuestos();});
 			$("#bGuardarConfiguracion").on("click",function(){updateConfiguracion();});
@@ -527,24 +672,39 @@
 			$("#bNuevoImpuesto").on("click",function(){addImpuesto();});
 			$("#bGuardarImpuesto").on("click",function(){insertImpuestos();});
 			//Facturas
-			$("#bFacturas").on("click",function(){populateAllFacturas();});
-			$("#bAgregarFactura").on("click",function(){populateFactura(false);});
-			$("#bNuevoProductoFactura").on("click",function(){addProductosFacturas();});
-			$("#cbArticuloFactura").on("change",function(){selectArticulo();});
-			$("#tbCantidadFactura").on("change",function(){calculaImporte();});
-			$("#tbPrecioFactura").on("change",function(){calculaImporte();});
+			$("#bFacturas").on("click",function(){if(permisoAdmonFactura){populateAllFacturas();}else{$.mobile.changePage( "#pPermisos", { role: "dialog" , transition:"slidedown" } );}});
+			$("#bAgregarFactura").on("click",function(){if(permisoGenerarFactura){populateFactura();}else{$.mobile.changePage( "#pPermisos", { role: "dialog" , transition:"slidedown" } );} });
+			$("#bNuevoProductoFactura").on("click",function(){addProductos(1);});
+			$("#cbArticuloFactura").on("change",function(){selectArticulo(1);});
+			$("#tbCantidadFactura").on("change",function(){calculaImporte(1);});
+			$("#tbPrecioFactura").on("change",function(){calculaImporte(1);});
 			$("#tbDescuentoFactura").on("change",function(){descuentoFactura();});
 			$("#cbFormaPagoFactura").on("change",function(){mostrarFormaPago();});
 			$("#cbMetodoPagoFactura").on("change",function(){habilitaNumeroCuenta();});
-			$("#bAgregarProductoFactura").on("click",function(){saveNuevoProductoFactura();});
-			$("#bCancelarProductoFactura").on("click",function(){$('#pAgregarProducto').popup("close");$("#cbArticuloFactura").val("");});
+			$("#bAgregarProductoFactura").on("click",function(){saveNuevoProducto(1);});			
+			$("#bCancelarProductoFactura").on("click",function(){$('#pAgregarProductoFactura').popup("close");$("#cbArticuloFactura").val("");});
 			$("#bGuardarFactura").on("click",function(){insertFactura(5);});
 			$("#bGenerarFactura").on("click",function(){insertFactura(1);});
 			$("#bEditarResumenFactura").on("click",function(){populateFactura(true);});
 			$("#tbImpuestosFactura").on("focus",function(){$("#pAgregarImpuestos").popup("open");});
-			//populateFactura
+			$("#bCancelarImpuestosFactura").on("click",function(){$("#pAgregarImpuestos").popup("close");});
+			//Cotizaciones
+			$("#bCotizaciones").on("click",function(){populateAllCotizaciones();});
+			$("#bAgregarCotizacion").on("click",function(){populateCotizacion();});
+			$("#bNuevoProductoCotizacion").on("click",function(){addProductos(2);});
+			$("#cbArticuloCotizacion").on("change",function(){selectArticulo(2);});
+			$("#tbCantidadCotizacion").on("change",function(){calculaImporte(2);});
+			$("#tbPrecioCotizacion").on("change",function(){calculaImporte(2);});
+			$("#bAgregarProductoCotizacion").on("click",function(){saveNuevoProducto(2);});
+			$("#bCancelarProductoCotizacion").on("click",function(){$('#pAgregarProductoCotizacion').popup("close");$("#cbArticuloCotizacion").val("");});
+			$("#bGuardarCotizacion").on("click",function(){insertCotizacion(0);});
+			$("#tbImpuestosCotizacion").on("click",function(){populateImpuestosPopUp(2,-1);});
+			$("#bCancelarImpuestoCotizacion").on("click",function(){$('#pAgregarImpuestoCotizacion').popup("close");});
+			$("#bAgregarImpuestoCotizacion").on("click",function(){addImpuestos(2);});
+			$("#tbDescuentoCotizacion").on("change",function(){totalGeneral(2);});
+			$("#bEnviarCotizacion").on("click",function(){insertCotizacion(1);});
 			//Clientes
-			$("#bClientes").on("click",function(){populateAllClientes();});
+			$("#bClientes").on("click",function(){if(permisoCliente){populateAllClientes();}else{$.mobile.changePage( "#pPermisos", { role: "dialog" , transition:"slidedown" } );}});
 			$("#bInicioListaClientes").on("click",function(){setInicioListaClientes();});
 			$("#pAccionesCliente").on({ //bloquea la pantalla al abrir un popup
 				popupbeforeposition: function () {
@@ -555,6 +715,7 @@
 			$("#bAgregarCliente").on("click",function(){limpiarPantallaCliente(true);});
 			$("#bEditarCliente").on("click",function(){populateCliente(ClienteID);});
 			$("#bEliminarCliente").on("click",function(){ if(confirm("¿Confirma la eliminacion de este cliente?")){ deleteCliente(ClienteID);}});
+			$("#bClienteNuevaCotizacion").on("click",function(){$('#pAccionesCliente').popup("close"); $.mobile.changePage("#pCotizacion");populateCotizacion();$("#cbClienteCotizacion").val(ClienteID);});
 			/*Listview infinite clientes*/
 			$('#lvClientes').onScrollBeyond(function() {
 			var page = $.mobile.activePage;//.attr('id');
@@ -569,6 +730,10 @@
 						$("#CargandoListaGastos").addClass("cargando");
 						getMoreGastos();
 						$("#CargandoListaGastos").removeClass("cargando");
+					}else if (page=="pListaFacturas"){
+						getMoreFacturas();
+					}else if (page=="pListaCotizaciones"){
+						getMoreCotizaciones();
 					}
 				}
 			});
@@ -578,35 +743,91 @@
 			$("#dOtraInformacion").on("click",function(){otraInformacion();});
 			$("#dContacto").on("click",function(){contacto();});
 			$("#bContactoCliente").on("click",function(){addContacto(false,0);});
-
-//////////////////////////////    Gastos    ////////////////////////////////////////
-			$("#bGastos").on("click",function(){populateAllGastos();});
+			//Gastos
+			$("#bGastos").on("click",function(){if(permisoGastos){populateAllGastos();}else{$.mobile.changePage( "#pPermisos", { role: "dialog" , transition:"slidedown" } );}});
 			$("#bInicioListaGastos").on("click",function(){setInicioListaGastos();});
-			$("#bAgregarGasto").on("click",function(){limpiarPantallaGastos(true);
-				insertarImpuestos("cbImpuestosGasto");});
+			$("#bAgregarGasto").on("click",function(){limpiarPantallaGastos(true);insertarImpuestos("cbImpuestosGasto");});
+/*			$('#lvGastos').onScrollBeyond(function() {
+			  if(EmpresaID > 0)
+				{	
+				alert('entro gastos');
+				}
+			});*/
+			
+			/*Calendario*/
+			var curr = new Date().getFullYear();
+            var opt = {
+		    }
+			opt.date = {preset : 'date'};
+			opt.datetime = { preset : 'datetime', minDate: new Date(2012,3,10,9,22), maxDate: new Date(2020,7,30,15,44), stepMinute: 5  };
+			opt.time = {preset : 'time'};
+			opt.select = {preset : 'select'};
+			var demo = $('#demo').val();
+			if (!($("#demo_"+demo).length))
+			demo = 'default';
+			$("#tbFechaGasto").val('').scroller('destroy').scroller($.extend(opt["date"], { theme: "jqm", mode: "scroller", display: "modal", lang: "es" }));
+        	$("#tbFechaFactura").val('').scroller('destroy').scroller($.extend(opt["date"], { theme: "jqm", mode: "scroller", display: "modal", lang: "es" }));
+			$("#tbFechaCotizacion").val('').scroller('destroy').scroller($.extend(opt["date"], { theme: "jqm", mode: "scroller", display: "modal", lang: "es" }));
 			$("#bGuardarGasto").on("click",function(){insertGasto();});
-
 		});
 			
-		/*popUp agregar Producto*/
-		$( "#pAgregarProducto" ).on({
-			popupbeforeposition: function() {
-				var h = $( window ).height();
-				var w = $( window ).width();
-				$( "#pAgregarProducto" ).css( "height", h );
-				$( "#pAgregarProducto" ).css( "width", w );
-			}
-		});
-
-		$("#pAgregarImpuestos").on({
-			popupbeforeposition: function() {
-				var h = $( window ).height();
-				var w = $( window ).width();
-				$( "#pAgregarImpuestos" ).css( "height", h );
-				$( "#pAgregarImpuestos" ).css( "width", w );
-			}
-		});
-		
+			/*popUp agregar Producto*/
+			$( "#pAgregarProductoFactura" ).on({
+				popupbeforeposition: function() {
+					var h = $( window ).height();
+					var w = $( window ).width();
+					$( "#pAgregarProductoFactura" ).css( "height", h );
+					$( "#pAgregarProductoFactura" ).css( "width", w );
+				}
+			});
+			$( "#pAgregarProductoCotizacion" ).on({
+				popupbeforeposition: function() {
+					var h = $( window ).height();
+					var w = $( window ).width();
+					$( "#pAgregarProductoCotizacion" ).css( "height", h );
+					$( "#pAgregarProductoCotizacion" ).css( "width", w );
+				}
+			});
+			$( "#pAgregarImpuestoCotizacion" ).on({
+				popupbeforeposition: function() {
+					var h = $( window ).height();
+					var w = $( window ).width();
+					$( "#pAgregarImpuestoCotizacion" ).css( "height", h );
+					$( "#pAgregarImpuestoCotizacion" ).css( "width", w );
+				}
+			});
+			
+			$("#pAgregarImpuestos").on({
+				popupbeforeposition: function() {
+					var h = $( window ).height();
+					var w = $( window ).width();
+					$( "#pAgregarImpuestos" ).css( "height", h );
+					$( "#pAgregarImpuestos" ).css( "width", w );
+				}
+			});
+			/*Text box numericos*/
+			//Acepta decimales y negativos
+			$(".numeric1").numeric();
+			//solo enteros y negativos
+			$(".numeric2").numeric({ decimal: false, negative: true },function(){});
+			//solo acepta enteros positivos
+			$(".numeric3").numeric({ decimal: false, negative: false },function(){});
+			
+			var dontBlock = false;
+			$(document).ajaxStart(function(){
+				if(!dontBlock)
+				{
+					$.blockUI({ message: '<h1>Espere por favor...</h1>',css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff' 
+					} });
+				}
+			}).ajaxStop($.unblockUI);
 		</script>
     </body>
 </html>

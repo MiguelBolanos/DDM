@@ -1,15 +1,52 @@
+input{
+	color: #808080;
+	font-family:"Helvetica",Arial;
+	font-size:16px;/*7.5pt;*/
+	padding:10px 0px 10px 0px;
+}
+select{
+	color: #808080;
+	font-family:"Helvetica",Arial;
+	font-size:16px;/*7.5pt;*/
+	padding:10px 0px 8px 0px;
+}
+
+
+.padding_izquierda{
+	padding-left:10px;
+}
+
+.padding_izquierda2{
+	padding-left:5px;
+}
+
+.padding_contenido{
+	padding: 15px 15px 15px 15px;
+}
+
+.combobox{
+	background: url('../imagenes/arrow-down.png');
+	background-position: right center;
+	background-repeat:no-repeat;
+}
+
+.date{
+	background: url('../imagenes/calendar.png');
+	background-position: right center;
+	background-repeat:no-repeat;
+}
 /*Header*/
 .barra_Header{
 	background: url('../imagenes/barra-header.png');
 	color:#fff;
-	height:75px;
+	height:55px;
 }
 
 .barra_Header_Listado{
 	/*background: url('../imagenes/barra-header.png');*/
 	background-color:#00294B;
 	color:#fff;
-	height:95px;
+	height:55px;
 	text-align:center;
 }
 
@@ -19,7 +56,7 @@
 	background-position:center;
 	background-repeat:no-repeat;
 	color:#fff;
-	height:95px;
+	height:55px;
 	text-align:center;
 }
 
@@ -29,7 +66,7 @@
 	background-position:center;
 	background-repeat:no-repeat;
 	color:#fff;
-	height:95px;
+	height:55px;
 	text-align:center;
 }
 
@@ -39,7 +76,17 @@
 	background-position:center;
 	background-repeat:no-repeat;
 	color:#fff;
-	height:95px;
+	height:55px;
+	text-align:center;
+}
+
+.header_cotizaciones{
+	background: url('../imagenes/barra-cotizaciones.png');
+	background-color:#00294B;
+	background-position:center;
+	background-repeat:no-repeat;
+	color:#fff;
+	height:55px;
 	text-align:center;
 }
 
@@ -48,8 +95,8 @@
 	background: url('../botones/b-ayuda.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 70px;
-    width: 70px;
+	height: 52px;
+    width: 52px;
 }
 .bAyuda:hover {
 	background: url('../botones/b-ayuda-over.png');
@@ -61,8 +108,8 @@
 	background-repeat:no-repeat;
 	display: inline-block;
 	float:right;
-	height: 70px;
-    width: 70px;
+	height: 52px;
+    width: 52px;
 }
 .bConfiguracion:hover {
 	background: url('../botones/b-configuracion-over.png');
@@ -74,8 +121,8 @@
 	background-repeat:no-repeat;
 	display: inline-block;
 	float:left;
-	height: 90px;
-    width: 90px;
+	height: 52px;
+    width: 52px;
 }
 .bInicio:hover {
 	background: url('../botones/b-inicio-over.png');
@@ -87,8 +134,8 @@
 	background-repeat:no-repeat;
 	display: inline-block;
 	float:right;
-	height: 90px;
-    width: 90px;
+	height: 52px;
+    width: 52px;
 }
 .bAgregar:hover {
 	background: url('../botones/b-mas-over.png');
@@ -99,8 +146,8 @@
 	background: url('../botones/b-eliminar.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 60px;
-    width: 130px;
+	height: 45px;
+    width: 97px;
 }
 .bEliminar:hover {
 	background: url('../botones/b-eliminar-over.png');
@@ -112,8 +159,8 @@
 	background-repeat:no-repeat;
 	/*display: inline-block;*/
 	float:right;
-	height: 90px;
-    width: 180px;
+	height: 52px;
+    width: 104px;
 }
 .bGuardar:hover {
 	background: url('../botones/b-guardar-over.png');
@@ -125,8 +172,8 @@
 	background-repeat:no-repeat;
 	/*display: inline-block;*/
 	float:right;
-	height: 90px;
-    width: 100px;
+	height: 52px;
+    width: 57px;
 }
 .bEditar:hover {
 	background: url('../botones/b-editar-over.png');
@@ -139,8 +186,8 @@
 	background-repeat:no-repeat;
 	display: inline-block;
 	float:left;
-	height: 90px;
-    width: 180px;
+	height: 52px;
+    width: 104px;
 }
 .bCancelar:hover {
 	background: url('../botones/b-cancelar-over.png');
@@ -156,8 +203,8 @@
 	background: url('../botones/b-acciones.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 90px;
-    width: 180px;
+	height: 67px;
+    width: 134px;
 }
 .bAcciones:hover {
 	background: url('../botones/b-acciones-over.png');
@@ -168,8 +215,8 @@
 	background: url('../botones/b-nuevafactura.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 75px;
-    width: 550px;
+	height: 52px;
+    width: 380px;
 }
 .bNuevaFactura:hover {
 	background: url('../botones/b-nuevafactura-over.png');
@@ -179,8 +226,8 @@
 	background: url('../botones/b-nuevacotizacion.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 75px;
-    width: 550px;
+	height: 52px;
+    width: 380px;
 }
 .bNuevaCotizacion:hover {
 	background: url('../botones/b-nuevacotizacion-over.png');
@@ -190,8 +237,8 @@
 	background: url('../botones/b-neliminarCliente.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 75px;
-    width: 550px;
+	height: 52px;
+    width: 380px;
 }
 .bEliminarCliente:hover {
 	background: url('../botones/b-neliminarCliente-over.png');
@@ -201,8 +248,8 @@
 	background: url('../botones/b-ncancelar.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 75px;
-    width: 550px;
+	height: 52px;
+    width: 380px;
 }
 .bCancelarAccion:hover {
 	background: url('../botones/b-ncancelar-over.png');
@@ -218,10 +265,10 @@
 	background: url('../botones/b-clientes.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 165px;
+	height: 123px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 170px;
+    width: 126px;
 }
 .bClientes:hover {
 	background: url('../botones/b-clientes-over.png');
@@ -231,10 +278,10 @@
 	background: url('../botones/b-facturacion.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 165px;
+	height: 123px;
 	margin-left: auto;
 	 margin-right: auto; 
-    width: 170px;
+    width: 126px;
 }
 .bFacturas:hover {
 	background: url('../botones/b-facturacion-over.png');
@@ -244,10 +291,10 @@
 	background: url('../botones/b-cotizaciones.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 165px;
+	height: 123px;
 	margin-left: auto;
 	 margin-right: auto; 
-    width: 170px;
+    width: 126px;
 }
 .bCotizacion:hover {
 	background: url('../botones/b-cotizaciones-over.png');
@@ -257,10 +304,10 @@
 	background: url('../botones/b-gastos.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 165px;
+	height: 123px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 170px;
+    width: 126px;
 }
 .bGastos:hover {
 	background: url('../botones/b-gastos-over.png');
@@ -270,13 +317,13 @@
 	background: url('../botones/boton-entrar.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 75px;
-	margin-left: auto;
-	margin-right: auto; 
-    width: 430px;
+	margin: 0 auto;
+	height: 52px;
+    width: 299px;
 }
 .bEntrar:hover {
 	background: url('../botones/boton-entrar-over.png');
+	background-repeat:no-repeat;
 }
 
 .bSucursal {
@@ -316,8 +363,8 @@
 	background: url('../botones/b-iguardar.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 90px;
-    width: 180px;
+	height: 67px;
+    width: 134px;
 }
 .bGuardarPiePagina:hover {
 	background: url('../botones/b-iguardar-over.png');
@@ -327,39 +374,41 @@
 	background: url('../botones/b-datosfiscales.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 75px;
+	height: 56px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 430px;
+    width: 322px;
 }
 .bDatosFiscales:hover {
 	background: url('../botones/b-datosfiscales-over.png');
+	background-repeat:no-repeat;
 }
 .bImpuestos {
 	background: url('../botones/b-impuestos.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 75px;
+	height: 56px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 430px;
+    width: 322px;
 }
 .bImpuestos:hover {
 	background: url('../botones/b-impuestos-over.png');
+	background-repeat:no-repeat;
 }
 /*Listados*/
 .listado1{
   color:#336699;
-  font:Arial;
-  font-family:Arial;
-  font-size:8pt;
+ /* font:Arial;*/
+  font-family:"Helvetica",Arial;
+  font-size:16px/*8pt*/;
  }
 
 .listado2{
   color:#808080;
-  font:Arial;
-  font-family:Arial;
-  font-size:6.5pt;
+  /*font:Arial;*/
+  font-family:"Helvetica",Arial;
+  font-size:14px;/*6.5pt*/;
  }
 
 
@@ -381,9 +430,11 @@ float:right;
 .texto_principal
 {
 	color:#336699;
-	font:Arial;
-	font-family:Arial;
-	font-size:8pt;
+	/*font:Arial;*/
+	font-family:"Helvetica",Arial;
+	font-size:16px;/*8pt*/
+	padding-left:6px;
+	padding-bottom:4px;
 }
 
 .texto_secundario
@@ -399,8 +450,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 8px; 
-	-webkit-border-radius: 8px;
+	-moz-border-radius: 12px; 
+	-webkit-border-radius: 12px;
 	 width:100%;
 }
 .campo2
@@ -408,8 +459,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 8px 0px 0px 0px; 
-	-webkit-border-radius: 8px 0px 0px 0px;
+	-moz-border-radius: 12px 0px 0px 0px; 
+	-webkit-border-radius: 12px 0px 0px 0px;
 	 width:100%;
 }
 .campo3
@@ -417,8 +468,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 0px 8px 0px 0px; 
-	-webkit-border-radius: 0px 8px 0px 0px;
+	-moz-border-radius: 0px 12px 0px 0px; 
+	-webkit-border-radius: 0px 12px 0px 0px;
 	 width:100%;
 }
 .campo4
@@ -426,8 +477,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 0px 0px 8px 0px; 
-	-webkit-border-radius: 0px 0px 8px 0px;
+	-moz-border-radius: 0px 0px 12px 0px; 
+	-webkit-border-radius: 0px 0px 12px 0px;
 	 width:100%;
 }
 .campo5
@@ -435,8 +486,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 0px 0px 0px 8px; 
-	-webkit-border-radius: 0px 0px 0px 8px;
+	-moz-border-radius: 0px 0px 0px 12px; 
+	-webkit-border-radius: 0px 0px 0px 12px;
 	 width:100%;
 }
 .campo6
@@ -444,8 +495,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 8px 0px 0px 8px; 
-	-webkit-border-radius: 8px 0px 0px 8px;
+	-moz-border-radius: 12px 0px 0px 12px; 
+	-webkit-border-radius: 12px 0px 0px 12px;
 	 width:100%;
 }
 .campo7
@@ -453,8 +504,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 0px 8px 8px 0px; 
-	-webkit-border-radius: 0px 8px 8px 0px;
+	-moz-border-radius: 0px 12px 12px 0px; 
+	-webkit-border-radius: 0px 12px 12px 0px;
 	 width:100%;
 }
 .campo8
@@ -469,8 +520,8 @@ float:right;
 	 border: 1px solid #BDC2C9;
 	 border-collapse:collapse;
 	 height:100%;
-	-moz-border-radius: 8px 8px 0px 0px; 
-	-webkit-border-radius: 8px 8px 0px 0px;
+	-moz-border-radius: 12px 12px 0px 0px; 
+	-webkit-border-radius: 12px 12px 0px 0px;
 	 width:100%;
 }
 .campo10
@@ -478,10 +529,30 @@ float:right;
 	border: 1px solid #BDC2C9;
 	border-collapse:collapse;
 	height:100%;
-   -moz-border-radius: 0px 0px 8px 8px; 
-   -webkit-border-radius: 0px 0px 8px 8px;
+   -moz-border-radius: 0px 0px 12px 12px; 
+   -webkit-border-radius: 0px 0px 12px 12px;
     width:100%;
 }
+.campo11
+{
+	 border: 1px solid #BDC2C9;
+	 border-collapse:collapse;
+	 height:100%;
+	-moz-border-radius: 25px 25px 0px 0px; 
+	-webkit-border-radius: 25px 25px 0px 0px;
+	 width:100%;
+}
+.campo12
+{
+	border: 1px solid #BDC2C9;
+	border-collapse:collapse;
+	height:100%;
+   -moz-border-radius: 0px 0px 25px 25px; 
+   -webkit-border-radius: 0px 0px 25px 25px;
+    width:100%;
+}
+
+
 .div1{
 	 display:block-inline;
 	 width:50%;
@@ -564,6 +635,28 @@ float:right;
 	 display:block-inline;
 	 width:67%;
 }
+.div21{
+	 display:block-inline;
+	 width:60%;
+}
+.div22{
+	display:block-inline;
+	width:20%;
+}
+.div23{
+	display:block-inline;
+	width:15%;
+}
+
+.div_boton1{
+	display:block-inline;
+	width:45px;
+}
+.div_impuesto{
+	display:block-inline;
+	width:420px;
+}
+
 .divSucursal{
 	border: 1px solid #BDC2C9;
 	border-collapse:collapse;
@@ -591,6 +684,10 @@ float:right;
 .espacio2{
 	height:15px
 }
+.espacio3{
+	height:30px
+}
+
 .limpiar{
 	clear:both;
 }
@@ -624,9 +721,10 @@ float:right;
 .div_total{
 	background-color:#65C9EF;
 	color:#fff;
-	font:Arial;
-	font-family:Arial;
-	font-size:12pt;
+	/*font:Arial;*/
+	font-family:"Helvetica",Arial;
+	font-size:20px;/*12pt*/;
+	font-weight:bold;
 	height:155px;
 	line-height:155px;
 	text-align:center;
@@ -673,19 +771,16 @@ float:right;
 	background: url('../imagenes/logo-login.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 200px;
-	margin-left: auto;
-	margin-right: auto; 
-    width: 525px;
+	height: 145px;
+	margin: 0 auto;
+	width: 380px;
 }
 
 .olvide_pass{
 	color:#0000FF;
-	font:Arial;
-	font-family:Arial;
-	font-size:7.5pt;
-	margin-left: auto;
-	margin-right: auto; 
+	/*font:Arial;*/
+	font-family:"Helvetica",Arial;
+	font-size:16px;/*7.5pt;*/
 	text-decoration:underline;
 }
 
@@ -752,14 +847,30 @@ float:right;
 .cabecera_seccion_down
 {
 	background: url('../imagenes/arrow-down.png');
-	background-color:#8DD7F9;
+	background-color:#8BD5F9;
 	background-position: right center;
 	background-repeat:no-repeat;
 	color:#406699;
-	padding:3px 0px 3px 10px;
+	padding:10px 0px 10px 10px;
 	text-align:left;
 }
+.cabecera_seccion_down2
+{
+	background: url('../imagenes/arrow-down.png');
+	background-color:#97CAEF;
+	background-position: right center;
+	background-repeat:no-repeat;
+	color:#406699;
+	padding:10px 0px 10px 10px;
+	text-align:left;
+}
+
 .cabecera_seccion_down:hover
+{
+	background-color:#C1E9FB;
+	color:#406699;
+}
+.cabecera_seccion_down2:hover
 {
 	background-color:#C1E9FB;
 	color:#406699;
@@ -771,7 +882,7 @@ float:right;
 	background-position: right center;
 	background-repeat:no-repeat;
 	color:#406699;
-	padding:3px 0px 3px 10px;
+	padding:10px 0px 10px 10px;
 	text-align:left;
 }
 .cabecera_seccion_up:hover
@@ -787,20 +898,22 @@ float:right;
 
 .error{
 	color:#FF0000;
-	font:Arial;
-	font-family:Arial;
-	font-size:7.5pt;
+	/*font:Arial;*/
+	font-family:"Helvetica",Arial;
+	font-size:16px;/*7.5pt*/
 	font-style:italic;
 }
 
 .barra_azul{
 	background: url('../imagenes/barra.png');
 	color:#fff;
-	font:Arial;
-	font-family:Arial;
+	/*font:Arial;*/
+	font-family:"Helvetica",Arial;
+	font-size:16px;
+	font-weight:bold;
 	height:60px;
 	line-height:60px;
-	padding-left:20px;
+	padding-left:10px;
 }
 
 .div_add_impuesto{
@@ -860,9 +973,9 @@ float:right;
 	background: url('../botones/b-guardarfactura.png');
 	background-repeat:no-repeat;
 	display: inline-block;
-	height: 90px;
+	height: 67px;
 	margin:0px auto;
-    width: 310px;
+    width: 230px;
 }
 .bGuardarFactura:hover {
 	background: url('../botones/b-guardarfactura-over.png');
@@ -873,10 +986,10 @@ float:right;
 	background: url('../botones/b-generar-factura.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 90px;
+	height: 67px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 310px;
+    width: 230px;
 }
 .bGenerarFactura:hover {
 	background: url('../botones/b-generar-factura-over.png');
@@ -887,10 +1000,10 @@ float:right;
 	background: url('../botones/b-agregar.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 70px;
+	height: 52px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 200px;
+    width: 148px;
 }
 .bAgregarPopUp:hover {
 	background: url('../botones/b-agregar-over.png');
@@ -900,10 +1013,10 @@ float:right;
 	background: url('../botones/b-cancelarn.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 70px;
+	height: 52px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 200px;
+    width: 148px;
 }
 .bCancelarPopUp:hover {
 	background: url('../botones/b-cancelarn-over.png');
@@ -922,7 +1035,7 @@ float:right;
 
 .popUpBotones{
 	background-color:#CECECE;
-	height:80px;
+	height:55px;
 	line-height:80px;
 	padding-top:5px;
 	width:100%;
@@ -933,4 +1046,82 @@ float:right;
 	font:Arial;
 	font-size:8.5pt;
 	margin-left:10px;
+}
+
+.cargando{
+	background: url('../imagenes/ajax-loader.gif');
+	background-position: center center;
+	background-repeat:no-repeat;
+	height:32px;
+	left:50%;
+	margin-left:-16px;
+	margin-top:-16px;
+	position:absolute;
+	top:50%;
+	width:32px;
+}
+
+.pantalla_error{
+	background: url('../imagenes/error.png');
+	background-position: left center;
+	background-repeat:no-repeat;
+	height:50px;
+	padding-left:60px;
+	padding-top:25px;
+}
+
+.pantalla_warning{
+	background: url('../imagenes/error.png');
+	background-position: left center;
+	background-repeat:no-repeat;
+	height:50px;
+	padding-left:60px;
+	padding-top:25px;
+}
+
+.pantalla_permisos{
+	background: url('../imagenes/lock.png');
+	background-position: left center;
+	background-repeat:no-repeat;
+	height:50px;
+	padding-left:60px;
+	padding-top:25px;
+}
+
+/*cotizacion*/
+#ulProductosCotizacion 
+{ 
+	display: inline-block;
+    padding: 0;
+	width:   100%;
+}
+
+#ulProductosCotizacion li 
+{ 
+	list-style: none;
+}
+
+#ulImpuestosCotizacion 
+{ 
+	display: inline-block;
+    padding: 0;
+	width:   100%;
+}
+
+#ulImpuestosCotizacion li 
+{ 
+	list-style: none;
+}
+
+.bEnviar {
+	background: url('../botones/b-enviar.png');
+	background-repeat:no-repeat;
+	display: inline-block;
+	height: 52px;
+	margin:0px auto;
+    width: 179px;
+}
+.bEnviar:hover {
+	background: url('../botones/b-enviar-over.png');
+	background-repeat:no-repeat;
 }
