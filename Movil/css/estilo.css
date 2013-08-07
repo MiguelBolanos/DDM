@@ -1113,6 +1113,18 @@ float:right;
 	list-style: none;
 }
 
+#ulImpuestosFactura
+{ 
+	display: inline-block;
+    padding: 0;
+	width:   100%;
+}
+
+#ulImpuestosFactura li 
+{ 
+	list-style: none;
+}
+
 .bEnviar {
 	background: url('../botones/b-enviar.png');
 	background-repeat:no-repeat;

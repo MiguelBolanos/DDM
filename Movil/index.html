@@ -347,7 +347,7 @@
 				<div class="barra_Header_Listado">
 					<div>
 						<a class="bCancelar" href="#pMenu"></a>
-						<a class="bGuardar" href="#"></a>
+						<a class="bGuardar" href="#" id="bGuardarFactura"></a>
 					</div>
 				</div>
 				<div data-role="content">
@@ -389,22 +389,22 @@
 				<div class="div9 izquierda"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidadFactura"></input></div>
 				<div class="div8 izquierda"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecioFactura"></input></div>
 				<div class="div1 izquierda"><input type="text" name="Importe" value="" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporteFactura"></input></div>
-				<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosFactura"></input></div>
+				<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosFactura" onclick="populateImpuestosPopUp(1,-1)"></input></div>
 				<div class="espacio2 limpiar"></div>
 				<ul id="ulProductosFactura">
 				</ul>
-				<div class="div1 izquierda"><input type="text" name="tbNotaOpcional" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
-				<div class="div1 izquierda"><input type="text" name="tbTerminos" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbNotaOpcionalFactura" id="tbNotaOpcionalFactura" value="" placeholder=" Nota opcional" data-role="none" class="campo6"></input></div>
+				<div class="div1 izquierda"><input type="text" name="tbTerminosFactura" id="tbTerminosFactura" value="" placeholder=" Terminos" data-role="none" class="campo7"></input></div>
 				<div class="espacio2 limpiar"></div>	
-				<div id="dSubTotalFactura" class="divSubTotales"><div class="div11 izquierda">Subtotal</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divSubTotalFactura">$ 0.00</div></div>
-				<div id="dDescuentoFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Descuentos</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divDescuentoFactura">$ 0.00</div></div>
-				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
-				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">IEPS</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
-				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de IVA</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
-				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Retenciones de ISR</div><div class="div10 izquierda texto_derecha bordeSuperior">$ 0.00</div></div>
-				<div id="dOtrasRetencionesFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Otras Retenciones</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divOtrasRetencionesFactura">$0.00</div></div>
-				<div id="dOtrosTrasladosFactura" class="NoVisible divSubTotales"><div class="div11 izquierda">Otros Traslados</div><div class="div10 izquierda texto_derecha bordeSuperior" id="divOtrosTrasladosFactura">$0.00</div></div>
-				<div id="dTotalFactura" class="divTotales"><div class="div11 izquierda">total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalFactura">$ 0.00</div></div>
+				<div id="dSubTotalFactura" class="divSubTotales"><div class="div1 izquierda">Subtotal</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divSubTotalFactura">$ 0.00</div></div>
+				<div id="dDescuentoFactura" class="NoVisible divSubTotales"><div class="div1 izquierda">Descuentos</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divDescuentoFactura">$ 0.00</div></div>
+				<div id="dIVAFactura" class="NoVisible divSubTotales"><div class="div1 izquierda">IVA</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divIVAFactura">$ 0.00</div></div>
+				<div id="dIEPSFactura" class="NoVisible divSubTotales"><div class="div1 izquierda">IEPS</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divIEPSFactura">$ 0.00</div></div>
+				<div id="dRetencionIVAFactura" class="NoVisible divSubTotales"><div class="div1 izquierda">Retenciones de IVA</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divRetencionIVAFactura">$ 0.00</div></div>
+				<div id="dRetencionISRFactura" class="NoVisible divSubTotales"><div class="div1 izquierda">Retenciones de ISR</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divRetencionISRFactura">$ 0.00</div></div>
+				<div id="dOtrasRetencionesFactura" class="NoVisible divSubTotales"><div class="div1 izquierda">Otras Retenciones</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divOtrasRetencionesFactura">$0.00</div></div>
+				<div id="dOtrosTrasladosFactura" class="NoVisible divSubTotales"><div class="div1 izquierda">Otros Traslados</div><div class="div1 izquierda texto_derecha bordeSuperior" id="divOtrosTrasladosFactura">$0.00</div></div>
+				<div id="dTotalFactura" class="divTotales"><div class="div1 izquierda">total</div><div class="div1 izquierda texto_derecha divTotal" id="divTotalFactura">$ 0.00</div></div>
 				<div class="espacio2 limpiar"></div>	
 				<div class="div3">
 					<select class="campo1 " data-role="none" id="cbFormaPagoFactura">
@@ -434,8 +434,8 @@
 				</div>
 				<div class="div6 izquierda"><input type="text" name="tbNoCuentaFactura" value="" placeholder=" No. cuenta" data-role="none" class="campo1" id="tbNoCuentaFactura" readonly></input></div>
 				<div class="espacio2 limpiar"></div>
-				<div class="div1 izquierda texto_centro"><a class="bGuardarFactura" href="#"></a></div>
-				<div class="div1 izquierda texto_centro"><a class="bGenerarFactura" href="#"></a></div>
+				<!--<div class="div1 izquierda texto_centro"><a class="bGuardarFactura" href="#"></a></div>-->
+				<div class="div1 texto_centro div_centro"><a class="bGenerarFactura" href="#" id="bGenerarFactura"></a></div>
 					<div data-role="popup" id="pAgregarProductoFactura" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
 						<div class="popUpContenido">
 							<div class="popUpBotones">
@@ -453,7 +453,7 @@
 							</div>
 						</div>
 					</div>
-					<div data-role="popup" id="pAgregarImpuestos" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
+					<div data-role="popup" id="pAgregarImpuestoFactura" data-corners="false" data-theme="none" data-shadow="false" data-overlay-theme="a" data-tolerance="0,0" data-position-to="window" data-transition="slideup">
 						<div class="popUpContenido">
 							<div class="popUpBotones">
 								<div class="div1 izquierda"><a href="#" class="bAgregarPopUp" id="bAgregarImpuestosFactura"></a></div>
@@ -462,10 +462,13 @@
 							<div class="popUpCampos">
 								<div class="div3"><span class="popUpTexto">Impuestos</span></div>
 								<div class="espacio2 limpiar"></div>
-								<div data-role="fieldcontain">
-  									<fieldset data-role="controlgroup" id="lvImpuestosFactura">
-  									</fieldset>
-  								</div>
+								<!--<div data-role="fieldcontain">
+									<fieldset data-role="controlgroup" id="lvImpuestosFactura">
+									</fieldset>
+								</div>-->
+								<ul id="ulImpuestosFactura">
+									<li><input type="checkbox" id="chkImpuesto" value="" data-role="none"/><label for = "chkImpuesto">Impuesto</label></li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -559,7 +562,7 @@
 				<div id="dRetencionIVACotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Retenciones de IVA</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divRetencionIVACotizacion">$ 0.00</div></div>
 				<div id="dRetencionISRCotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Retenciones de ISR</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divRetencionISRCotizacion">$ 0.00</div></div>
 				<div id="dOtrasRetencionesCotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Otras Retenciones</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divOtrasRetencionesCotizacion">$ 0.00</div></div>
-				<div id="dOtrosTransladosCotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Otros Translados</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divOtrosTransladosCotizacion">$ 0.00</div></div>
+				<div id="dOtrosTrasladosCotizacion" class="NoVisible divSubTotales"><div class="div18 izquierda">Otros Traslados</div><div class="div17 izquierda texto_derecha bordeSuperior" id="divOtrosTrasladosCotizacion">$ 0.00</div></div>
 				<div id="dTotalCotizacion" class="divTotales"><div class="div11 izquierda">total</div><div class="div10 izquierda texto_derecha divTotal" id="divTotalCotizacion">$ 0.00</div></div>
 				<div class="espacio2 limpiar"></div>
 				<div class="div3 izquierda texto_centro"><a class="bEnviar" href="#" id="bEnviarCotizacion"></a></div>
@@ -591,6 +594,10 @@
 						<div class="popUpCampos">
 							<div class="div3"><span class="popUpTexto">Impuestos</span></div>
 							<div class="espacio2 limpiar"></div>
+							<!--<div data-role="fieldcontain">
+								<fieldset data-role="controlgroup" id="lvImpuestosCotizacion">
+								</fieldset>
+							</div>-->
 							<ul id="ulImpuestosCotizacion">
 								<li><input type="checkbox" id="chkImpuesto" value="" data-role="none"/><label for = "chkImpuesto">Impuesto</label></li>
 							</ul>
@@ -686,8 +693,9 @@
 			$("#bGuardarFactura").on("click",function(){insertFactura(5);});
 			$("#bGenerarFactura").on("click",function(){insertFactura(1);});
 			$("#bEditarResumenFactura").on("click",function(){populateFactura(true);});
-			$("#tbImpuestosFactura").on("focus",function(){$("#pAgregarImpuestos").popup("open");});
-			$("#bCancelarImpuestosFactura").on("click",function(){$("#pAgregarImpuestos").popup("close");});
+			$("#tbImpuestosFactura").on("focus",function(){populateImpuestosPopUp(1,-1);});
+			$("#bAgregarImpuestosFactura").on("click",function(){addImpuestos(1);});
+			$("#bCancelarImpuestosFactura").on("click",function(){$("#pAgregarImpuestoFactura").popup("close");});
 			//Cotizaciones
 			$("#bCotizaciones").on("click",function(){populateAllCotizaciones();});
 			$("#bAgregarCotizacion").on("click",function(){populateCotizacion();});
@@ -797,12 +805,12 @@
 				}
 			});
 			
-			$("#pAgregarImpuestos").on({
+			$("#pAgregarImpuestoFactura").on({
 				popupbeforeposition: function() {
 					var h = $( window ).height();
 					var w = $( window ).width();
-					$( "#pAgregarImpuestos" ).css( "height", h );
-					$( "#pAgregarImpuestos" ).css( "width", w );
+					$( "#pAgregarImpuestoFactura" ).css( "height", h );
+					$( "#pAgregarImpuestoFactura" ).css( "width", w );
 				}
 			});
 			/*Text box numericos*/
