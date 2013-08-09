@@ -31,6 +31,8 @@ var obtenerIDImpuesto = 0;
 /*Permisos*/
 var permisoCliente = false, permisoAdmonFactura = false, permisoGastos = false, permisoReportes = false;
 var permisoConfiguracion = false, permisoGenerarFactura = false, permisoCancelarFactura = false, permisoVDEFacturas = false, permisoAbonarFactura = false;
+/*Preferencias*/
+var numDecimales = 2;
 /*Login*/
 function autentifica() {
 	var usuario = $("#tbUsuario").val();
@@ -59,6 +61,7 @@ function autentifica() {
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					EmpresaID = obj.EmpresaID;
@@ -161,6 +164,7 @@ function recuperarContrasena(pLogin) {
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "false") {
 					alert("A ocuurido un error, por favor verifique su conexion a internet.");
@@ -204,6 +208,7 @@ function populateMonedas() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				JSonMonedas = obj.Monedas;
@@ -242,6 +247,7 @@ function populateProductos() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				JSonProductos = obj.Productos;
@@ -306,6 +312,7 @@ function populateConfiguracion() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				JSonSucursales = obj.Sucursales
@@ -485,6 +492,7 @@ function updateConfiguracion() {
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					$.mobile.changePage("#pMenu");
@@ -533,6 +541,7 @@ function populateImpuestos() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				JSonTiposImpuestos = obj.TiposImpuestos;
@@ -543,7 +552,7 @@ function populateImpuestos() {
 					html = html + '<div class="div_impuesto izquierda"><input type="text" name="tbImpuesto" value="' + value.Nombre + '" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto' + contadorImpuestos + '"></input></div>';
 					html = html + '<div class="div11 izquierda padding_izquierda2"><a class="bEliminar" href="" id="bEliminarImpuesto' + contadorImpuestos + '" onclick="eliminarImpuesto(' + contadorImpuestos + ')"></a></div>';
 					html = html + '<div id="divDetalleImpuestos' + contadorImpuestos + '" class="Visible">';
-					html = html + '<div class="div1 izquierda"><input type="text" name="tbTasa" value="' + value.Tasa + '" placeholder=" Tasa" data-role="none" class="campo6" id="tbTasa' + contadorImpuestos + '"></input></div>';
+					html = html + '<div class="div13 izquierda limpiar"><input type="text" name="tbTasa" value="' + value.Tasa + '" placeholder=" Tasa" data-role="none" class="campo6 numeric1" id="tbTasa' + contadorImpuestos + '"></input></div>';
 					html = html + '<div class="div1 izquierda">';
 					html = html + '<select class="campo7 combobox" data-role="none" id="cbTipoPago' + contadorImpuestos + '">';
 					html = html + '<option value="" selected="selected">Tipo de impuesto</option>';
@@ -563,6 +572,7 @@ function populateImpuestos() {
 					html = '<option value="' + value.TipoImpuestoID + '">' + value.Nombre + '</option>'
 						$("#cbTipoPago").append(html);
 				});
+				tabNumerico();
 				$.mobile.changePage("#pImpuestos");
 			} else
 				alert("A ocuurido un error, por favor verifique su conexion a internet.");
@@ -604,7 +614,7 @@ function addImpuesto() {
 				html = html + '<div class="div_impuesto izquierda"><input type="text" name="tbImpuesto" value="' + impuesto + '" placeholder=" Impuesto" data-role="none" class="campo1" id="tbImpuesto' + contadorImpuestos + '"></input></div>';
 				html = html + '<div class="div11 izquierda padding_izquierda2"><a class="bEliminar" href="" id="bEliminarImpuesto' + contadorImpuestos + '" onclick="eliminarImpuesto(' + contadorImpuestos + ')"></a></div>';
 				html = html + '<div id="divDetalleImpuestos' + contadorImpuestos + '" class="Visible">';
-				html = html + '<div class="div1 izquierda"><input type="text" name="tbTasa" value="' + tasa + '" placeholder=" Tasa" data-role="none" class="campo6" id="tbTasa' + contadorImpuestos + '"></input></div>';
+				html = html + '<div class="div1 izquierda limpiar"><input type="text" name="tbTasa" value="' + tasa + '" placeholder=" Tasa" data-role="none" class="campo6 numeric1" id="tbTasa' + contadorImpuestos + '"></input></div>';
 				html = html + '<div class="div1 izquierda">';
 				html = html + '<select class="campo7 combobox" data-role="none" id="cbTipoPago' + contadorImpuestos + '">';
 				html = html + '<option value="" selected="selected">Tipo de impuesto</option>';
@@ -624,6 +634,7 @@ function addImpuesto() {
 				$("#tbTasa").val("");
 				$("#cbTipoPago").val("");
 			}
+			tabNumerico();
 }
 
 function closeImpuesto(row) {
@@ -711,6 +722,7 @@ function insertImpuestos() {
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					$.mobile.changePage("#pMenu");
@@ -768,6 +780,7 @@ function populateFactura(edicion) {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.each(obj.Clientes, function (index, value) {
@@ -824,6 +837,7 @@ function populateFactura(edicion) {
 			contentType : 'text/xml;charset=utf-8',
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					$("#cbClienteFactura").val(obj.ClienteID);
@@ -897,11 +911,11 @@ function populateFactura(edicion) {
 						html = html + '<div class="espacio1 limpiar"></div>';
 						html = html + '<div id="contenidoProducto' + contadorProductos + '" class="Visible" >';
 						html = html + '<div class="div3"><input type="text" name="tbDescripcion" value="" placeholder=" Descripcion" data-role="none" class="campo9" id="tbDescripcionFactura' + contadorProductos + '"></input></div>';
-						html = html + '<div class="div8 izquierda"><input type="text" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo8" id="tbCantidadFactura' + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ')"></input></div>';
+						html = html + '<div class="div8 izquierda"><input type="number" name="tbCantidad" value="" placeholder=" Cantidad" data-role="none" class="campo8" id="tbCantidadFactura' + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ')"></input></div>';
 						html = html + '<div class="div9 izquierda"><input type="text" name="tbUnidad" value="" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidadFactura' + contadorProductos + '"></input></div>';
-						html = html + '<div class="div8 izquierda"><input type="text" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecioFactura' + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ')"></input></div>';
-						html = html + '<div class="div1 izquierda"><input type="text" name="Importe" value="" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporteFactura' + contadorProductos + '"></input></div>';
-						html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosFactura' + contadorProductos + '"></input></div>';
+						html = html + '<div class="div8 izquierda"><input type="number" name="Precio" value="" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecioFactura' + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ')"></input></div>';
+						html = html + '<div class="div1 izquierda"><input type="number" name="Importe" value="" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporteFactura' + contadorProductos + '"></input></div>';
+						html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestosFactura' + contadorProductos + '" readonly></input></div>';
 						html = html + '</div>';
 						html = html + '</li>';
 
@@ -952,6 +966,7 @@ function populateAllFacturas() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.mobile.changePage("#pListaFacturas");
@@ -959,7 +974,7 @@ function populateAllFacturas() {
 					html = '<li>';
 					html = html + '<a href="#" onclick="populateResumenFactura(' + value.FacturaID + ')">';
 					html = html + '<div class="div1 izquierda">';
-					html = html + '<div class="listado1">' + value.NombreCliente + '...</div>';
+					html = html + '<div class="listado1">' + value.NombreCliente.substring(0, 20) + '...</div>';
 					html = html + '<div class="listado2">' + value.Fecha + '</div>';
 					html = html + '</div>';
 					html = html + '<div class="div1 izquierda texto_derecha">';
@@ -1011,13 +1026,14 @@ function getMoreFacturas() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.each(obj.Facturas, function (index, value) {
 					html = '<li>';
 					html = html + '<a href="#">';
 					html = html + '<div class="div1 izquierda">';
-					html = html + '<div class="listado1">' + value.NombreCliente + '...</div>';
+					html = html + '<div class="listado1">' + value.NombreCliente.substring(0, 20) + '...</div>';
 					html = html + '<div class="listado2">' + value.Fecha + '</div>';
 					html = html + '</div>';
 					html = html + '<div class="div1 izquierda texto_derecha">';
@@ -1122,6 +1138,7 @@ function insertFactura(status)
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					$("#lvFacturas li").remove();
@@ -1263,6 +1280,7 @@ function populateResumenFactura(facturaID) {
 		contentType : 'text/xml;charset=utf-8',
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$("#StatusResumenFactura").text(obj.Status);
@@ -1333,6 +1351,7 @@ function addProductos(op) {
 						if (importe == "") {
 							alert("Favor de capturar importe");
 							$("#tbImporte" + opcion).focus();
+							$("#tbImporte" + opcion).focus();
 						} else {
 							contadorProductos++;
 							var html;
@@ -1340,7 +1359,7 @@ function addProductos(op) {
 							html = html + '<div class="espacio1 limpiar"></div>';
 							html = html + '<div class="div_boton1 izquierda"><a class="bQuitar" href="" id="bQuitarProducto' + opcion + contadorProductos + '" onclick="closeProducto(' + contadorProductos + ',' + op + ')"></a></div>';
 							html = html + '<div class="div_impuesto izquierda">';
-							html = html + '<select class="campo1 " data-role="none" id="cbArticulo' + opcion + contadorProductos + '">';
+							html = html + '<select class="campo1 combobox" data-role="none" id="cbArticulo' + opcion + contadorProductos + '">';
 							$.each(JSonProductos, function (index, value) {
 								html = html + '<option value=' + value.Empresa_Catalogo_ProductosID + '>' + value.NoIdentificacion + '</option>';
 							});
@@ -1350,11 +1369,11 @@ function addProductos(op) {
 							html = html + '<div class="espacio1 limpiar"></div>';
 							html = html + '<div id="contenidoProducto' + opcion + contadorProductos + '" class="Visible" >';
 							html = html + '<div class="div3"><input type="text" name="tbDescripcion" value="' + descripcion + '" placeholder=" Descripcion" data-role="none" class="campo9" id="tbDescripcion' + opcion + contadorProductos + '"></input></div>';
-							html = html + '<div class="div8 izquierda"><input type="text" name="tbCantidad" value="' + cantidad + '" placeholder=" Cantidad" data-role="none" class="campo8" id="tbCantidad' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
+							html = html + '<div class="div8 izquierda"><input type="text" name="tbCantidad" value="' + cantidad + '" placeholder=" Cantidad" data-role="none" class="campo8 numeric2" id="tbCantidad' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
 							html = html + '<div class="div9 izquierda"><input type="text" name="tbUnidad" value="' + unidad + '" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidad' + opcion + contadorProductos + '"></input></div>';
-							html = html + '<div class="div8 izquierda"><input type="text" name="Precio" value="' + precio + '" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecio' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
-							html = html + '<div class="div1 izquierda"><input type="text" name="Importe" value="' + importe + '" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporte' + opcion + contadorProductos + '"></input></div>';
-							html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestos' + opcion + contadorProductos + '" onClick="populateImpuestosPopUp(' + op + ',' + contadorProductos + ')"></input></div>';
+							html = html + '<div class="div8 izquierda"><input type="text" name="Precio" value="' + precio + '" placeholder=" Precio" data-role="none" class="campo8 numeric1" id="tbPrecio' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
+							html = html + '<div class="div1 izquierda"><input type="text" name="Importe" value="' + importe + '" placeholder=" Importe" data-role="none" class="campo5 importe_azul numeric1" id="tbImporte' + opcion + contadorProductos + '"></input></div>';
+							html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestos' + opcion + contadorProductos + '" onClick="populateImpuestosPopUp(' + op + ',' + contadorProductos + ')"  readonly></input></div>';
 							html = html + '<div class="div3 izquierda NoVisible"><input type="text" name="ID" value="0" placeholder=" Impuestos" data-role="none" class="campo4" id="tbID' + opcion + contadorProductos + '"></input></div>';
 							html = html + '</div>';
 							html = html + '</li>';
@@ -1377,7 +1396,8 @@ function addProductos(op) {
 							$("#tbPrecio" + opcion).val("");
 							$("#tbImporte" + opcion).val("");
 						}
-}
+		tabNumerico();
+	}
 
 function closeProducto(row, op) {
 	var opcion;
@@ -1748,6 +1768,7 @@ function saveNuevoProducto(op) {
 						data : soap,
 						success : function (xml) {
 							var r = $(xml).text();
+							r = r.replace(/\|amp;/g,"&");
 							var obj = jQuery.parseJSON(r);
 							if (obj.Validacion == "true") {
 								if (obj.Estatus == "1") {
@@ -1797,6 +1818,7 @@ function populateAllCotizaciones() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.mobile.changePage("#pListaCotizaciones");
@@ -1804,7 +1826,7 @@ function populateAllCotizaciones() {
 					html = '<li>';
 					html = html + '<a href="#" onclick="getCotizacion(' + value.CotizacionID + ')">';
 					html = html + '<div class="div1 izquierda">';
-					html = html + '<div class="listado1">' + value.NombreCliente + '...</div>';
+					html = html + '<div class="listado1">' + value.NombreCliente.substring(0, 20) + '...</div>';
 					html = html + '<div class="listado2">' + value.Fecha + '</div>';
 					html = html + '</div>';
 					html = html + '<div class="div1 izquierda texto_derecha">';
@@ -1855,17 +1877,18 @@ function getMoreCotizaciones() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.each(obj.Cotizaciones, function (index, value) {
 					html = '<li>';
 					html = html + '<a href="#" onclick="getCotizacion(' + value.CotizacionID + ')">';
 					html = html + '<div class="div1 izquierda">';
-					html = html + '<div class="listado1">' + value.NombreCliente + '...</div>';
+					html = html + '<div class="listado1">' + value.NombreCliente.substring(0, 20) + '...</div>';
 					html = html + '<div class="listado2">' + value.Fecha + '</div>';
 					html = html + '</div>';
 					html = html + '<div class="div1 izquierda texto_derecha">';
-					html = html + '<div class="listado1">$ ' + value.Total + '</div>';
+					html = html + '<div class="listado1">$ ' + Number(value.Total).toFixed(numDecimales) + '</div>';
 					html = html + '<div class="listado2">' + value.Estatus + '</div>';
 					html = html + '</div>';
 					html = html + '</a>';
@@ -1911,6 +1934,7 @@ function populateCotizacion() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.each(obj.Clientes, function (index, value) {
@@ -2013,6 +2037,7 @@ function getCotizacion(pCotizacionID) {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				CotizacionID = obj.CotizacionID;
@@ -2040,11 +2065,11 @@ function getCotizacion(pCotizacionID) {
 					html = html + '<div class="espacio1 limpiar"></div>';
 					html = html + '<div id="contenidoProducto' + opcion + contadorProductos + '" class="Visible" >';
 					html = html + '<div class="div3"><input type="text" name="tbDescripcion" value="' + value.Descripcion + '" placeholder=" Descripcion" data-role="none" class="campo9" id="tbDescripcion' + opcion + contadorProductos + '"></input></div>';
-					html = html + '<div class="div8 izquierda"><input type="text" name="tbCantidad" value="' + value.Cantidad + '" placeholder=" Cantidad" data-role="none" class="campo8" id="tbCantidad' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
+					html = html + '<div class="div8 izquierda"><input type="text" name="tbCantidad" value="' + value.Cantidad + '" placeholder=" Cantidad" data-role="none" class="campo8 numeric2" id="tbCantidad' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
 					html = html + '<div class="div9 izquierda"><input type="text" name="tbUnidad" value="' + value.Unidad + '" placeholder=" Unidad" data-role="none" class="campo8" id="tbUnidad' + opcion + contadorProductos + '"></input></div>';
-					html = html + '<div class="div8 izquierda"><input type="text" name="Precio" value="' + value.Precio + '" placeholder=" Precio" data-role="none" class="campo8" id="tbPrecio' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
-					html = html + '<div class="div1 izquierda"><input type="text" name="Importe" value="' + (value.Cantidad * value.Precio) + '" placeholder=" Importe" data-role="none" class="campo5 importe_azul" id="tbImporte' + opcion + contadorProductos + '"></input></div>';
-					html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestos' + opcion + contadorProductos + '" onClick="populateImpuestosPopUp(2,' + contadorProductos + ')"></input></div>';
+					html = html + '<div class="div8 izquierda"><input type="text" name="Precio" value="' + value.Precio + '" placeholder=" Precio" data-role="none" class="campo8 numeric1" id="tbPrecio' + opcion + contadorProductos + '" onChange="calculaImporte2(' + contadorProductos + ',' + op + ')"></input></div>';
+					html = html + '<div class="div1 izquierda"><input type="text" name="Importe" value="' + (value.Cantidad * value.Precio) + '" placeholder=" Importe" data-role="none" class="campo5 importe_azul numeric1" id="tbImporte' + opcion + contadorProductos + '"></input></div>';
+					html = html + '<div class="div1 izquierda"><input type="text" name="Impuestos" value="" placeholder=" Impuestos" data-role="none" class="campo4" id="tbImpuestos' + opcion + contadorProductos + '" onClick="populateImpuestosPopUp(2,' + contadorProductos + ')" readonly></input></div>';
 					html = html + '<div class="div3 izquierda NoVisible"><input type="text" name="ID" value="' + value.ConceptoCotizacionID + '" placeholder=" Impuestos" data-role="none" class="campo4" id="tbID' + opcion + contadorProductos + '"></input></div>';
 					html = html + '</div>';
 					html = html + '</li>';
@@ -2054,6 +2079,7 @@ function getCotizacion(pCotizacionID) {
 					$("#cbArticulo" + opcion + contadorProductos).val(value.Empresa_Catalogo_ProductosID);
 				});
 				totalGeneral(op);
+				tabNumerico();
 				//totalGeneralFacturas();
 			} else
 				alert("A ocuurido un error, por favor verifique su conexion a internet.");
@@ -2249,6 +2275,7 @@ function insertCotizacion(pEnviar) {
 
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					resultado = true;
@@ -2314,6 +2341,7 @@ function populateImpuestosPopUp(op, index) {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				if (obtenerIDImpuesto == 0) {
@@ -2610,40 +2638,50 @@ function addImpuestos(op) {
 }
 
 /*Clientes*/
-function populateAllClientes() {
-	Paginacion = 1;
-	var html;
+function populateAllClientes()
+{
+Paginacion = 1;
+var html,soap;
+	soap = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Webservice1">';
+	soap = soap + '<soapenv:Header/>';
+	soap = soap + '<soapenv:Body>';
+	soap = soap + '<urn:getAllClientes>';
+	soap = soap + '<urn:pEmpresaID>'+EmpresaID+'</urn:pEmpresaID>';
+	soap = soap + '<urn:pPaginacion>'+Paginacion+'</urn:pPaginacion>';
+	soap = soap + '</urn:getAllClientes>';
+	soap = soap + '</soapenv:Body>';
+	soap = soap + '</soapenv:Envelope>';
 	$.ajax({
-		cache : false,
-		type : 'post',
-		async : false,
-		dataType : 'xml',
-		url : 'http://developer-03/app/Service1.asmx/getAllClientes',
-		data : {
-			"EmpresaID" : EmpresaID,
-			"Pagina" : Paginacion
-		},
-		success : function (xml) {
-			var r = $(xml).text();
+			cache: false,
+			type: 'post',
+			async: false,
+			dataType: 'xml',
+			//url:'http://192.168.0.101/app/Service1.asmx/getAllClientes',
+			//data: {"EmpresaID" : EmpresaID ,"Pagina" : Paginacion },
+			contentType: "text/xml;charset=UTF-8",
+			url: pURL,
+			data: soap,
+			success: function (xml) {
+			var r = $(xml).text(); 
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
-			if (obj.Validacion == "true") {
+			if(obj.Validacion == "true")
+			{	
 				$.mobile.changePage("#pListaClientes");
-				$.each(obj.Clientes, function (index, value) {
-					html = '<li data-icon="false"><a href="#" onclick="populatePerfil(' + value.ClienteID + ')"><div class="listado1">' + value.Nombre + '...</div><div class="listado2">' + value.RFC + '</div></a></li>';
+				$.each(obj.Clientes, function(index,value){
+				html= '<li data-icon="false"><a href="#" onclick="populatePerfil('+value.ClienteID+')"><div class="listado1">'+value.Nombre.substring(0, 37) +'...</div><div class="listado2">'+ value.RFC +'</div></a></li>';
 					$("#lvClientes").append(html);
 				});
-				$("#lvClientes").show();
-				$("#lvClientes").listview("refresh");
-			} else
+					$("#lvClientes").show();
+					$("#lvClientes").listview("refresh");
+			}
+			else
 				alert("A ocurrido un error, por favor verifique su conexion a internet.");
-		},
-		error : function (e) {
+			},
+			error: function (e) {
 			//alert("Error11: " + e.responseText);
-			$.mobile.changePage("#pError", {
-				role : "dialog",
-				transition : "slidedown"
-			});
-		}
+			$.mobile.changePage( "#pError", { role: "dialog" , transition:"slidedown" } );
+			}
 	});
 }
 
@@ -2677,6 +2715,7 @@ function populatePerfil(pClienteID) {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				ClienteID = pClienteID;
@@ -2726,6 +2765,7 @@ function populateCliente(pClienteID) {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				ClienteID = obj.ClienteID;
@@ -2820,6 +2860,7 @@ function deleteCliente(pClienteID) {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$('#lvClientes').children().remove('li');
@@ -2868,10 +2909,11 @@ function getMoreClientes() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.each(obj.Clientes, function (index, value) {
-					html = '<li data-icon="false"><a href="#" onclick="populateCliente(' + value.ClienteID + ')"><div class="listado1">' + value.Nombre + '...</div><div class="listado2">' + value.RFC + '</div></a></li>';
+					html = '<li data-icon="false"><a href="#" onclick="populateCliente(' + value.ClienteID + ')"><div class="listado1">' + value.Nombre.substring(0, 37) + '...</div><div class="listado2">' + value.RFC + '</div></a></li>';
 					$("#lvClientes").append(html);
 				});
 				$("#lvClientes").show();
@@ -2923,8 +2965,8 @@ function limpiarPantallaCliente(pEnviarPantalla) {
 	contacto = contacto + '<input id="tbCliente_ContactosID1" type="hidden" value="0"></input>'
 		contacto = contacto + '</div>';
 	$("#ulContactos").append('<li id="liContacto1">' + contacto + '</li>');
-	$("#dOtraInformacion").removeClass("cabecera_seccion_up");
-	$("#dOtraInformacion").addClass("cabecera_seccion_down");
+	$("#dOtraInformacion").removeClass("cabecera_seccion_up2");
+	$("#dOtraInformacion").addClass("cabecera_seccion_down2");
 	$("#dOtraInformacionContenido").removeClass("Visible");
 	$("#dOtraInformacionContenido").addClass("NoVisible");
 	$("#dContacto").removeClass("cabecera_seccion_up");
@@ -2948,22 +2990,23 @@ function addSucursal(pVisible, pNombreSucursal, pCliente_SucursalID) {
 	else
 		sucursal = sucursal + '<div id="divSucursalContenido' + contadorSucursales + '" class="divSucursalContenido NoVisible">';
 	sucursal = sucursal + '<div class="div14 div_centro">';
-	sucursal = sucursal + '<div class="texto_derecha"><a href="#" id="bQuitarSucursal' + contadorSucursales + '" class="bQuitar derecha" onClick="removeSucursal(' + contadorSucursales + ')"></a></div>';
+	sucursal = sucursal + '<div class="texto_derecha"><a href="#" id="bQuitarSucursal' + contadorSucursales + '" class="bEliminar derecha" onClick="removeSucursal(' + contadorSucursales + ')"></a></div>';
 	sucursal = sucursal + '<div class="div3"><input type="text" name="tbNombreSucursal" value="" maxlength="255" placeholder=" Nombre" data-role="none" class="campo9" id="tbNombreSucursal' + contadorSucursales + '"></input></div>';
 	sucursal = sucursal + '<div class="div8 izquierda"><input type="text" name="tbCalleSucursal" value="" maxlength="255" placeholder=" Calle" data-role="none" class="campo8" id="tbCalleSucursal' + contadorSucursales + '"></input></div>';
 	sucursal = sucursal + '<div class="div9 izquierda"><input type="text" name="tbColoniaSucursal" value="" maxlength="255" placeholder=" Colonia" data-role="none" class="campo8" id="tbColoniaSucursal' + contadorSucursales + '"></input></div>';
 	sucursal = sucursal + '<div class="div8 izquierda"><input type="text" name="tbPaisSucursal" value="" maxlength="255" placeholder=" Pais" data-role="none" class="campo8" id="tbPaisSucursal' + contadorSucursales + '"></input></div>';
-	sucursal = sucursal + '<div class="div11 izquierda"><input type="text" name="tbNoExteriorSucursal" value="" maxlength="30" placeholder=" No ext" data-role="none" class="campo8" id="tbNoExteriorSucursal' + contadorSucursales + '"></input></div>';
-	sucursal = sucursal + '<div class="div13 izquierda"><input type="text" name="tbMunicipioSucursal" value="" maxlength="255" placeholder=" Municipio" data-role="none" class="campo8" id="tbMunicipioSucursal' + contadorSucursales + '"></input></div>';
-	sucursal = sucursal + '<div class="div13 izquierda"><input type="text" name="tbEstadoSucursal" value="" maxlength="255" placeholder=" Estado" data-role="none" class="campo8" id="tbEstadoSucursal' + contadorSucursales + '"></input></div>';
-	sucursal = sucursal + '<div class="div11 izquierda"><input type="text" name="tbNoInteriorSucursal" value="" maxlength="30" placeholder=" No int" data-role="none" class="campo8" id="tbNoInteriorSucursal' + contadorSucursales + '"></input></div>';
-	sucursal = sucursal + '<div class="div12 izquierda"><input type="text" name="tbCiudadSucursal" value="" maxlength="50" placeholder=" Ciudad" data-role="none" class="campo8" id="tbCiudadSucursal' + contadorSucursales + '"></input></div>';
-	sucursal = sucursal + '<div class="div11 izquierda"><input type="text" name="tbCPSucursal" value="" maxlength="12" placeholder=" CP" data-role="none" class="campo8" id="tbCPSucursal' + contadorSucursales + '"></input></div>';
+	sucursal = sucursal + '<div class="div22 izquierda"><input type="text" name="tbNoExteriorSucursal" value="" maxlength="30" placeholder=" No ext" data-role="none" class="campo8" id="tbNoExteriorSucursal' + contadorSucursales + '"></input></div>';
+	sucursal = sucursal + '<div class="div24 izquierda"><input type="text" name="tbMunicipioSucursal" value="" maxlength="255" placeholder=" Municipio" data-role="none" class="campo8" id="tbMunicipioSucursal' + contadorSucursales + '"></input></div>';
+	sucursal = sucursal + '<div class="div24 izquierda"><input type="text" name="tbEstadoSucursal" value="" maxlength="255" placeholder=" Estado" data-role="none" class="campo8" id="tbEstadoSucursal' + contadorSucursales + '"></input></div>';
+	sucursal = sucursal + '<div class="div22 izquierda"><input type="text" name="tbNoInteriorSucursal" value="" maxlength="30" placeholder=" No int" data-role="none" class="campo8" id="tbNoInteriorSucursal' + contadorSucursales + '"></input></div>';
+	sucursal = sucursal + '<div class="div21 izquierda"><input type="text" name="tbCiudadSucursal" value="" maxlength="50" placeholder=" Ciudad" data-role="none" class="campo8" id="tbCiudadSucursal' + contadorSucursales + '"></input></div>';
+	sucursal = sucursal + '<div class="div22 izquierda"><input type="text" name="tbCPSucursal" value="" maxlength="5" placeholder=" CP" data-role="none" class="campo8 numeric2" id="tbCPSucursal' + contadorSucursales + '"></input></div>';
 	sucursal = sucursal + '<div class="div3"><input type="text" name="tbReferenciaSucursal" value="" maxlength="255" placeholder=" Referencia" data-role="none" class="campo10" id="tbReferenciaSucursal' + contadorSucursales + '"></input></div>';
 	sucursal = sucursal + '<input id="tbCliente_SucursalID' + contadorSucursales + '" type="hidden" value="' + pCliente_SucursalID + '"></input>'
 		sucursal = sucursal + '</div>';
 	sucursal = sucursal + '</div>';
 	$("#ulSucursales").append('<li id="liSucursal' + contadorSucursales + '">' + sucursal + '</li>');
+	tabNumerico();
 }
 
 function removeSucursal(row) {
@@ -3192,6 +3235,7 @@ function validaCliente() {
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "false") {
 					resultado = false;
@@ -3307,6 +3351,7 @@ function insertCliente() {
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					$.mobile.changePage("#pListaClientes");
@@ -3356,6 +3401,7 @@ function populateAllGastos() {
 		data : soap,
 		success : function (json) {
 			var r = $(json).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.mobile.changePage("#pListaGastos");
@@ -3413,6 +3459,7 @@ function getMoreGastos() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				$.mobile.changePage("#pListaGastos");
@@ -3498,6 +3545,7 @@ function insertGasto() {
 			data : soap,
 			success : function (xml) {
 				var r = $(xml).text();
+				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "true") {
 					$.mobile.changePage("#pListaGastos");
@@ -3518,6 +3566,15 @@ function insertGasto() {
 
 function populateGasto(pGastoID) {
 	var html;
+	var soap;
+	soap = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:Webservice1">';
+	soap = soap + '<soapenv:Header/>';
+	soap = soap + '<soapenv:Body>';
+	soap = soap + '<urn:getGasto>';
+	soap = soap + '<urn:pGastoID>'+ pGastoID +'</urn:pGastoID>';
+	soap = soap + '</urn:getGasto>';
+	soap = soap + '</soapenv:Body>';
+	soap = soap + '</soapenv:Envelope>';
 	limpiarPantallaGastos(false);
 	insertarImpuestosCombo("cbImpuestosGasto");
 	$.ajax({
@@ -3525,13 +3582,14 @@ function populateGasto(pGastoID) {
 		type : 'post',
 		async : false,
 		dataType : 'xml',
-		url : 'http://developer-03/app/Service1.asmx/getGasto',
-
-		data : {
-			'pGastoID' : pGastoID
-		},
+		/*url : 'http://developer-03/app/Service1.asmx/getGasto',
+		data : {'pGastoID' : pGastoID},*/
+		contentType : "text/xml;charset=UTF-8",
+		url : pURL,
+		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				GastosID = obj.GastosID;
@@ -3576,6 +3634,7 @@ function cargarImpuestos() {
 		data : soap,
 		success : function (xml) {
 			var r = $(xml).text();
+			r = r.replace(/\|amp;/g,"&");
 			var obj = jQuery.parseJSON(r);
 			if (obj.Validacion == "true") {
 				ImpuestosJSON = obj;
@@ -3621,4 +3680,13 @@ function agregarDecimales(importe) {
 			return cadena;
 		}
 	}
+}
+
+function tabNumerico(){
+	//Acepta decimales y negativos
+	$(".numeric1").numeric();
+	//solo enteros y negativos
+	$(".numeric2").numeric({ decimal: false, negative: true },function(){});
+	//solo acepta enteros positivos
+	$(".numeric3").numeric({ decimal: false, negative: false },function(){});
 }

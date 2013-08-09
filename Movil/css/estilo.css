@@ -1,3 +1,42 @@
+/*[data-role=page]{height: 100%; position:relative;}*/
+/*[data-role=header]{top:0; position:fixed !important; top: auto !important; width:100%; z-index:100;}*/
+/*[data-role=footer]{bottom:0; position:fixed; top:auto; width:100%;z-index:101;}*/
+
+.ui-bar-f{
+	top:0; position:fixed !important; top: auto !important; width:100%; z-index:100;
+}
+
+.headerMensaje{
+	float:left;
+	height:55px;
+	position:fixed;
+	top:0;
+	width:500px;
+	z-index:100;
+}
+.piePagina50{
+	background-color:#00294B;
+	bottom:0;
+	color:#fff;
+	float:left;
+	height:50px;
+	left:0;
+	position:fixed;
+	width:100%;
+}
+
+.piePagina25{
+	background-color:#00294B;
+	bottom:0;
+	color:#fff;
+	float:left;
+	height:25px;
+	left:0;
+	position: fixed;
+	width:100%;
+	z-index:101;
+}
+
 input{
 	color: #808080;
 	font-family:"Helvetica",Arial;
@@ -8,6 +47,7 @@ select{
 	color: #808080;
 	font-family:"Helvetica",Arial;
 	font-size:16px;/*7.5pt;*/
+	height: 42px !important;
 	padding:10px 0px 8px 0px;
 }
 
@@ -28,6 +68,7 @@ select{
 	background: url('../imagenes/arrow-down.png');
 	background-position: right center;
 	background-repeat:no-repeat;
+	height:50px;
 }
 
 .date{
@@ -50,14 +91,33 @@ select{
 	text-align:center;
 }
 
+.barra_Header_Fixed{
+	/*background: url('../imagenes/barra-header.png');*/
+	background-color:#00294B;
+	color:#fff;
+	float:left;
+	height:55px;
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:100;
+}
+
+
 .header_clientes{
 	background: url('../imagenes/barra-clientes.png');
 	background-color:#00294B;
 	background-position:center;
 	background-repeat:no-repeat;
 	color:#fff;
+	float:left;
 	height:55px;
-	text-align:center;
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:100;
 }
 
 .header_gastos{
@@ -66,8 +126,13 @@ select{
 	background-position:center;
 	background-repeat:no-repeat;
 	color:#fff;
+	float:left;
 	height:55px;
-	text-align:center;
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:100;
 }
 
 .header_facturas{
@@ -76,8 +141,13 @@ select{
 	background-position:center;
 	background-repeat:no-repeat;
 	color:#fff;
+	float:left;
 	height:55px;
-	text-align:center;
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:100;
 }
 
 .header_cotizaciones{
@@ -86,8 +156,13 @@ select{
 	background-position:center;
 	background-repeat:no-repeat;
 	color:#fff;
+	float:left;
 	height:55px;
-	text-align:center;
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:100;
 }
 
 /*Botones Header*/
@@ -196,7 +271,14 @@ select{
 /*Footer*/
 .piePagina{
 	background-color:#00294B;
+	bottom:0;
+	color:#fff;
+	float:left;
+	left:0;
+	position: fixed;
 	text-align:center;
+	width:100%;
+	z-index:101;
 }
 /*Footer Botones*/
 .bAcciones {
@@ -216,7 +298,7 @@ select{
 	background-repeat:no-repeat;
 	display: inline-block;
 	height: 52px;
-    width: 380px;
+    width: 280px;
 }
 .bNuevaFactura:hover {
 	background: url('../botones/b-nuevafactura-over.png');
@@ -227,7 +309,7 @@ select{
 	background-repeat:no-repeat;
 	display: inline-block;
 	height: 52px;
-    width: 380px;
+    width: 280px;
 }
 .bNuevaCotizacion:hover {
 	background: url('../botones/b-nuevacotizacion-over.png');
@@ -238,7 +320,7 @@ select{
 	background-repeat:no-repeat;
 	display: inline-block;
 	height: 52px;
-    width: 380px;
+    width: 280px;
 }
 .bEliminarCliente:hover {
 	background: url('../botones/b-neliminarCliente-over.png');
@@ -249,7 +331,7 @@ select{
 	background-repeat:no-repeat;
 	display: inline-block;
 	height: 52px;
-    width: 380px;
+    width: 280px;
 }
 .bCancelarAccion:hover {
 	background: url('../botones/b-ncancelar-over.png');
@@ -265,10 +347,10 @@ select{
 	background: url('../botones/b-clientes.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 123px;
+	height: 100px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 126px;
+    width: 102px;
 }
 .bClientes:hover {
 	background: url('../botones/b-clientes-over.png');
@@ -278,10 +360,10 @@ select{
 	background: url('../botones/b-facturacion.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 123px;
+	height: 100px;
 	margin-left: auto;
 	 margin-right: auto; 
-    width: 126px;
+    width: 102px;
 }
 .bFacturas:hover {
 	background: url('../botones/b-facturacion-over.png');
@@ -291,10 +373,10 @@ select{
 	background: url('../botones/b-cotizaciones.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 123px;
+	height: 100px;
 	margin-left: auto;
 	 margin-right: auto; 
-    width: 126px;
+    width: 102px;
 }
 .bCotizacion:hover {
 	background: url('../botones/b-cotizaciones-over.png');
@@ -304,10 +386,10 @@ select{
 	background: url('../botones/b-gastos.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 123px;
+	height: 100px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 126px;
+    width: 102px;
 }
 .bGastos:hover {
 	background: url('../botones/b-gastos-over.png');
@@ -318,8 +400,8 @@ select{
 	background-repeat:no-repeat;
 	display: block;
 	margin: 0 auto;
-	height: 52px;
-    width: 299px;
+	height: 49px;
+    width: 280px;
 }
 .bEntrar:hover {
 	background: url('../botones/boton-entrar-over.png');
@@ -374,10 +456,10 @@ select{
 	background: url('../botones/b-datosfiscales.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 56px;
+	height: 49px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 322px;
+    width: 282px;
 }
 .bDatosFiscales:hover {
 	background: url('../botones/b-datosfiscales-over.png');
@@ -387,10 +469,10 @@ select{
 	background: url('../botones/b-impuestos.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 56px;
+	height: 49px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 322px;
+    width: 282px;
 }
 .bImpuestos:hover {
 	background: url('../botones/b-impuestos-over.png');
@@ -647,6 +729,10 @@ float:right;
 	display:block-inline;
 	width:15%;
 }
+.div24{
+	display:block-inline;
+	width:40%;
+}
 
 .div_boton1{
 	display:block-inline;
@@ -654,7 +740,7 @@ float:right;
 }
 .div_impuesto{
 	display:block-inline;
-	width:420px;
+	width:180px;
 }
 
 .divSucursal{
@@ -687,7 +773,9 @@ float:right;
 .espacio3{
 	height:30px
 }
-
+.espacio4{
+	height:60px
+}
 .limpiar{
 	clear:both;
 }
@@ -771,9 +859,11 @@ float:right;
 	background: url('../imagenes/logo-login.png');
 	background-repeat:no-repeat;
 	display: block;
-	height: 145px;
+	height: 109px;
 	margin: 0 auto;
-	width: 380px;
+	margin-bottom:0px;
+	margin-top:100px;
+	width: 286px;
 }
 
 .olvide_pass{
@@ -958,6 +1048,15 @@ float:right;
 	line-height:150px;
 }
 
+.divTotales2{
+	color:#3C6699;
+	font-size:12pt;
+	font-weight:bold;
+	height:155px;
+	line-height:155px;
+}
+
+
 .divTotal
 {
 	background-color:#93C7ED;
@@ -1003,7 +1102,7 @@ float:right;
 	height: 52px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 148px;
+    width: 104px;
 }
 .bAgregarPopUp:hover {
 	background: url('../botones/b-agregar-over.png');
@@ -1016,7 +1115,7 @@ float:right;
 	height: 52px;
 	margin-left: auto;
 	margin-right: auto; 
-    width: 148px;
+    width: 104px;
 }
 .bCancelarPopUp:hover {
 	background: url('../botones/b-cancelarn-over.png');
@@ -1044,7 +1143,7 @@ float:right;
 {
 	color:#808080;
 	font:Arial;
-	font-size:8.5pt;
+	font-size:18px;/*8.5pt;*/
 	margin-left:10px;
 }
 
@@ -1136,4 +1235,8 @@ float:right;
 .bEnviar:hover {
 	background: url('../botones/b-enviar-over.png');
 	background-repeat:no-repeat;
+}
+
+.paddingDerecha{
+	padding-right:5px;
 }
