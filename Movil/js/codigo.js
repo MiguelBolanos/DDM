@@ -167,7 +167,7 @@ function recuperarContrasena(pLogin) {
 				r = r.replace(/\|amp;/g,"&");
 				var obj = jQuery.parseJSON(r);
 				if (obj.Validacion == "false") {
-					alert("A ocuurido un error, por favor verifique su conexion a internet.");
+					alert("A ocurrido un error, por favor verifique su conexion a internet.");
 				}
 			},
 			error : function (xhr, ajaxOptions, thrownError) {
@@ -351,7 +351,7 @@ function populateConfiguracion() {
 				$("#cbSerieEmpresa").val("");
 				$.mobile.changePage("#pDatosFiscales");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error3: " + xhr.status +" | "+xhr.responseText);
@@ -497,7 +497,7 @@ function updateConfiguracion() {
 				if (obj.Validacion == "true") {
 					$.mobile.changePage("#pMenu");
 				} else
-					alert("A ocuurido un error, por favor verifique su conexion a internet.");
+					alert("A ocurrido un error, por favor verifique su conexion a internet.");
 
 				$("#dCargando").removeClass("Visible");
 				$("#dCargando").addClass("NoVisible");
@@ -575,7 +575,7 @@ function populateImpuestos() {
 				tabNumerico();
 				$.mobile.changePage("#pImpuestos");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error5: " + xhr.status +" | "+xhr.responseText);
@@ -727,7 +727,7 @@ function insertImpuestos() {
 				if (obj.Validacion == "true") {
 					$.mobile.changePage("#pMenu");
 				} else
-					alert("A ocuurido un error, por favor verifique su conexion a internet.");
+					alert("A ocurrido un error, por favor verifique su conexion a internet.");
 			},
 			error : function (xhr, ajaxOptions, thrownError) {
 				//alert("Error6: " + xhr.status +" | "+xhr.responseText);
@@ -787,7 +787,7 @@ function populateFactura(edicion) {
 					$("#cbClienteFactura").append('<option value=' + value.ClienteID + '>' + value.Nombre + '</option>');
 				});
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error7: " + xhr.status +" | "+xhr.responseText);
@@ -988,7 +988,7 @@ function populateAllFacturas() {
 				$("#lvFacturas").show();
 				$("#lvFacturas").listview("refresh");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (e) {
 			//alert("Error8: " + e.responseText);
@@ -1047,7 +1047,7 @@ function getMoreFacturas() {
 				$("#lvFacturas").show();
 				$("#lvFacturas").listview("refresh");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error9: " + xhr.status +" | "+xhr.responseText);
@@ -1840,7 +1840,7 @@ function populateAllCotizaciones() {
 				$("#lvCotizaciones").show();
 				$("#lvCotizaciones").listview("refresh");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (e) {
 			//alert("Error8: " + e.responseText);
@@ -1898,7 +1898,7 @@ function getMoreCotizaciones() {
 				$("#lvCotizaciones").show();
 				$("#lvCotizaciones").listview("refresh");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error9: " + xhr.status +" | "+xhr.responseText);
@@ -1941,7 +1941,7 @@ function populateCotizacion() {
 					$("#cbClienteCotizacion").append('<option value=' + value.ClienteID + '>' + value.Nombre + '</option>');
 				});
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error7: " + xhr.status +" | "+xhr.responseText);
@@ -2082,7 +2082,7 @@ function getCotizacion(pCotizacionID) {
 				tabNumerico();
 				//totalGeneralFacturas();
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			$.mobile.changePage("#pError", {
@@ -2281,7 +2281,7 @@ function insertCotizacion(pEnviar) {
 					resultado = true;
 
 				} else
-					alert("A ocuurido un error, por favor verifique su conexion a internet.");
+					alert("A ocurrido un error, por favor verifique su conexion a internet.");
 			},
 			error : function (xhr, ajaxOptions, thrownError) {
 				$.mobile.changePage("#pError", {
@@ -2728,7 +2728,7 @@ function populatePerfil(pClienteID) {
 				$("#pcCorreo").text(obj.Correo);
 				$.mobile.changePage("#pPerfilClientes");
 			} else {
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 			}
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
@@ -2826,7 +2826,7 @@ function populateCliente(pClienteID) {
 				$('#tbNotaInterna').val(obj.NotaInterna);
 				$.mobile.changePage("#pClientes");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error13: " + xhr.status +" | "+xhr.responseText);
@@ -2866,7 +2866,7 @@ function deleteCliente(pClienteID) {
 				$('#lvClientes').children().remove('li');
 				populateAllClientes();
 			} else {
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 			}
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
@@ -2919,7 +2919,7 @@ function getMoreClientes() {
 				$("#lvClientes").show();
 				$("#lvClientes").listview("refresh");
 			} else
-				alert("A ocuurido un error, por favor verifique su conexion a internet.");
+				alert("A ocurrido un error, por favor verifique su conexion a internet.");
 		},
 		error : function (xhr, ajaxOptions, thrownError) {
 			//alert("Error15: " + xhr.status +" | "+xhr.responseText);
@@ -3356,7 +3356,7 @@ function insertCliente() {
 				if (obj.Validacion == "true") {
 					$.mobile.changePage("#pListaClientes");
 				} else {
-					alert("A ocuurido un error, por favor verifique su conexion a internet.");
+					alert("A ocurrido un error, por favor verifique su conexion a internet.");
 				}
 				$("#dCargando").removeClass("Visible");
 				$("#dCargando").addClass("NoVisible");
